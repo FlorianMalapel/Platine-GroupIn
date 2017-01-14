@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="70dp"
+              android:orientation="horizontal"
+              android:background="@android:color/white"
+              android:weightSum="12"
+    >
+
+    <TextView
+        android:id="@+id/textViewFirstLetter"
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:text="A"
+        android:gravity="center"
+        android:textStyle="normal|bold"
+        android:textSize="20sp"
+        android:fontFamily="serif-monospace"
+        android:textColor="@android:color/holo_red_dark"/>
+
+    <ImageView
+        android:id="@+id/imageViewProfilPicture"
+        android:layout_weight="1.5"
+        android:layout_width="0dp"
+        android:padding="10dp"
+        android:layout_height="match_parent"
+        />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="7"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textViewLastName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:text="Prenom"
+            android:gravity="left|center_vertical"
+            android:fontFamily="sans-serif"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            />
+
+        <TextView
+            android:id="@+id/textViewFirstName"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/textViewLastName"
+            android:layout_marginLeft="15dp"
+            android:text="Nom"
+            android:gravity="left|center_vertical"
+            android:fontFamily="sans-serif"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"/>
+
+    </RelativeLayout>
+
+    <CheckBox
+        android:id="@+id/checkboxFriend"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        />
+
+</LinearLayout>

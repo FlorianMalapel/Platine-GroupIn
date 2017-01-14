@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.groupin.florianmalapel.groupin.controllers.activities.GIActivityMain"
+    tools:showIn="@layout/app_bar_activity_main"
+    >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPagerBottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavigation">
+
+
+    </android.support.v4.view.ViewPager>
+
+    <com.ss.bottomnavigation.BottomNavigation
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:elevation="10dp"
+        android:layout_alignParentBottom="true">
+
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/tab_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tab_text="@string/menu_home_tab"
+            app:tab_text_color="@color/colorPrimaryDark"
+            app:tab_icon="@drawable/ic_home_black"
+            />
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/tab_groups"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tab_text="@string/menu_groups_tab"
+            app:tab_text_color="@color/colorPrimaryDark"
+            app:tab_icon="@drawable/ic_people_black"
+            />
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/tab_events"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tab_text="@string/menu_events_tab"
+            app:tab_text_color="@color/colorPrimaryDark"
+            app:tab_icon="@drawable/ic_event_black_24d"
+            />
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/tab_friends"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tab_text="@string/menu_friend_tab"
+            app:tab_text_color="@color/colorPrimaryDark"
+            app:tab_icon="@drawable/ic_person_black"
+            />
+
+
+        </com.ss.bottomnavigation.BottomNavigation>
+
+</RelativeLayout>

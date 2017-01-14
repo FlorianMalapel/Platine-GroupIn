@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 android:background="@color/colorPrimaryDark">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewFriends"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:layout_margin="0dp"
+        android:padding="0dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabAddFriend"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/ic_add_black_24dp"
+        app:elevation="5dp"
+        android:layout_gravity="right|bottom"
+        app:backgroundTint="@color/GIYellow"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutFormAddFiend"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDarkAlpha"
+        android:visibility="visible"
+        android:elevation="10dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="15dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:background="@android:color/white"
+            android:layout_centerInParent="true">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:drawableRight="@drawable/ic_search_black"
+                android:hint="@string/email_address"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/editTextMailAddress"/>
+
+            <RelativeLayout
+                android:id="@+id/relativeLayoutFriendInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/editTextMailAddress">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circularImageViewProfilPic"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/darth_vader"
+                    tools:layout_editor_absoluteY="0dp"
+                    tools:layout_editor_absoluteX="0dp"
+                    android:layout_alignParentLeft="true"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FFdcdcdc"
+                    />
+
+                <TextView
+                    android:id="@+id/textViewNameFriend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="Charlie Quetstroey"
+                    android:layout_toRightOf="@+id/circularImageViewProfilPic"
+                    android:layout_centerInParent="true"
+                    />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_height="48dp"
+                android:layout_width="0dp"
+                android:orientation="horizontal"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@+id/relativeLayoutFriendInfo">
+
+                <Button
+                    android:id="@+id/buttonAddFriendCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/cancel"
+                    />
+
+                <Button
+                    android:id="@+id/buttonAddFriendOk"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ok"
+                    />
+
+            </LinearLayout>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#dcdcdc</color>
+    <color name="colorPrimaryDark">@color/GIBlue</color>
+    <!--<color name="colorPrimaryDark">#282f3b</color>-->
+    <color name="colorPrimaryDarkAlpha">#da282f3b</color>
+    <color name="colorAccent">@color/GIPurple</color>
+    <color name="facebookBlue">#3c5a96</color>
+    <color name="googleRed">#DB4C3F</color>
+    <color name="lightGray">#f2f2f2</color>
+    <color name="holoGreen">#9c0</color>
+    <color name="holoBlueDark">#09c</color>
+
+
+    <color name="GIPurple">#882D63</color>
+    <color name="GIYellow">#fcd915</color>
+    <color name="GIBlue">#3362e5</color>
+
+</resources>

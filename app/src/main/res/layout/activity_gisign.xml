@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_gisign"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.groupin.florianmalapel.groupin.controllers.activities.GIActivitySocialSign"
+    android:background="@color/colorPrimaryDark">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/gilogo_medium"
+        android:id="@+id/gilogo"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        />
+
+    <TextView
+        android:text="GroupIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        app:layout_constraintRight_toRightOf="@+id/gilogo"
+        app:layout_constraintLeft_toLeftOf="@+id/gilogo"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/gilogo"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"/>
+
+    <Button
+        android:text="Facebook"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_facebook_login"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/button_sign_in_google"
+        android:layout_marginStart="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:textAllCaps="false"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="32dp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/facebookBlue"/>
+
+    <Button
+        android:text="Google"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_sign_in_google"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/gilogo"
+        android:layout_marginStart="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textAllCaps="false"
+        android:layout_marginLeft="32dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/googleRed"/>
+
+    <TextView
+        android:text="@string/connectionWithSocialGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_connectSocial"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/gilogo"
+        app:layout_constraintBottom_toTopOf="@+id/button_sign_in_google"
+        app:layout_constraintLeft_toLeftOf="@+id/button_sign_in_google"/>
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/editText_email"
+        android:hint="Email"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        app:layout_constraintLeft_toLeftOf="@+id/button_facebook_login"
+        app:layout_constraintRight_toRightOf="@+id/button_facebook_login"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:textSize="12sp"/>
+
+    <Button
+        android:text="@string/continuer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_continue"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="@+id/editText_email"
+        app:layout_constraintRight_toRightOf="@+id/editText_email"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/editText_email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.0"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/linearLayout"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/button_facebook_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintVertical_bias="0.11"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="16dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="3px"
+            app:srcCompat="@android:color/white"
+            android:id="@+id/imageView"
+            android:layout_weight="1"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:text="@string/connectionWithEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:layout_weight="0.25"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:padding="0dp"
+            android:paddingBottom="0dp"
+            android:paddingEnd="0dp"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:paddingStart="0dp"
+            android:paddingTop="0dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            app:srcCompat="@android:color/white"
+            android:id="@+id/imageView2"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_height="1dp"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="0dp"/>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

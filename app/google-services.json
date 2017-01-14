@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "786170456164",
+    "firebase_url": "https://groupin-146311.firebaseio.com",
+    "project_id": "groupin-146311",
+    "storage_bucket": "groupin-146311.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786170456164:android:0558373a3c7c78b7",
+        "android_client_info": {
+          "package_name": "com.groupin.florianmalapel.groupin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786170456164-f0kah0u3fq3nlhrql4d678n6tbdi1fqd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.groupin.florianmalapel.groupin",
+            "certificate_hash": "716B54D3EA81F1A2480C01E50C50CBED931AB766"
+          }
+        },
+        {
+          "client_id": "786170456164-7ajvnebo1t8h4gfvs0hvg694splvjih0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP-em2ewA8aY4BVvMh17rKtjGdaeuFSBA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786170456164-7ajvnebo1t8h4gfvs0hvg694splvjih0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

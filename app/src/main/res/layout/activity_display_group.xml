@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/textView_groupName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Group name"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentTop="true"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPagerBottomMenuGroup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView_groupName"
+        android:layout_above="@+id/bottomNavigation">
+
+
+    </android.support.v4.view.ViewPager>
+
+    <com.ss.bottomnavigation.BottomNavigation
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:elevation="10dp"
+        android:layout_alignParentBottom="true">
+
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/tab_homeGroup"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tab_text="@string/menu_calendar_tab"
+            app:tab_text_color="@color/colorPrimaryDark"
+            app:tab_icon="@drawable/ic_event"
+            />
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/tab_chat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tab_text="@string/menu_chat_tab"
+            app:tab_text_color="@color/colorPrimaryDark"
+            app:tab_icon="@drawable/ic_chat"
+            />
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/tab_money"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tab_text="@string/menu_polls_tab"
+            app:tab_text_color="@color/colorPrimaryDark"
+            app:tab_icon="@drawable/ic_poll"
+            />
+        <com.ss.bottomnavigation.TabItem
+            android:id="@+id/tab_polls"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tab_text="@string/menu_money_tab"
+            app:tab_text_color="@color/colorPrimaryDark"
+            app:tab_icon="@drawable/ic_money"
+            />
+
+
+    </com.ss.bottomnavigation.BottomNavigation>
+
+</RelativeLayout>

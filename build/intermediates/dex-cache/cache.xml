@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-25.0.1_34676bbcaea037bbe19f50ddce295edf71b97f2b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.firebase/firebase-storage-common/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="ec9104b53aee77dfcfd2fe1c4add23ff7c4df55f">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-storage-common-9.8.0_f57fa1687b5a977a697c491ce31ffe7c140d3d23.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_6d0f4d87d3a5a66f0ec31a04faf13b08230f7e4d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth-base/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="a1ed98e01bd58976d80c062fd0ea2968a1ff68a1">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-auth-base-9.8.0_a1bf95489ce9de4dd32e44e8a35c5054cf839f13.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="ca851be26ff89f5b32cc222cee98139fb3fac830">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-auth-9.8.0_d9f198186b86c9399d9dce788308fff9c38646da.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.0.1/support-annotations-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/support-annotations-25.0.1_8379989179be5124160cf190413057845d862d0f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/transition/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="c1b6ab157e8e12cb08b9ee82bb5e3c5d22632eb3">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.android.support-transition-25.0.1_ad8799c09eaff661a55a85037bc42067e28d5cc5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.1.4/129874135e6081269ace2312092031558865de12/bolts-android-1.1.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="129874135e6081269ace2312092031558865de12">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/bolts-android-1.1.4_21351f190e8909eda611b4f632e1dcff77a39e94.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-25.0.1_1732376267cef7d3486916b326f7aedc5fd13ada.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.0-beta4/constraint-layout-solver-1.0.0-beta4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="0a9cb567dc008f570c28531720168f19148da965">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/constraint-layout-solver-1.0.0-beta4_e8273c8e4e324936b40b564b85ef1fa6d6b887c3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics-impl/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="190a642ba16d1421296a4d794606279b80039c59">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-analytics-impl-9.8.0_075e2c2f5f52fc1a82fb904f1c8bdd248387242d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="26c6eef571592c91f29e56fda0bac73321de0c92">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-25.0.1_8704f11a2fa85693d7580e0bb9603480ee990958.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.volley/volley/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.android.volley-volley-1.0.0_ad1363d098756e54107c73fbaccfacba53f56d5f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="0f254ec13d6671680482d2218f01ecf14dfa93e6">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.facebook.android-facebook-android-sdk-4.0.0_ab5b995b7bcace6f1bea4162e3c9a9918c048de3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth-common/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="4438b1a7848a7c571122ba618aa1304514aabee6">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-auth-common-9.8.0_03b1e15104ce44da958922f7637b0b52b34016cc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-25.0.1_abf2052595fb997db02ae53615a7207df03153e3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.firebase/firebase-database/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="03df48d3713661d66ad024b1e406259a4c26fcac">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-database-9.8.0_5f23765b671435fa623f7a54079eec96c03f8dbd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/picasso-2.5.2_26467789e208e2a9a706f5081b36a634190c5f2d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.firebase/firebase-iid/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="6b6f292b8b951dcf2ecf2b20853e3eabc7d65c48">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-iid-9.8.0_377105575cb112bfc6182774ec403c4d35206224.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support.constraint/constraint-layout/1.0.0-beta4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="662d7533b25a666c649c10a16b42edfb95f25a4f">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.android.support.constraint-constraint-layout-1.0.0-beta4_1a5ce1b6de1f1264f0f22040701dc2f45fd9491c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.firebase/firebase-storage/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="7fd91ec2730fdaa82906aad32a3f3d3e574bae56">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-storage-9.8.0_757f11c31a38a1a2cffc9fd58b1f8fd26b17ae4d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="c61641e333fa88da21758bab8cc28ee16604b05f">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-common-9.8.0_f5ce29fcd67d82f14119057c9252ea9e7a55d23b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="7e92aadd0697922316d1395c1887a23aebec640a">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-9.8.0_f4f289d70ae4d2e642861ca5397ac6cdeba28295.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.daimajia.swipelayout/library/1.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="e84b30031d4bab89a2b5c45af4eb9213828524dd">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.daimajia.swipelayout-library-1.2.0_1628e3dfaa3068c12dd70891e0399961498b724b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_71fb7f2d444d63bb5f1379135fa0e5c874c2c049.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth-module/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="3f8f779a22cbb4c4d0759467a4f1011bb5252970">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-auth-module-9.8.0_491186e4555c792d9521871794173b5bd4e0bd1d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-25.0.1_dbd88bb3949d9c8ea4da73f2b0609303b40a7545.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_79f96c57356e6d178a21b27eb416f889dbf1419e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="f83b00041ecfba705603fec40363416c7de69719">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_9073b3f28de3bbee1e352d3a8fa1cb264d4d9421.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-25.0.1_fe5f3c431912d88cb1b8747edc239e795ce78670.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/jp.bassaer/chatmessageview/1.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="64552cc39507eeea72195603c3d827edf1f4ac1f">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/jp.bassaer-chatmessageview-1.2.0_d778ca9990156c8f750ac635938f1acf5665942f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="297d4bcf6ed4e747a1bf7d0d094a2d911a8d3a8e">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-25.0.1_681e93f418b9ae200d3016d099730951f5c74fe1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-25.0.1_5ce0e34615d9f4e9343851a527ca50db07a5bf9f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.ss.bottomnavigation/bottomnavigation/1.4.2/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="ab42d789b7200ca7b3eb38613ed3d3e9b5ada408">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.ss.bottomnavigation-bottomnavigation-1.4.2_02f186ff4741139ed87fe9532a911cfed5e8ff44.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/2.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="a2af9c72ccaa4c5c049b500ca6ea664a4ce1f7d4">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/de.hdodenhof-circleimageview-2.1.0_e2b3556e4e779fd2a8a810d6cf46c233323b026d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="6a1479afe9f1b3645e1cd9a87318976893472818">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-25.0.1_80fd06fd4a770f3a717d3094c44eeb68fae59823.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/design/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="3b236883e0df6002cabb01ce57d00a5b1e5de610">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.android.support-design-25.0.1_b085118300038eae5481f49096a1e848c88f4ac9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="9ff04cc3470178a44512624036751a803418c2ca">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-analytics-9.8.0_04dc71f0cc8c687db7dc97db06b66cd0e3372352.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="c5b7145fb34779b6639147b8f2f8dd77c0db771b">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.1_4dd0c307a333fea7e752a91481e1611e69a4f6ae.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="9f6d236bac26d02b410e4ee186ba517ace5ee661">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-basement-9.8.0_5605827b33b17003790707d01e4f3e6e78b3bbb9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="15e59454416c6341bd3ed2533b585cd340682dd1">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-auth-9.8.0_f4301ed045db1703e0d6c17c0316a3bb6c8610c7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="bf2e1838e4428616c1aa26edf43de72b5b99bf84">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-tasks-9.8.0_6842199d57cbfb8db4300700e7d619c10eaa8fde.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-25.0.1_e32d5374117eaa0888fd23043a7e58e29b2db603.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/exploded-aar/com.google.firebase/firebase-database-connection/9.8.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="24.0.0"
+        sha1="5f47ede9561595584dca71104baa0fecb36dda87">
+        <dex dex="/Users/florianmalapel/Cours/M2/PLATINE/GroupIn/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-database-connection-9.8.0_d15c79aeb42a72c5c4128c0d913e24275b399622.jar" />
+    </item>
+
+</items>

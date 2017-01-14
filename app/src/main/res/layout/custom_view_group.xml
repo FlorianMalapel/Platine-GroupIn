@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/group_card_style"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="15dp"
+    >
+
+    <RelativeLayout
+        android:id="@+id/topCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="15dp"
+        >
+
+        <ImageView
+            android:id="@+id/imageView_group"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/header_menu"
+            />
+
+        <TextView
+            android:id="@+id/textView_groupName"
+            android:layout_toRightOf="@+id/imageView_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom du groupe"
+            android:layout_centerVertical="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginLeft="35dp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+
+        <LinearLayout
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/colorPrimaryDark"
+            />
+
+        <ImageView
+            android:id="@+id/imageView_personLogo"
+            android:layout_margin="5dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/circled_background"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_person_black"
+            />
+
+        <TextView
+            android:id="@+id/textView_groupNbParticipant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/imageView_personLogo"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_centerVertical="true"
+            android:textSize="13sp"
+            android:text="1"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
