@@ -4,11 +4,13 @@ import android.util.Log;
 
 import com.groupin.florianmalapel.groupin.model.GIDataCache;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
+import com.groupin.florianmalapel.groupin.volley.GIRequestData;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by florianmalapel on 12/01/2017.
@@ -22,7 +24,7 @@ public class GIDataCacheHelper {
     }
 
     public static void handleResponseRequest(int requestCode, JSONObject response, GIDataCache cache){
-        ArrayList<Object> listObjects = null;
+        ArrayList<GIJsonToObjectHelper.ItemReceived> listObjects = null;
         try {
             listObjects = GIJsonToObjectHelper.mapJSON(requestCode, response);
         } catch (JSONException e) {
@@ -33,20 +35,24 @@ public class GIDataCacheHelper {
         if(listObjects == null)
             return;
 
-        for(Object object : listObjects){
-            handleObjectToCache(object, cache);
+        for(GIJsonToObjectHelper.ItemReceived item : listObjects){
+            handleObjectToCache(item, cache);
         }
     }
 
-    public static void handleObjectToCache(Object object, GIDataCache cache){
+    public static void handleObjectToCache(GIJsonToObjectHelper.ItemReceived itemReceived, GIDataCache cache){
 
-        if(object == null) {
+        if(itemReceived == null) {
             Log.w("GIDataCacheHelper", "~~~~~~~~ null ~~~~~~~ñ");
             return;
         }
 
-        if(object.getClass().isAssignableFrom(GIUser.class)){
-            cache.setUser((GIUser) object);
+        if(itemReceived.request_code == GIRequestData.USER){
+            cache.setUser((GIUser) itemReceived.object);
+        }
+
+        else if(itemReceived.request_code == GIRequestData.ALL_USERS){
+            cache.setAllUsersList((HashMap<String, GIUser>) itemReceived.object);
         }
 
         // TODO NEED TO FINISH

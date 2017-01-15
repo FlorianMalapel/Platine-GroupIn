@@ -10,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.util.SortedListAdapterCallback;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecyclerViewFriends;
+import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
 
 import java.util.ArrayList;
@@ -51,6 +53,7 @@ public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickL
         View view = inflater.inflate(R.layout.fragment_home_menu_friends, container, false);
 //        fixture();
         findViewById(view);
+        initialize();
         initViews();
         setListeners();
         return view;
@@ -68,6 +71,14 @@ public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickL
         circularImageViewProfilPic = (CircleImageView) view.findViewById(R.id.circularImageViewProfilPic);
     }
 
+    private void initialize(){
+        friendsList = new ArrayList<>();
+        for(String key : GIApplicationDelegate.getInstance().getDataCache().allUsersList.keySet()){
+            friendsList.add(GIApplicationDelegate.getInstance().getDataCache().allUsersList.get(key));
+            Log.w("∆∆∆ ∆∆∆ ∆∆∆", friendsList.get(friendsList.size()-1).toString());
+        }
+    }
+
     private void initViews(){
         fabAddFriend.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
         initRecyclerView();
@@ -80,27 +91,27 @@ public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickL
     }
 
     private void initRecyclerView(){
-        friendsAdapter = new GIAdapterRecyclerViewFriends(friendsList, false);
+        friendsAdapter = new GIAdapterRecyclerViewFriends(friendsList, false, getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerViewFriends.setLayoutManager(mLayoutManager);
         recyclerViewFriends.setItemAnimator(new DefaultItemAnimator());
         recyclerViewFriends.setAdapter(friendsAdapter);
     }
 
-    private void fixture(){
-        friendsList = new ArrayList<>();
-        friendsList.add(new GIUser("marty@mc.fly", "01", "McFly", "McFly", "Marty"));
-        friendsList.add(new GIUser("george@mc.fly", "02", "McFly", "McFly", "George"));
-        friendsList.add(new GIUser("daniel@gmail.com", "03", "Daniel", "Sandoval", "Daniel"));
-        friendsList.add(new GIUser("biff@tanon.ws", "04", "Biff", "Tanon", "Biff"));
-        friendsList.add(new GIUser("zoé@dubois.ws", "05", "Zoé", "Dubois", "Zoé"));
-        friendsList.add(new GIUser("edouard@delbove.sj", "06", "Edouard", "Delbove", "Edouard"));
-        friendsList.add(new GIUser("guitou@blank.sj", "07", "Guitou", "Blank", "Guillaume"));
-        friendsList.add(new GIUser("elodie@girot.sj", "08", "Elodie", "Girot", "Elodie"));
-        friendsList.add(new GIUser("alan@turing.ws", "09", "Alan", "Turing", "Alan"));
-        friendsList.add(new GIUser("shledon@cooper.tbbt", "10", "Sheldon", "Cooper", "Sheldon"));
-        sortFriendsListAlphabetically(friendsList);
-    }
+//    private void fixture(){
+//        friendsList = new ArrayList<>();
+//        friendsList.add(new GIUser("marty@mc.fly", "01", "McFly", "McFly", "Marty"));
+//        friendsList.add(new GIUser("george@mc.fly", "02", "McFly", "McFly", "George"));
+//        friendsList.add(new GIUser("daniel@gmail.com", "03", "Daniel", "Sandoval", "Daniel"));
+//        friendsList.add(new GIUser("biff@tanon.ws", "04", "Biff", "Tanon", "Biff"));
+//        friendsList.add(new GIUser("zoé@dubois.ws", "05", "Zoé", "Dubois", "Zoé"));
+//        friendsList.add(new GIUser("edouard@delbove.sj", "06", "Edouard", "Delbove", "Edouard"));
+//        friendsList.add(new GIUser("guitou@blank.sj", "07", "Guitou", "Blank", "Guillaume"));
+//        friendsList.add(new GIUser("elodie@girot.sj", "08", "Elodie", "Girot", "Elodie"));
+//        friendsList.add(new GIUser("alan@turing.ws", "09", "Alan", "Turing", "Alan"));
+//        friendsList.add(new GIUser("shledon@cooper.tbbt", "10", "Sheldon", "Cooper", "Sheldon"));
+//        sortFriendsListAlphabetically(friendsList);
+//    }
 
     private void onClickToValidateFriendship(){
         relativeLayoutFormAddFiend.setVisibility(View.GONE);

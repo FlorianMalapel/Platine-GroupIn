@@ -104,7 +104,7 @@ public class GIActivityCreateGroup extends AppCompatActivity
     }
 
     private void initRecyclerViewFriends(){
-        adapterRecyclerViewFriends = new GIAdapterRecyclerViewFriends(friendsList, true);
+        adapterRecyclerViewFriends = new GIAdapterRecyclerViewFriends(friendsList, true, this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerViewFriends.setLayoutManager(layoutManager);
         recyclerViewFriends.setItemAnimator(new DefaultItemAnimator());

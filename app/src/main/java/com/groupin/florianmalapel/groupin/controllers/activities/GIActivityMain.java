@@ -58,6 +58,7 @@ public class GIActivityMain extends AppCompatActivity
         initializeViews();
         setListeners();
         volleyHandler.getUser(GIApplicationDelegate.getInstance().getDataCache().getUserUid(), this);
+        volleyHandler.getAllUsers(this);
     }
 
     @Override
@@ -114,6 +115,9 @@ public class GIActivityMain extends AppCompatActivity
     }
 
     private void setUserPhotoInMenu(){
+        if(GIApplicationDelegate.getInstance().getDataCache().user.photoURL == null)
+            return;
+
         Picasso.with(this)
                 .load(GIApplicationDelegate.getInstance().getDataCache().user.photoURL)
                 .transform(new CircleTransform()).into(imageViewMenu);

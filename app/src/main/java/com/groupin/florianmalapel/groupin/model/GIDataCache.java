@@ -23,6 +23,7 @@ public class GIDataCache implements GIVolleyRequest.RequestCallback {
     public RequestQueue                 requestQueue        = null;
     public GIUser                       user                = null;
     public HashMap<String, GIUser>      userFriendList      = null;
+    public HashMap<String, GIUser>      allUsersList        = null;
     private GISharedPreferencesHelper   prefsHelper         = null;
 
     public GIDataCache(Context context) {
@@ -44,8 +45,18 @@ public class GIDataCache implements GIVolleyRequest.RequestCallback {
         }
     }
 
+    public void setAllUsersList(HashMap<String, GIUser> allUsersList) {
+        this.allUsersList = allUsersList;
+    }
+
     public String getUserUid(){
         return prefsHelper.getUserUid();
+    }
+
+    public String isUserLoggedIn(){
+        if(this.getUserUid() != null)
+            return this.getUserUid();
+        return null;
     }
 
     @Override

@@ -63,4 +63,18 @@ public class GIVolleyHandler {
         request.initGetJSONRequest(null);
         request.startRequest();
     }
+
+    public void postFriendShip(GIVolleyRequest.RequestCallback callback, String userUid, String friendUid){
+        String url = GIRequestData.API_URL + GIRequestData.USER_ENDPOINT + GIRequestData.FRIENDS_ENDPOINT;
+        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.POST_FRIENDSHIP_CODE, Request.Method.POST, url, callback);
+        JSONObject object = new JSONObject();
+        try {
+            object.put("uidR", userUid); // Ask for friendship
+            object.put("uidD", friendUid); // Asked for friendship
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        request.initPostJSONRequest(null, object);
+        request.startRequest();
+    }
 }

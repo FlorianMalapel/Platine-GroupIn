@@ -24,6 +24,7 @@ public class GIUser {
     public String firstName = null;
     public String lastName = null;
     public ArrayList<String> friendsUids = null;
+    public ArrayList<String> groupsUids = null;
 
     public GIUser() {
     }
@@ -83,6 +84,7 @@ public class GIUser {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", friendsUids=" + friendsUids +
+                ", groupsUids=" + groupsUids +
                 '}';
     }
 }
