@@ -58,7 +58,7 @@ public class GIActivityMain extends AppCompatActivity
         initializeViews();
         setListeners();
         volleyHandler.getUser(GIApplicationDelegate.getInstance().getDataCache().getUserUid(), this);
-        volleyHandler.getAllUsers(this);
+//        volleyHandler.getAllUsers(this);
     }
 
     @Override

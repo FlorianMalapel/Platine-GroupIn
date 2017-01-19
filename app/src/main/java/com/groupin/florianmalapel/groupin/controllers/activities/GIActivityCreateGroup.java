@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.util.SortedListAdapterCallback;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -24,11 +23,19 @@ import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecyclerViewFriends;
 import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecyclerViewFriendsListCreateGroup;
 import com.groupin.florianmalapel.groupin.helpers.GICommunicationsHelper;
+import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
+import com.groupin.florianmalapel.groupin.model.dbObjects.GIGroup;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
+import com.groupin.florianmalapel.groupin.views.GIProgressIndicator;
+import com.groupin.florianmalapel.groupin.volley.GIRequestData;
+import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
+import com.groupin.florianmalapel.groupin.volley.GIVolleyRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Created by florianmalapel on 13/01/2017.
@@ -37,7 +44,8 @@ import java.util.Collections;
 public class GIActivityCreateGroup extends AppCompatActivity
         implements  View.OnClickListener,
                     GIAdapterRecyclerViewFriendsListCreateGroup.ItemClickedCallback,
-                    GICommunicationsHelper.FirebaseUploadImageCallback {
+                    GICommunicationsHelper.FirebaseUploadImageCallback,
+                    GIVolleyRequest.RequestCallback {
 
     private int PICK_IMAGE_REQUEST = 1;
 
@@ -66,8 +74,13 @@ public class GIActivityCreateGroup extends AppCompatActivity
     private String urlGroupPhoto = null;
     private Bitmap bitmapImageGroup = null;
 
-    // Fixtures
+    private GIVolleyHandler volleyHandler = null;
+
     private ArrayList<GIUser> friendsList = null;
+
+    private GIGroup groupToCreate = null;
+    private GIProgressIndicator progressIndicator = null;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,7 +91,7 @@ public class GIActivityCreateGroup extends AppCompatActivity
 
     private void initialize() {
         findViewById();
-        fixture();
+//        fixture();
         initializeObjects();
         initializeViews();
         setListeners();
@@ -89,18 +102,20 @@ public class GIActivityCreateGroup extends AppCompatActivity
         imageViewAddPhotoGroup = (ImageView) findViewById(R.id.imageButtonAddPhotoGroup);
         buttonAddFriend = (ImageButton) findViewById(R.id.imageButtonAddFriend);
         editTextGroupName = (EditText) findViewById(R.id.editTextGroupName);
-        editTextGroupDesc = (EditText) findViewById(R.id.editTextGroupDesc);
+        editTextGroupDesc = (EditText) findViewById(R.id.editTextEventDesc);
         textViewCancel = (TextView) findViewById(R.id.textViewCancel);
         textViewValidateCreate = (TextView) findViewById(R.id.textViewValidateCreate);
         textViewOk = (TextView) findViewById(R.id.textViewOk);
         recyclerViewFriends = (RecyclerView) findViewById(R.id.recyclerViewFriends);
         recyclerViewFriendsDeleteList = (RecyclerView) findViewById(R.id.recyclerViewFriendsDeleteList);
         relativeLayoutFriends = (RelativeLayout) findViewById(R.id.relativeLayoutFriendsPopUp);
-        relativeLayoutPhotoGroup = (RelativeLayout) findViewById(R.id.relativeLayoutPhotoGroup);
+        relativeLayoutPhotoGroup = (RelativeLayout) findViewById(R.id.relativeLayoutPhotoEvent);
+        progressIndicator = (GIProgressIndicator) findViewById(R.id.progressIndicator);
     }
 
     private void initializeObjects() {
-
+        friendsList = GIApplicationDelegate.getInstance().getDataCache().getUserFriendsList();
+        volleyHandler = new GIVolleyHandler();
     }
 
     private void initRecyclerViewFriends(){
@@ -163,7 +178,19 @@ public class GIActivityCreateGroup extends AppCompatActivity
     }
 
     private void confirmGroupCreation(){
-        GICommunicationsHelper.firebaseUploadBitmap("testUpload.jpg", bitmapImageGroup, this);
+        progressIndicator.startRotating();
+        progressIndicator.setVisibility(View.VISIBLE);
+        GICommunicationsHelper.firebaseUploadBitmap(GIApplicationDelegate.getInstance().getDataCache().getUserUid() + System.currentTimeMillis() + ".jpg", bitmapImageGroup, this);
+    }
+
+    private void sendGroupToAPI(){
+        // TODO check if nothing is null
+        groupToCreate = new GIGroup(editTextGroupName.getText().toString(), editTextGroupDesc.getText().toString(), urlGroupPhoto);
+        try {
+            volleyHandler.postNewGroup(this, groupToCreate.getCreateGroupJSON(GIApplicationDelegate.getInstance().getDataCache().getUserUid()));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private void onClickOnButtonAddFriend(){
@@ -181,7 +208,7 @@ public class GIActivityCreateGroup extends AppCompatActivity
         }
 
         else if(view == textViewValidateCreate){
-
+            confirmGroupCreation();
         }
 
         else if(view == buttonAddFriend){
@@ -206,10 +233,33 @@ public class GIActivityCreateGroup extends AppCompatActivity
     @Override
     public void firebaseUploadSuccess(String url) {
         this.urlGroupPhoto = url;
+        sendGroupToAPI();
     }
 
     @Override
     public void firebaseUploadFailed() {
+
+    }
+
+    @Override
+    public void onRequestStart() {
+
+    }
+
+    @Override
+    public void onRequestFinishWithSuccess(int request_code, JSONObject object) {
+        GIApplicationDelegate.getInstance().onRequestFinishWithSuccess(request_code, object);
+        if(request_code == GIRequestData.POST_GROUP_CODE){
+            volleyHandler.getGroups(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+        }
+        else if(request_code == GIRequestData.GET_GROUPS_CODE) {
+            progressIndicator.stopRotate();
+            finish();
+        }
+    }
+
+    @Override
+    public void onRequestFinishWithFailure() {
 
     }
 
@@ -230,37 +280,4 @@ public class GIActivityCreateGroup extends AppCompatActivity
         }
     }
 
-    private void fixture(){
-        friendsList = new ArrayList<>();
-        friendsList.add(new GIUser("marty@mc.fly", "01", "McFly", "McFly", "Marty"));
-        friendsList.add(new GIUser("george@mc.fly", "02", "McFly", "McFly", "George"));
-        friendsList.add(new GIUser("daniel@gmail.com", "03", "Daniel", "Sandoval", "Daniel"));
-        friendsList.add(new GIUser("biff@tanon.ws", "04", "Biff", "Tanon", "Biff"));
-        friendsList.add(new GIUser("zoé@dubois.ws", "05", "Zoé", "Dubois", "Zoé"));
-        friendsList.add(new GIUser("edouard@delbove.sj", "06", "Edouard", "Delbove", "Edouard"));
-        friendsList.add(new GIUser("guitou@blank.sj", "07", "Guitou", "Blank", "Guillaume"));
-        friendsList.add(new GIUser("elodie@girot.sj", "08", "Elodie", "Girot", "Elodie"));
-        friendsList.add(new GIUser("alan@turing.ws", "09", "Alan", "Turing", "Alan"));
-        friendsList.add(new GIUser("shledon@cooper.tbbt", "10", "Sheldon", "Cooper", "Sheldon"));
-        sortFriendsListAlphabetically(friendsList);
-    }
-
-    private void sortFriendsListAlphabetically(ArrayList<GIUser> friendsList){
-        Collections.sort(friendsList, new SortedListAdapterCallback<GIUser>(null) {
-            @Override
-            public int compare(GIUser o1, GIUser o2) {
-                return o1.lastName.compareTo(o2.lastName);
-            }
-
-            @Override
-            public boolean areContentsTheSame(GIUser oldItem, GIUser newItem) {
-                return false;
-            }
-
-            @Override
-            public boolean areItemsTheSame(GIUser item1, GIUser item2) {
-                return false;
-            }
-        });
-    }
 }

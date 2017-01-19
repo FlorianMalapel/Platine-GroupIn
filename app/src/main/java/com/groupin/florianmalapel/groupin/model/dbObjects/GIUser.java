@@ -1,5 +1,7 @@
 package com.groupin.florianmalapel.groupin.model.dbObjects;
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.IgnoreExtraProperties;
@@ -27,6 +29,8 @@ public class GIUser {
     public ArrayList<String> groupsUids = null;
 
     public GIUser() {
+        this.groupsUids = new ArrayList<>();
+        this.friendsUids = new ArrayList<>();
     }
 
     public GIUser(FirebaseUser user) {
@@ -35,11 +39,15 @@ public class GIUser {
         this.display_name = user.getDisplayName();
         this.providerId = user.getProviders().get(0);
         this.photoURL = (user.getPhotoUrl() != null) ? user.getPhotoUrl().toString() : null;
+        this.groupsUids = new ArrayList<>();
+        this.friendsUids = new ArrayList<>();
     }
 
     public GIUser(String email, String display_name) {
         this.email = email;
         this.display_name = display_name;
+        this.groupsUids = new ArrayList<>();
+        this.friendsUids = new ArrayList<>();
     }
 
     public GIUser(String email, String uid, String display_name, String firstName, String lastName) {
@@ -48,6 +56,8 @@ public class GIUser {
         this.display_name = display_name;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.groupsUids = new ArrayList<>();
+        this.friendsUids = new ArrayList<>();
     }
 
     public GIUser(String email, String uid, String display_name, String firstName, String lastName, String photoURL) {
@@ -57,6 +67,8 @@ public class GIUser {
         this.firstName = firstName;
         this.lastName = lastName;
         this.photoURL = photoURL;
+        this.groupsUids = new ArrayList<>();
+        this.friendsUids = new ArrayList<>();
     }
 
     public void writeUserInDB(DatabaseReference databaseReference) {
@@ -70,6 +82,7 @@ public class GIUser {
         userJSON.put("photoURL", this.photoURL);
         userJSON.put("providerId", this.providerId);
         userJSON.put("uid", this.uid);
+        Log.i("∆∆∆ ∆∆∆ ∆∆∆ ∆∆", userJSON.toString());
         return userJSON;
     }
 

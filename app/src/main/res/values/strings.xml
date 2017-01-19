@@ -23,6 +23,22 @@
     <string name="participants">participants</string>
     <string name="eventsToCome">Evénements à venir</string>
 
+    <!--Create an event-->
+    <string name="createEvent">Créer un événement</string>
+    <string name="eventName">Nom de l\'événement</string>
+    <string name="eventPlace">Lieu</string>
+    <string name="eventPrice">Prix</string>
+    <string name="eventPriceHolder">0,00€</string>
+    <string name="eventPlaceHolder">Adresse</string>
+    <string name="startDate">Date début</string>
+    <string name="endDate">Date fin</string>
+    <string name="dateHolder">jj/mm/aaaa</string>
+    <string name="eventDescHolder">Ecrire ici la description de l\'événement</string>
+    <string name="eventBringBack">Quoi ramener ?</string>
+    <string name="eventBringBackHolder">Dites à vos invités s\'il faut ramener  quelquechose.</string>
+    <string name="eventTheme">Thème</string>
+    <string name="eventSecondTheme">Sous-thème</string>
+
     <!--Create a group-->
     <string name="createGroup">Créer un groupe</string>
     <string name="groupName">Nom du groupe</string>

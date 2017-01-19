@@ -1,8 +1,10 @@
 package com.groupin.florianmalapel.groupin.helpers;
 
+import com.groupin.florianmalapel.groupin.model.dbObjects.GIGroup;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
 import com.groupin.florianmalapel.groupin.volley.GIRequestData;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,6 +33,15 @@ public class GIJsonToObjectHelper {
 
             case GIRequestData.GET_USERS_CODE:
                 listObjects.add(new ItemReceived(getUsersFromJSON(object), GIRequestData.ALL_USERS));
+                break;
+            case GIRequestData.NOTIFS_GROUP:
+                listObjects.add(new ItemReceived(getUsersFromJSON(object), GIRequestData.USER));
+                break;
+            case GIRequestData.POST_GROUP_CODE:
+                listObjects.add(new ItemReceived(getGroupFromJSON(object), GIRequestData.GROUP));
+                break;
+            case GIRequestData.GET_GROUPS_CODE:
+                listObjects.add(new ItemReceived(getGroupsFromJSON(object), GIRequestData.ALL_GROUPS));
                 break;
         }
 
@@ -68,6 +79,7 @@ public class GIJsonToObjectHelper {
 
             if(!friendsUids.isEmpty())
                 user.friendsUids = friendsUids;
+            else user.friendsUids = new ArrayList<>();
         }
         if(object.has("groups")){
             JSONObject groups = object.getJSONObject("groups");
@@ -80,6 +92,7 @@ public class GIJsonToObjectHelper {
 
             if(!groupsIds.isEmpty())
                 user.groupsUids = groupsIds;
+            else user.groupsUids = new ArrayList<>();
         }
 
 
@@ -87,6 +100,44 @@ public class GIJsonToObjectHelper {
             return user;
 
         return null;
+    }
+
+    public static HashMap<String, GIGroup> getGroupsFromJSON(JSONObject object) throws JSONException {
+        HashMap<String, GIGroup> groupsList = new HashMap<>();
+        JSONArray array = null;
+        if(object.has("groups")){
+            array = object.getJSONArray("groups");
+        }
+        else return null;
+
+        for(int i=0; i<array.length(); i++){
+            GIGroup group = getGroupFromJSON(array.getJSONObject(i));
+            if(group != null)
+                groupsList.put(group.id, group);
+        }
+
+        return groupsList;
+    }
+
+    public static GIGroup getGroupFromJSON(JSONObject object) throws JSONException {
+        GIGroup group = new GIGroup();
+        if(object.has("id")){
+            group.id = object.getString("id");
+        }
+
+        if(object.has("nom")){
+            group.name = object.getString("nom");
+        }
+
+        if(object.has("description")){
+            group.description = object.getString("description");
+        }
+
+        if(object.has("photoURL")){
+            group.url_image = object.getString("photoURL");
+        }
+
+        return group;
     }
 
     public static HashMap<String,GIUser> getUsersFromJSON(JSONObject object) throws JSONException {
@@ -125,5 +176,6 @@ public class GIJsonToObjectHelper {
             this.request_code = request_code;
         }
     }
+
 
 }

@@ -4,6 +4,15 @@
                 android:layout_height="match_parent"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:background="@android:color/white">
+    
+    <com.groupin.florianmalapel.groupin.views.GIProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:elevation="20dp"
+        android:visibility="gone"
+        />
 
         <RelativeLayout
             android:id="@+id/relativeLayoutTop"
@@ -18,6 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_arrow_back"
+                android:padding="3dp"
                 android:background="@android:color/transparent"
                 android:layout_alignParentLeft="true"/>
 
@@ -39,14 +49,17 @@
                 android:layout_centerVertical="true"
                 android:text="@string/confirm"
                 android:gravity="right"
-                android:padding="5dp"
+                android:paddingRight="5dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
                 android:textColor="@android:color/white"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textStyle="normal|bold"/>
         </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/relativeLayoutPhotoGroup"
+        android:id="@+id/relativeLayoutPhotoEvent"
         android:layout_below="@id/relativeLayoutTop"
         android:background="@drawable/border_light_gray"
         android:layout_width="match_parent"
@@ -65,7 +78,7 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayoutBottom"
-        android:layout_below="@+id/relativeLayoutPhotoGroup"
+        android:layout_below="@+id/relativeLayoutPhotoEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
@@ -109,14 +122,14 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/relativeLayoutGroupDesc"
+            android:id="@+id/relativeLayoutEventDesc"
             android:layout_below="@+id/relativeLayoutGroupName"
             android:background="@drawable/border_bottom_light_gray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/textViewGroupDesc"
+                android:id="@+id/textViewEventDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/groupDesc"
@@ -130,7 +143,7 @@
                 />
             
             <RelativeLayout
-                android:layout_below="@+id/textViewGroupDesc"
+                android:layout_below="@+id/textViewEventDesc"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginRight="20dp"
@@ -139,7 +152,7 @@
                 >
 
                 <EditText
-                    android:id="@+id/editTextGroupDesc"
+                    android:id="@+id/editTextEventDesc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/GIBlue"
@@ -156,7 +169,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_below="@+id/relativeLayoutGroupDesc"
+            android:layout_below="@+id/relativeLayoutEventDesc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="20dp"

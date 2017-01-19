@@ -25,7 +25,9 @@ import com.groupin.florianmalapel.groupin.helpers.GIGoogleLoginHelper;
 import com.groupin.florianmalapel.groupin.helpers.GISharedPreferencesHelper;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 import com.groupin.florianmalapel.groupin.tools.DLog;
+import com.groupin.florianmalapel.groupin.views.GIProgressIndicator;
 import com.groupin.florianmalapel.groupin.volley.GIRequestData;
+import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyRequest;
 
 import org.json.JSONObject;
@@ -50,7 +52,8 @@ public class GIActivitySocialSign extends AppCompatActivity implements
     private Button                  buttonContinue              = null;
     private EditText                editTextEmail               = null;
     private GISharedPreferencesHelper prefsHelper               = null;
-
+    private GIProgressIndicator     progressIndicator           = null;
+    private GIVolleyHandler         volleyHandler               = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,7 @@ public class GIActivitySocialSign extends AppCompatActivity implements
         buttonGoogleSignIn.setOnClickListener(this);
         googleLoginHelper = new GIGoogleLoginHelper(this, this, this);
         facebookLoginHelper = new GIFacebookLoginHelper(this);
+        volleyHandler = new GIVolleyHandler();
     }
 
     private void setListeners(){
@@ -93,6 +97,7 @@ public class GIActivitySocialSign extends AppCompatActivity implements
         buttonFacebookSignIn = (Button) findViewById(R.id.button_facebook_login);
         buttonContinue = (Button) findViewById(R.id.button_continue);
         editTextEmail = (EditText) findViewById(R.id.editText_email);
+        progressIndicator = (GIProgressIndicator) findViewById(R.id.progressIndicator);
     }
 
 
@@ -207,6 +212,8 @@ public class GIActivitySocialSign extends AppCompatActivity implements
         if(requestCode == googleLoginHelper.GOOGLE_LOGIN_ID)
             googleLoginHelper.handleResponse(data, requestCode);
         else facebookLoginHelper.handleActivityResult(requestCode, resultCode, data);
+        progressIndicator.startRotating();
+        progressIndicator.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -216,8 +223,12 @@ public class GIActivitySocialSign extends AppCompatActivity implements
 
     @Override
     public void onRequestFinishWithSuccess(int request_code, JSONObject object) {
+        GIApplicationDelegate.getInstance().onRequestFinishWithSuccess(request_code, object);
         if(request_code == GIRequestData.POST_USER_CODE) {
-            GIApplicationDelegate.getInstance().onRequestFinishWithSuccess(request_code, object);
+            volleyHandler.getGroups(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+        }
+        if(request_code == GIRequestData.GET_GROUPS_CODE) {
+            progressIndicator.stopRotate();
             goToActivityMain();
         }
     }

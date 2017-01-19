@@ -3,6 +3,7 @@ package com.groupin.florianmalapel.groupin.helpers;
 import android.util.Log;
 
 import com.groupin.florianmalapel.groupin.model.GIDataCache;
+import com.groupin.florianmalapel.groupin.model.dbObjects.GIGroup;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
 import com.groupin.florianmalapel.groupin.volley.GIRequestData;
 
@@ -43,7 +44,6 @@ public class GIDataCacheHelper {
     public static void handleObjectToCache(GIJsonToObjectHelper.ItemReceived itemReceived, GIDataCache cache){
 
         if(itemReceived == null) {
-            Log.w("GIDataCacheHelper", "~~~~~~~~ null ~~~~~~~ñ");
             return;
         }
 
@@ -54,6 +54,11 @@ public class GIDataCacheHelper {
         else if(itemReceived.request_code == GIRequestData.ALL_USERS){
             cache.setAllUsersList((HashMap<String, GIUser>) itemReceived.object);
         }
+
+        else if(itemReceived.request_code == GIRequestData.ALL_GROUPS){
+            cache.setUserGroupsList((HashMap<String, GIGroup>) itemReceived.object);
+        }
+
 
         // TODO NEED TO FINISH
 

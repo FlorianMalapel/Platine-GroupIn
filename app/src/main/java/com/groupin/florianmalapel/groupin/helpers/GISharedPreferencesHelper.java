@@ -16,6 +16,9 @@ public class GISharedPreferencesHelper {
     private static final String KEY_USER_PASSWORD               = "password";
     private static final String KEY_USER_ACCESS_TOKEN_FB        = "access_token_fb";
     private static final String KEY_USER_ACCESS_TOKEN_GOOGLE    = "access_token_google";
+    private static final String KEY_USER_DISPLAY_NAME           = "display_name";
+    private static final String KEY_USER_PHOTO_URL              = "photo_url";
+    private static final String KEY_USER_PROVIDER_ID            = "provider_id";
     private static final String KEY_USER_UID                    = "user_uid";
 
     private Context context;
@@ -68,6 +71,33 @@ public class GISharedPreferencesHelper {
     public void storeUserUid(String userUid){
         editor.putString(KEY_USER_UID, userUid);
         editor.commit();
+    }
+
+    public void storeProviderId(String providerId){
+        editor.putString(KEY_USER_PROVIDER_ID, providerId);
+        editor.commit();
+    }
+
+    public void storeDisplayName(String displayName){
+        editor.putString(KEY_USER_DISPLAY_NAME, displayName);
+        editor.commit();
+    }
+
+    public void storePhotoURL(String photoURL){
+        editor.putString(KEY_USER_PHOTO_URL, photoURL);
+        editor.commit();
+    }
+
+    public String getUserProviderId(){
+        return sharedPreferences.getString(KEY_USER_PROVIDER_ID, null);
+    }
+
+    public String getUserDisplayName(){
+        return sharedPreferences.getString(KEY_USER_DISPLAY_NAME, null);
+    }
+
+    public String getUserPhotoUrl(){
+        return sharedPreferences.getString(KEY_USER_PHOTO_URL, null);
     }
 
     public String getUserIdTokenGoogle(){

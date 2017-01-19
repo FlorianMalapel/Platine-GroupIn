@@ -9,13 +9,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.util.SortedListAdapterCallback;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,29 +24,31 @@ import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecyclerViewFriends;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
+import com.groupin.florianmalapel.groupin.transformations.CircleTransform;
+import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by florianmalapel on 04/12/2016.
  */
 
-public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickListener {
+public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickListener, TextWatcher {
 
     private RecyclerView recyclerViewFriends = null;
     private FloatingActionButton fabAddFriend = null;
     private RelativeLayout relativeLayoutFormAddFiend = null;
     private RelativeLayout relativeLayoutFriendInfo = null;
     private EditText editTextMailAddress = null;
-    private CircleImageView circularImageViewProfilPic = null;
+    private ImageView circularImageViewProfilPic = null;
     private TextView textViewNameFriend = null;
     private Button buttonAddFriendCancel = null;
     private Button buttonAddFriendOk = null;
     private ArrayList<GIUser> friendsList = null;
     private GIAdapterRecyclerViewFriends friendsAdapter = null;
+    private GIUser userSelected = null;
+    private GIVolleyHandler volleyHandler = null;
 
     @Nullable
     @Override
@@ -68,15 +71,20 @@ public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickL
         relativeLayoutFriendInfo = (RelativeLayout) view.findViewById(R.id.relativeLayoutFriendInfo);
         editTextMailAddress = (EditText) view.findViewById(R.id.editTextMailAddress);
         textViewNameFriend = (TextView) view.findViewById(R.id.textViewNameFriend);
-        circularImageViewProfilPic = (CircleImageView) view.findViewById(R.id.circularImageViewProfilPic);
+        circularImageViewProfilPic = (ImageView) view.findViewById(R.id.circularImageViewProfilPic);
     }
 
     private void initialize(){
         friendsList = new ArrayList<>();
-        for(String key : GIApplicationDelegate.getInstance().getDataCache().allUsersList.keySet()){
-            friendsList.add(GIApplicationDelegate.getInstance().getDataCache().allUsersList.get(key));
-            Log.w("∆∆∆ ∆∆∆ ∆∆∆", friendsList.get(friendsList.size()-1).toString());
+
+        if(GIApplicationDelegate.getInstance().getDataCache().userFriendList == null)
+            return;
+
+        for(String key : GIApplicationDelegate.getInstance().getDataCache().userFriendList.keySet()){
+            friendsList.add(GIApplicationDelegate.getInstance().getDataCache().userFriendList.get(key));
         }
+
+        volleyHandler = new GIVolleyHandler();
     }
 
     private void initViews(){
@@ -88,6 +96,7 @@ public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickL
         fabAddFriend.setOnClickListener(this);
         buttonAddFriendCancel.setOnClickListener(this);
         buttonAddFriendOk.setOnClickListener(this);
+        editTextMailAddress.addTextChangedListener(this);
     }
 
     private void initRecyclerView(){
@@ -115,29 +124,13 @@ public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickL
 
     private void onClickToValidateFriendship(){
         relativeLayoutFormAddFiend.setVisibility(View.GONE);
+        if(userSelected == null)
+            return;
+        volleyHandler.postFriendShip(GIApplicationDelegate.getInstance(), GIApplicationDelegate.getInstance().getDataCache().getUserUid(), userSelected.uid);
     }
 
     private void onClickToCancelFriendship(){
         relativeLayoutFormAddFiend.setVisibility(View.GONE);
-    }
-
-    private void sortFriendsListAlphabetically(ArrayList<GIUser> friendsList){
-        Collections.sort(friendsList, new SortedListAdapterCallback<GIUser>(null) {
-            @Override
-            public int compare(GIUser o1, GIUser o2) {
-                return o1.lastName.compareTo(o2.lastName);
-            }
-
-            @Override
-            public boolean areContentsTheSame(GIUser oldItem, GIUser newItem) {
-                return false;
-            }
-
-            @Override
-            public boolean areItemsTheSame(GIUser item1, GIUser item2) {
-                return false;
-            }
-        });
     }
 
     @Override
@@ -153,6 +146,25 @@ public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickL
         else if( view == buttonAddFriendOk ) {
             onClickToValidateFriendship();
         }
+
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        userSelected = GIApplicationDelegate.getInstance().getDataCache().findUserFromAll(charSequence.toString());
+        if(userSelected != null){
+            textViewNameFriend.setText(userSelected.display_name);
+            Picasso.with(getContext()).load(userSelected.photoURL).transform(new CircleTransform()).into(circularImageViewProfilPic);
+        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
 
     }
 }

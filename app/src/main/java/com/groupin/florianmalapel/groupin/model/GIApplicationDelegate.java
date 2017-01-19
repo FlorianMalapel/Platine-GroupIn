@@ -7,6 +7,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.storage.FirebaseStorage;
 import com.groupin.florianmalapel.groupin.helpers.GIDataCacheHelper;
+import com.groupin.florianmalapel.groupin.volley.GIRequestData;
+import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyRequest;
 import com.squareup.picasso.Picasso;
 
@@ -26,11 +28,14 @@ public class GIApplicationDelegate extends Application implements GIVolleyReques
 
     private FirebaseStorage firebaseStorage = null;
 
+    private GIVolleyHandler volleyHandler = null;
+
     @Override
     public void onCreate() {
         app_instance = this;
         dataCache = new GIDataCache(this);
         firebaseStorage = FirebaseStorage.getInstance();
+        volleyHandler = new GIVolleyHandler();
         Picasso.with(this).setLoggingEnabled(true);
     }
 
@@ -80,6 +85,10 @@ public class GIApplicationDelegate extends Application implements GIVolleyReques
     @Override
     public void onRequestFinishWithSuccess(int request_code, JSONObject object) {
         GIDataCacheHelper.handleResponseRequest(request_code, object, dataCache);
+        if(request_code == GIRequestData.POST_USER_CODE){
+            volleyHandler.getAllUsers(this);
+            volleyHandler.getGroups(this, dataCache.user.uid);
+        }
     }
 
     @Override

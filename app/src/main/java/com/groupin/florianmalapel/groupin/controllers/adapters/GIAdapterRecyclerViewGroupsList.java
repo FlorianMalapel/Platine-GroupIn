@@ -18,6 +18,7 @@ import com.groupin.florianmalapel.groupin.transformations.CircleTransform;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by florianmalapel on 06/01/2017.
@@ -28,9 +29,21 @@ public class GIAdapterRecyclerViewGroupsList extends RecyclerView.Adapter<GIAdap
     private ArrayList<GIGroup> list_groups = null;
     private Context context = null;
 
-    public GIAdapterRecyclerViewGroupsList(ArrayList<GIGroup> list_groups, Context context) {
-        this.list_groups = list_groups;
+    public GIAdapterRecyclerViewGroupsList(HashMap<String,GIGroup> list_groups, Context context) {
+        this.list_groups = getList_groups(list_groups);
         this.context = context;
+    }
+
+
+    public ArrayList<GIGroup> getList_groups(HashMap<String,GIGroup> list){
+        if(list == null)
+            return new ArrayList<>();
+
+        ArrayList<GIGroup> groups = new ArrayList<>();
+        for(String key: list.keySet()){
+            groups.add(list.get(key));
+        }
+        return groups;
     }
 
     @Override

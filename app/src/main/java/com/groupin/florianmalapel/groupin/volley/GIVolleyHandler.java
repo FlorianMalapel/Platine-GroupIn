@@ -57,12 +57,13 @@ public class GIVolleyHandler {
         request.startRequest();
     }
 
-    public void getGroup(GIVolleyRequest.RequestCallback callback, String uid){
+    public void getGroups(GIVolleyRequest.RequestCallback callback, String uid){
         String url = GIRequestData.API_URL + GIRequestData.GROUP_ENDPOINT + "/" + uid;
-        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.GET_GROUP_CODE, Request.Method.GET, url, callback);
+        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.GET_GROUPS_CODE, Request.Method.GET, url, callback);
         request.initGetJSONRequest(null);
         request.startRequest();
     }
+
 
     public void postFriendShip(GIVolleyRequest.RequestCallback callback, String userUid, String friendUid){
         String url = GIRequestData.API_URL + GIRequestData.USER_ENDPOINT + GIRequestData.FRIENDS_ENDPOINT;

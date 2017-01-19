@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
+import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
 
 /**
  * Created by florianmalapel on 14/01/2017.
@@ -20,6 +21,8 @@ public class GIActivityLauncher extends AppCompatActivity implements Animation.A
     private ImageView imageViewGroupInLogo = null;
     private static final int NB_ROTATE_ANIM = 2;
     private int currentNbRotateAnim = 0;
+    private boolean isUserConnected = false;
+    private GIVolleyHandler volleyHandler = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,8 +42,16 @@ public class GIActivityLauncher extends AppCompatActivity implements Animation.A
     }
 
     private void initializeObjects() {
+        volleyHandler = new GIVolleyHandler();
+        if (GIApplicationDelegate.getInstance().getDataCache().isUserLoggedIn() != null) {
+            isUserConnected = true;
+            volleyHandler.postUser(GIApplicationDelegate.getInstance().getDataCache().user, GIApplicationDelegate.getInstance());
+        } else {
+            isUserConnected = false;
+        }
 
     }
+
 
     private void initializeViews() {
         startAnimationOnLogo();
@@ -49,7 +60,7 @@ public class GIActivityLauncher extends AppCompatActivity implements Animation.A
     private void onAnimationTerminated(){
         if(currentNbRotateAnim == NB_ROTATE_ANIM) {
 
-            if (GIApplicationDelegate.getInstance().getDataCache().isUserLoggedIn() != null) {
+            if (isUserConnected) {
                 goToMainActivity();
             } else {
                 goToLoginActivity();

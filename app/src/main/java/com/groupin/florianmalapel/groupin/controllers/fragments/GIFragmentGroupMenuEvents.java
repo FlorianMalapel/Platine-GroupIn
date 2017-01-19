@@ -16,8 +16,8 @@ import android.view.ViewGroup;
 
 import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecyclerViewEventsList;
+import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIEvent;
-import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
 import com.groupin.florianmalapel.groupin.views.GIHorizontalBubbleList;
 
 import java.util.ArrayList;
@@ -54,15 +54,18 @@ public class GIFragmentGroupMenuEvents extends Fragment implements View.OnClickL
     private void initViews(){
         initRecyclerView();
         fabAddEvent.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        initTopBubbleFriendList();
+    }
+
+    private void initTopBubbleFriendList(){
+        if(GIApplicationDelegate.getInstance().getDataCache().userFriendList == null)
+            return;
+
         horizontalBubbleList_members.createContainerScrollView();
-        horizontalBubbleList_members.addBubbleInViewWithPicasso(new GIUser("flo@flo.flo", "uid", "Flo", "Malap", "Flo", "https://verbstomp.com/wp-content/uploads/2015/11/rick-and-morty.jpg"));
-        horizontalBubbleList_members.addBubbleInViewWithPicasso(new GIUser("flo@flo.flo", "uid", "Flo", "Malap", "Flo", "https://highape.com/wp-content/uploads/2016/12/party.jpg"));
-        horizontalBubbleList_members.addBubbleInViewWithPicasso(new GIUser("flo@flo.flo", "uid", "Flo", "Malap", "Flo", "https://verbstomp.com/wp-content/uploads/2015/11/rick-and-morty.jpg"));
-        horizontalBubbleList_members.addBubbleInViewWithPicasso(new GIUser("flo@flo.flo", "uid", "Flo", "Malap", "Flo", "https://highape.com/wp-content/uploads/2016/12/party.jpg"));
-        horizontalBubbleList_members.addBubbleInViewWithPicasso(new GIUser("flo@flo.flo", "uid", "Flo", "Malap", "Flo", "https://verbstomp.com/wp-content/uploads/2015/11/rick-and-morty.jpg"));
-        horizontalBubbleList_members.addBubbleInViewWithPicasso(new GIUser("flo@flo.flo", "uid", "Flo", "Malap", "Flo", "https://highape.com/wp-content/uploads/2016/12/party.jpg"));
-        horizontalBubbleList_members.addBubbleInViewWithPicasso(new GIUser("flo@flo.flo", "uid", "Flo", "Malap", "Flo", "https://verbstomp.com/wp-content/uploads/2015/11/rick-and-morty.jpg"));
-        horizontalBubbleList_members.addBubbleInViewWithPicasso(new GIUser("flo@flo.flo", "uid", "Flo", "Malap", "Flo", "https://highape.com/wp-content/uploads/2016/12/party.jpg"));
+
+        for(String key: GIApplicationDelegate.getInstance().getDataCache().userFriendList.keySet()){
+            horizontalBubbleList_members.addBubbleInViewWithPicasso(GIApplicationDelegate.getInstance().getDataCache().userFriendList.get(key));
+        }
     }
 
     private void setListeners(){

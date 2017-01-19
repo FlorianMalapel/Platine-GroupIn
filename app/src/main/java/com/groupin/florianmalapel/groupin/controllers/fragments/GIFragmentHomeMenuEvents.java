@@ -1,5 +1,6 @@
 package com.groupin.florianmalapel.groupin.controllers.fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.groupin.florianmalapel.groupin.R;
+import com.groupin.florianmalapel.groupin.controllers.activities.GIActivityCreateEvent;
 import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecyclerViewEventsList;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIEvent;
 
@@ -93,8 +95,13 @@ public class GIFragmentHomeMenuEvents extends Fragment implements View.OnClickLi
         list_events.add(event3);
     }
 
-    private void onClickFabAddEvent(){
+    private void createNewEvent(){
+        Intent intent = new Intent(getContext(), GIActivityCreateEvent.class);
+        getContext().startActivity(intent);
+    }
 
+    private void onClickFabAddEvent(){
+        createNewEvent();
     }
 
     @Override

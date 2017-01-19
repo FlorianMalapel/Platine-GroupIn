@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#dcdcdc</color>
-    <color name="colorPrimaryDark">@color/GIBlue</color>
+    <color name="colorPrimaryDark">@color/GIGray</color>
     <!--<color name="colorPrimaryDark">#282f3b</color>-->
     <color name="colorPrimaryDarkAlpha">#da282f3b</color>
     <color name="colorAccent">@color/GIPurple</color>
@@ -12,8 +12,13 @@
     <color name="holoBlueDark">#09c</color>
 
 
-    <color name="GIPurple">#882D63</color>
-    <color name="GIYellow">#fcd915</color>
-    <color name="GIBlue">#3362e5</color>
+    <color name="GIPurple">#CC6D8D</color>
+    <color name="GIGray">#282f3b</color>
+    <color name="GIYellow">#EACF6A</color>
+    <color name="GIBlue">#115471</color>
+    <!--<color name="GIPurple">#882D63</color>-->
+    <!--<color name="GIGray">#282f3b</color>-->
+    <!--<color name="GIYellow">#fcd915</color>-->
+    <!--<color name="GIBlue">#3362e5</color>-->
 
 </resources>

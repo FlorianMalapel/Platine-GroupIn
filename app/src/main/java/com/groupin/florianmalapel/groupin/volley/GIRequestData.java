@@ -18,7 +18,7 @@ public class GIRequestData {
     public final static int GET_USERS_CODE = 113;
     public final static int DELETE_GROUP_CODE = 114;
     public final static int POST_GROUP_CODE = 115;
-    public final static int GET_GROUP_CODE = 116;
+    public final static int GET_GROUPS_CODE = 116;
     public final static int POST_FRIENDSHIP_CODE = 117;
 
     // Volley receive item type
@@ -27,6 +27,7 @@ public class GIRequestData {
     public final static int ALL_USERS = 224;
     public final static int NOTIFS_GROUP = 225;
     public final static int NOTIFS_FRIENDS = 226;
+    public final static int ALL_GROUPS = 227;
 
 
 }

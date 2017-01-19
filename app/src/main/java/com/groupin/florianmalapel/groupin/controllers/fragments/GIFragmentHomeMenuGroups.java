@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,7 @@ import android.view.ViewGroup;
 import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.controllers.activities.GIActivityCreateGroup;
 import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecyclerViewGroupsList;
-import com.groupin.florianmalapel.groupin.model.dbObjects.GIGroup;
-
-import java.util.ArrayList;
+import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 
 /**
  * Created by florianmalapel on 04/12/2016.
@@ -27,7 +26,7 @@ import java.util.ArrayList;
 
 public class GIFragmentHomeMenuGroups extends Fragment implements View.OnClickListener {
 
-    private ArrayList<GIGroup> list_groups = null;
+//    private ArrayList<GIGroup> list_groups = null;
     private RecyclerView recyclerViewGroups = null;
     private FloatingActionButton fabAddGroup = null;
     private GIAdapterRecyclerViewGroupsList groupsAdapter = null;
@@ -37,7 +36,7 @@ public class GIFragmentHomeMenuGroups extends Fragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_menu_groups, container, false);
         findViewById(view);
-        fixture();
+//        fixture();
         initViews();
         setListeners();
         return view;
@@ -49,7 +48,7 @@ public class GIFragmentHomeMenuGroups extends Fragment implements View.OnClickLi
     }
 
     private void initRecyclerView(){
-        groupsAdapter = new GIAdapterRecyclerViewGroupsList(list_groups, getContext());
+        groupsAdapter = new GIAdapterRecyclerViewGroupsList(GIApplicationDelegate.getInstance().getDataCache().userGroupsList, getContext());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerViewGroups.setLayoutManager(layoutManager);
         recyclerViewGroups.setItemAnimator(new DefaultItemAnimator());
@@ -73,40 +72,49 @@ public class GIFragmentHomeMenuGroups extends Fragment implements View.OnClickLi
     @Override
     public void onClick(View view) {
         if(view == fabAddGroup){
-               createNewGroup();
+            createNewGroup();
         }
     }
 
-    private void fixture(){
-        ArrayList<String> uids = new ArrayList<>();
-        uids.add("ole");
-        uids.add("daniel");
-        uids.add("sandoval");
-        uids.add("west");
-        uids.add("world");
-
-        list_groups = new ArrayList<>();
-        GIGroup group = new GIGroup("#az", "Douai street", "http://fantasynscifi.com/wp-content/uploads/2016/05/yoda.jpg", "description");
-        group.membersUids = uids;
-
-        GIGroup group2 = new GIGroup("#az", "Anniversaire Thomas", "http://img.over-blog-kiwi.com/0/99/19/27/20150325/ob_d7ff31_20150215-131050.jpg", "description");
-        group2.membersUids = uids;
-
-        GIGroup group3 = new GIGroup("#az", "Foot", "http://hildasjcr.org.uk/wp-content/uploads/2015/07/Football.png", "description");
-        group3.membersUids = uids;
-
-        GIGroup group4 = new GIGroup("#az", "Famille", "https://verbstomp.com/wp-content/uploads/2015/11/rick-and-morty.jpg", "description");
-        group4.membersUids = uids;
-
-        GIGroup group5 = new GIGroup("#az", "Coloc", "http://www.plan-immobilier.fr/images/thumbnail/thumb_programme/images/programmes/2575/15401_0.jpg", "description");
-        group5.membersUids = uids;
-
-        list_groups.add(group);
-        list_groups.add(group2);
-        list_groups.add(group3);
-        list_groups.add(group4);
-        list_groups.add(group5);
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.wtf("||| ||| |||", GIApplicationDelegate.getInstance().getDataCache().userGroupsList.toString());
+//        groupsAdapter.getList_groups(GIApplicationDelegate.getInstance().getDataCache().userGroupsList);
+//        groupsAdapter.notifyDataSetChanged();
+        initRecyclerView();
     }
+
+    //    private void fixture(){
+//        ArrayList<String> uids = new ArrayList<>();
+//        uids.add("ole");
+//        uids.add("daniel");
+//        uids.add("sandoval");
+//        uids.add("west");
+//        uids.add("world");
+//
+//        list_groups = new ArrayList<>();
+//        GIGroup group = new GIGroup("#az", "Douai street", "http://fantasynscifi.com/wp-content/uploads/2016/05/yoda.jpg", "description");
+//        group.membersUids = uids;
+//
+//        GIGroup group2 = new GIGroup("#az", "Anniversaire Thomas", "http://img.over-blog-kiwi.com/0/99/19/27/20150325/ob_d7ff31_20150215-131050.jpg", "description");
+//        group2.membersUids = uids;
+//
+//        GIGroup group3 = new GIGroup("#az", "Foot", "http://hildasjcr.org.uk/wp-content/uploads/2015/07/Football.png", "description");
+//        group3.membersUids = uids;
+//
+//        GIGroup group4 = new GIGroup("#az", "Famille", "https://verbstomp.com/wp-content/uploads/2015/11/rick-and-morty.jpg", "description");
+//        group4.membersUids = uids;
+//
+//        GIGroup group5 = new GIGroup("#az", "Coloc", "http://www.plan-immobilier.fr/images/thumbnail/thumb_programme/images/programmes/2575/15401_0.jpg", "description");
+//        group5.membersUids = uids;
+//
+//        list_groups.add(group);
+//        list_groups.add(group2);
+//        list_groups.add(group3);
+//        list_groups.add(group4);
+//        list_groups.add(group5);
+//
+//
+//    }
 }

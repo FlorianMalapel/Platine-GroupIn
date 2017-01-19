@@ -3,6 +3,7 @@ package com.groupin.florianmalapel.groupin.volley;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -78,7 +79,7 @@ public class GIVolleyRequest implements Response.Listener<JSONObject>, Response.
 
     @Override
     public void onResponse(JSONObject response) {
-        Log.wtf("~~~~~~~ ", response.toString());
+        Log.wtf("~~~~~~~ ", ((method_type == Request.Method.POST) ? "POST " : "GET ") + url + " " + response.toString());
         if(callback != null)
             callback.onRequestFinishWithSuccess(request_code, response);
     }
