@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="Nom du groupe"
             android:layout_centerVertical="true"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@android:color/black"
             android:layout_marginLeft="35dp"
             />
 
@@ -49,7 +49,7 @@
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/colorPrimaryDark"
+            android:background="@android:color/black"
             />
 
         <ImageView
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/imageView_personLogo"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@android:color/black"
             android:layout_centerVertical="true"
             android:textSize="13sp"
             android:text="1"/>

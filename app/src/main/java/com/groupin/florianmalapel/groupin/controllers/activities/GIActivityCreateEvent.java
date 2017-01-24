@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,10 +25,18 @@ import com.groupin.florianmalapel.groupin.model.dbObjects.GIEvent;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIGroup;
 import com.groupin.florianmalapel.groupin.views.GIProgressIndicator;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
+import com.groupin.florianmalapel.groupin.volley.GIVolleyRequest;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by florianmalapel on 18/01/2017.
@@ -35,11 +44,12 @@ import java.util.Date;
 
 public class GIActivityCreateEvent extends AppCompatActivity
         implements  View.OnClickListener, TextWatcher,
-                    GICommunicationsHelper.FirebaseUploadImageCallback {
+                    GICommunicationsHelper.FirebaseUploadImageCallback,
+                    GIVolleyRequest.RequestCallback{
 
     private static final int PICK_IMAGE_REQUEST = 1;
-    private static final String BUNDLE_ID = "GROUP_BUNDLE";
-    private static final String GROUP_ID = "GROUP_OBJECT";
+    public static final String BUNDLE_ID = "GROUP_BUNDLE";
+    public static final String GROUP_ID = "GROUP_OBJECT";
 
     private ImageView imageButtonBack = null;
     private ImageView imageViewAddPhotoEvent = null;
@@ -57,6 +67,7 @@ public class GIActivityCreateEvent extends AppCompatActivity
     private EditText editTextEventPlace = null;
     private EditText editTextEventPrice = null;
     private GIProgressIndicator progressIndicator = null;
+    private MaterialSpinner spinnerGroups = null;
     private Bitmap bitmapImageEvent = null;
     private GIEvent eventToCreate = null;
     private GIGroup groupParent = null;
@@ -98,11 +109,16 @@ public class GIActivityCreateEvent extends AppCompatActivity
         editTextEventPlace = (EditText) findViewById(R.id.editTextEventPlace);
         editTextEventPrice = (EditText) findViewById(R.id.editTextEventPrice);
         progressIndicator = (GIProgressIndicator) findViewById(R.id.progressIndicator);
+        spinnerGroups = (MaterialSpinner) findViewById(R.id.spinnerGroups);
     }
 
     private void initializeObjects() {
         volleyHandler = new GIVolleyHandler();
-//        groupParent = (GIGroup) getIntent().getBundleExtra(BUNDLE_ID).getSerializable(GROUP_ID);
+        try {
+            groupParent = (GIGroup) getIntent().getBundleExtra(BUNDLE_ID).getSerializable(GROUP_ID);
+        } catch (Exception e) {
+            groupParent = null;
+        }
         startDatePicker = SwitchDateTimeDialogFragment.newInstance(
                 "Date début",
                 "OK",
@@ -115,9 +131,23 @@ public class GIActivityCreateEvent extends AppCompatActivity
         );
     }
 
+    private void initializeMaterialSpinnerWithGroups(){
+        if(groupParent != null) {
+            spinnerGroups.setVisibility(View.GONE);
+            return;
+        }
+        List<String> groupsNames = new ArrayList<>();
+        for(String key : GIApplicationDelegate.getInstance().getDataCache().userGroupsList.keySet()){
+            groupsNames.add(GIApplicationDelegate.getInstance().getDataCache().userGroupsList.get(key).name);
+        }
+        if(groupsNames.isEmpty())
+            return;
+        spinnerGroups.setItems(groupsNames);
+    }
+
     private void initializeViews() {
         imageButtonBack.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-
+        initializeMaterialSpinnerWithGroups();
     }
 
     private void setListeners() {
@@ -139,6 +169,7 @@ public class GIActivityCreateEvent extends AppCompatActivity
             @Override
             public void onPositiveButtonClick(Date date) {
                 eventDateStart = date.getTime();
+                setDateInTextView(date, textViewEventStartDate);
             }
 
             @Override
@@ -150,6 +181,7 @@ public class GIActivityCreateEvent extends AppCompatActivity
             @Override
             public void onPositiveButtonClick(Date date) {
                 eventDateEnd = date.getTime();
+                setDateInTextView(date, textViewEventEndDate);
             }
 
             @Override
@@ -157,9 +189,22 @@ public class GIActivityCreateEvent extends AppCompatActivity
 
             }
         });
+        spinnerGroups.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                groupParent = GIApplicationDelegate.getInstance().getDataCache().getGroupByName(item);
+            }
+        });
     }
 
-    private void confirmGroupCreation(){
+    private void setDateInTextView(Date date, TextView textView){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        textView.setText(calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.YEAR) + " " + calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE));
+    }
+
+    private void confirmEventCreation(){
         progressIndicator.startRotating();
         progressIndicator.setVisibility(View.VISIBLE);
         GICommunicationsHelper.firebaseUploadBitmap(GIApplicationDelegate.getInstance().getDataCache().getUserUid() + System.currentTimeMillis() + ".jpg", bitmapImageEvent, this);
@@ -176,18 +221,22 @@ public class GIActivityCreateEvent extends AppCompatActivity
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
 
-    private void sendGroupToAPI(){
+    private void sendEventToAPI(){
+        if(groupParent == null)
+            groupParent = GIApplicationDelegate.getInstance().getDataCache().getGroupByName((String) spinnerGroups.getItems().get(0));
+
         // TODO check if nothing is null
         eventToCreate = new GIEvent(groupParent.id, editTextEventName.getText().toString(),
-                editTextEventDesc.getText().toString(), editTextEventTheme.getText().toString(),
-                editTextEventPlace.getText().toString(), urlGroupPhoto,
-                String.valueOf(eventDateStart), String.valueOf(eventDateEnd),
-                Float.valueOf(editTextEventPrice.getText().toString()), editTextEventBringBack.getText().toString());
-//        try {
-//            volleyHandler.postNewGroup(this, groupToCreate.getCreateGroupJSON(GIApplicationDelegate.getInstance().getDataCache().getUserUid()));
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+            editTextEventDesc.getText().toString(), editTextEventTheme.getText().toString(),
+            editTextEventPlace.getText().toString(), urlGroupPhoto,
+            String.valueOf(eventDateStart), String.valueOf(eventDateEnd),
+            Float.valueOf(editTextEventPrice.getText().toString()), editTextEventBringBack.getText().toString());
+        try {
+            volleyHandler.postEvent(this, eventToCreate.getCreateEventJSON(GIApplicationDelegate.getInstance().getDataCache().getUserUid()));
+            Log.v("∆∆ ∆∆ || ∆∆", "start post /Event " + eventToCreate.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private void onClickOnTextViewStartDate(){
@@ -216,7 +265,9 @@ public class GIActivityCreateEvent extends AppCompatActivity
             onClickOnTextViewEndDate();
         }
 
-
+        else if(view == textViewValidateCreate){
+            confirmEventCreation();
+        }
     }
 
     @Override
@@ -237,11 +288,28 @@ public class GIActivityCreateEvent extends AppCompatActivity
     @Override
     public void firebaseUploadSuccess(String url) {
         this.urlGroupPhoto = url;
-        sendGroupToAPI();
+        sendEventToAPI();
     }
 
     @Override
     public void firebaseUploadFailed() {
+
+    }
+
+    @Override
+    public void onRequestStart() {
+
+    }
+
+    @Override
+    public void onRequestFinishWithSuccess(int request_code, JSONObject object) {
+        GIApplicationDelegate.getInstance().onRequestFinishWithSuccess(request_code, object);
+        progressIndicator.stopRotate();
+        finish();
+    }
+
+    @Override
+    public void onRequestFinishWithFailure() {
 
     }
 

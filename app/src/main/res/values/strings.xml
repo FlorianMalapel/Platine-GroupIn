@@ -16,11 +16,17 @@
     <string name="email_address">Adresse email</string>
     <string name="ok">OK</string>
     <string name="cancel">Annuler</string>
-    <string name="name">Name</string>
+    <string name="name">Nom</string>
+    <string name="displayName">Pseudo</string>
+    <string name="lastname">Prénom</string>
 
     <!--Divers-->
+    <string name="logOut">Se déconnecter</string>
     <string name="confirm">Confirmer</string>
-    <string name="participants">participants</string>
+    <string name="save">Enregistrer</string>
+    <string name="user">Utilisateur</string>
+    <string name="home">Accueil</string>
+    <string name="participants">Participants</string>
     <string name="eventsToCome">Evénements à venir</string>
 
     <!--Create an event-->
@@ -38,6 +44,15 @@
     <string name="eventBringBackHolder">Dites à vos invités s\'il faut ramener  quelquechose.</string>
     <string name="eventTheme">Thème</string>
     <string name="eventSecondTheme">Sous-thème</string>
+
+    <!--Display an event-->
+    <string name="bringBack">Ramener</string>
+    <string name="participate">Participer</string>
+    <string name="maybe">Peut-être</string>
+    <string name="doNotParticipate">Ne participe pas</string>
+    <string name="pollsHistory">Historique des votes</string>
+    <string name="descriptionHolder">Lorem ipsum dolor sit amet, summo iracundia nam te, legendos sententiae assueverit vel no, doming constituam nam no. Mel te mollis aliquam repudiandae, nonumes intellegat definitiones per in. Delicata inimicus ut eos, quo impetus debitis placerat ad, per oportere postulant id. Mea nonumy eirmod admodum ne, pro et mucius habemus oportere, clita voluptatum mea te.</string>
+
 
     <!--Create a group-->
     <string name="createGroup">Créer un groupe</string>

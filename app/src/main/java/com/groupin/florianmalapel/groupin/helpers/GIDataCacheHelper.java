@@ -3,7 +3,10 @@ package com.groupin.florianmalapel.groupin.helpers;
 import android.util.Log;
 
 import com.groupin.florianmalapel.groupin.model.GIDataCache;
+import com.groupin.florianmalapel.groupin.model.dbObjects.GIEvent;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIGroup;
+import com.groupin.florianmalapel.groupin.model.dbObjects.GINotificationFriend;
+import com.groupin.florianmalapel.groupin.model.dbObjects.GINotificationGroup;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
 import com.groupin.florianmalapel.groupin.volley.GIRequestData;
 
@@ -47,6 +50,10 @@ public class GIDataCacheHelper {
             return;
         }
 
+        if(itemReceived.request_code == GIRequestData.MY_USER){
+            cache.setUser((GIUser) itemReceived.object);
+        }
+
         if(itemReceived.request_code == GIRequestData.USER){
             cache.setUser((GIUser) itemReceived.object);
         }
@@ -59,7 +66,21 @@ public class GIDataCacheHelper {
             cache.setUserGroupsList((HashMap<String, GIGroup>) itemReceived.object);
         }
 
+        else if(itemReceived.request_code == GIRequestData.GROUP){
+            cache.addGroupOrUpdate((GIGroup) itemReceived.object);
+        }
 
+        else if(itemReceived.request_code == GIRequestData.EVENTS) {
+            cache.setEventsList((HashMap<String,GIEvent>) itemReceived.object);
+        }
+
+        else if(itemReceived.request_code == GIRequestData.NOTIFS_FRIENDS) {
+            cache.setNotificationsFriend((ArrayList<GINotificationFriend>) itemReceived.object);
+        }
+
+        else if(itemReceived.request_code == GIRequestData.NOTIFS_GROUP) {
+            cache.setNotificationsGroup((ArrayList<GINotificationGroup>) itemReceived.object);
+        }
         // TODO NEED TO FINISH
 
     }

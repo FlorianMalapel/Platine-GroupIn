@@ -17,12 +17,13 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabAddFriend"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabSize="auto"
         android:src="@drawable/ic_add_black_24dp"
         app:elevation="5dp"
         android:layout_gravity="right|bottom"
-        app:backgroundTint="@color/GIYellow"
+        app:backgroundTint="@color/GIBlue"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         />

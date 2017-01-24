@@ -1,6 +1,11 @@
 package com.groupin.florianmalapel.groupin.helpers;
 
+import android.util.Log;
+
+import com.groupin.florianmalapel.groupin.model.dbObjects.GIEvent;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIGroup;
+import com.groupin.florianmalapel.groupin.model.dbObjects.GINotificationFriend;
+import com.groupin.florianmalapel.groupin.model.dbObjects.GINotificationGroup;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
 import com.groupin.florianmalapel.groupin.volley.GIRequestData;
 
@@ -22,7 +27,7 @@ public class GIJsonToObjectHelper {
 
         switch (requestCode) {
             case GIRequestData.POST_USER_CODE:
-                listObjects.add(new ItemReceived(getUserFromJSON(object), GIRequestData.USER));
+                listObjects.add(new ItemReceived(getUserFromJSON(object), GIRequestData.MY_USER));
                 listObjects.add(new ItemReceived(getNotifsFriendsFromJSON(object), GIRequestData.NOTIFS_FRIENDS));
                 listObjects.add(new ItemReceived(getNotifsGroupsFromJSON(object), GIRequestData.NOTIFS_GROUP));
                 break;
@@ -31,17 +36,33 @@ public class GIJsonToObjectHelper {
                 listObjects.add(new ItemReceived(getUserFromJSON(object), GIRequestData.USER));
                 break;
 
+            case GIRequestData.GET_USER_MY_CODE:
+                listObjects.add(new ItemReceived(getUserFromJSON(object), GIRequestData.MY_USER));
+                break;
+
             case GIRequestData.GET_USERS_CODE:
                 listObjects.add(new ItemReceived(getUsersFromJSON(object), GIRequestData.ALL_USERS));
                 break;
             case GIRequestData.NOTIFS_GROUP:
-                listObjects.add(new ItemReceived(getUsersFromJSON(object), GIRequestData.USER));
+                // TODO strange .. getUSers and MY_USER .. to see
+                listObjects.add(new ItemReceived(getUsersFromJSON(object), GIRequestData.MY_USER));
                 break;
             case GIRequestData.POST_GROUP_CODE:
                 listObjects.add(new ItemReceived(getGroupFromJSON(object), GIRequestData.GROUP));
                 break;
             case GIRequestData.GET_GROUPS_CODE:
                 listObjects.add(new ItemReceived(getGroupsFromJSON(object), GIRequestData.ALL_GROUPS));
+                break;
+            case GIRequestData.POST_EVENT_CODE:
+                listObjects.add(new ItemReceived(getUserFromJSON(object), GIRequestData.MY_USER));
+                listObjects.add(new ItemReceived(getEventsFromJSONArray(object), GIRequestData.EVENTS));
+                break;
+            case GIRequestData.GET_EVENTS_USER_CODE:
+                listObjects.add(new ItemReceived(getEventsFromJSON(object), GIRequestData.EVENTS));
+                break;
+            case GIRequestData.GET_NOTIFICATIONS_CODE:
+                listObjects.add(new ItemReceived(getArrayNotificationFriendFromJSON(object), GIRequestData.NOTIFS_FRIENDS));
+                listObjects.add(new ItemReceived(getArrayNotificationGroupFromJSON(object), GIRequestData.NOTIFS_GROUP));
                 break;
         }
 
@@ -137,6 +158,28 @@ public class GIJsonToObjectHelper {
             group.url_image = object.getString("photoURL");
         }
 
+        if(object.has("membres")){
+            JSONObject members = object.getJSONObject("membres");
+            ArrayList<String> membersUids = new ArrayList<>();
+            for(int indexUid = 0; indexUid < members.names().length(); indexUid++){
+                if(members.names().get(indexUid) != null && !((String)members.names().get(indexUid)).isEmpty()){
+                    membersUids.add((String) members.names().get(indexUid));
+                }
+            }
+            group.membersUids = membersUids;
+        }
+
+        if(object.has("events")){
+            JSONObject events = object.getJSONObject("events");
+            ArrayList<String> eventsIds = new ArrayList<>();
+            for(int indexId = 0; indexId < events.names().length(); indexId++){
+                if(events.names().get(indexId) != null && !((String)events.names().get(indexId)).isEmpty()){
+                    eventsIds.add((String) events.names().get(indexId));
+                }
+            }
+            group.eventsIds = eventsIds;
+        }
+
         return group;
     }
 
@@ -156,6 +199,129 @@ public class GIJsonToObjectHelper {
         }
 
         return usersList;
+    }
+
+    public static HashMap<String, GIEvent> getEventsFromJSON(JSONObject object) throws JSONException {
+        HashMap<String, GIEvent> eventsList = new HashMap<>();
+
+        if(object.names() == null)
+            return eventsList;
+
+        for(int index = 0; index < object.names().length(); index ++){
+            GIEvent event = getEventFromJSON(object.getJSONObject((String)object.names().get(index)));
+            if(event != null)
+                eventsList.put(event.id, event);
+        }
+
+        return eventsList;
+    }
+
+    public static HashMap<String, GIEvent> getEventsFromJSONArray(JSONObject object) throws JSONException {
+        HashMap<String, GIEvent> eventsList = new HashMap<>();
+        JSONArray array = null;
+        if(object.has("events")){
+            array = object.getJSONArray("events");
+        }
+        else return null;
+
+        for(int i=0; i<array.length(); i++){
+            GIEvent event = getEventFromJSON(array.getJSONObject(i));
+            if(event != null)
+                eventsList.put(event.id, event);
+        }
+
+        return eventsList;
+    }
+
+    public static GIEvent getEventFromJSON(JSONObject object) throws JSONException {
+        GIEvent event = new GIEvent();
+        if(object.has("id")){
+            event.id = object.getString("id");
+        }
+
+        if(object.has("nom")){
+            event.name = object.getString("nom");
+        }
+
+        if(object.has("description")){
+            event.description = object.getString("description");
+        }
+
+        if(object.has("photoURL")){
+            event.url_image = object.getString("photoURL");
+        }
+
+        if(object.has("dateDebut")){
+            event.date_start = object.getString("dateDebut");
+        }
+
+        if(object.has("dateFin")){
+            event.date_end = object.getString("dateFin");
+        }
+
+        if(object.has("obj")){
+            event.bring_back = object.getString("obj");
+        }
+
+        if(object.has("theme")){
+            event.theme = object.getString("theme");
+        }
+
+        if(object.has("price")){
+            event.price = Float.valueOf(object.getString("price"));
+        }
+
+        if(object.has("createur")){
+            event.uid_creator = object.getString("createur");
+        }
+
+        if(object.has("participants")){
+            JSONObject participants = object.getJSONObject("participants");
+            ArrayList<String> participantsUids = new ArrayList<>();
+            for(int indexUid = 0; indexUid < participants.names().length(); indexUid++){
+                participantsUids.add((String) participants.names().get(indexUid));
+            }
+
+            if(!participantsUids.isEmpty())
+                event.participantsUids = participantsUids;
+            else event.participantsUids = new ArrayList<>();
+        }
+
+        return event;
+    }
+
+    public static ArrayList<GINotificationGroup> getArrayNotificationGroupFromJSON(JSONObject object) throws JSONException {
+        ArrayList<GINotificationGroup> arrayNotifsGroup = new ArrayList<>();
+        JSONArray arrayNotifsGroupJSON = null;
+        if(object.has("notifsGroupes")){
+            arrayNotifsGroupJSON = object.getJSONArray("notifsGroupes");
+        }
+        else return arrayNotifsGroup;
+
+        for(int index=0; index<arrayNotifsGroupJSON.length(); index++){
+            arrayNotifsGroup.add(new GINotificationGroup(getGroupFromJSON(arrayNotifsGroupJSON.getJSONObject(index))));
+        }
+
+        Log.v("~~~ = GIJsonToObj", " --> -->  " + arrayNotifsGroup.toString());
+
+        return arrayNotifsGroup;
+    }
+
+    public static ArrayList<GINotificationFriend> getArrayNotificationFriendFromJSON(JSONObject object) throws JSONException {
+        ArrayList<GINotificationFriend> arrayNotifsFriend = new ArrayList<>();
+        JSONArray arrayNotifsFriendJSON = null;
+        if(object.has("notifsAmis")){
+            arrayNotifsFriendJSON = object.getJSONArray("notifsAmis");
+        }
+        else return arrayNotifsFriend;
+
+        for(int index=0; index<arrayNotifsFriendJSON.length(); index++){
+            arrayNotifsFriend.add(new GINotificationFriend(getUserFromJSON(arrayNotifsFriendJSON.getJSONObject(index))));
+        }
+
+        Log.v("~~~ = GIJsonToObj", " --> -->  " + arrayNotifsFriend.toString());
+
+        return arrayNotifsFriend;
     }
 
     public static Object getNotifsFriendsFromJSON(JSONObject object){

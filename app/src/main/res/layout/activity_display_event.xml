@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@android:color/white"
+    >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageButton
+            android:id="@+id/imageButtonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back"
+            android:padding="3dp"
+            android:background="@android:color/transparent"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/textViewEventName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Nom de l'événement"
+            android:textColor="@android:color/white"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textStyle="normal|bold"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        >
+
+        <ImageView
+            android:id="@+id/imageViewEventPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:src="@drawable/ic_add_a_photo"
+            android:background="@android:color/transparent"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/border_bottom_light_gray"
+        android:paddingBottom="1dp">
+
+        <Button
+            android:id="@+id/buttonParticipate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_done"
+            android:text="@string/participate"
+            android:textAllCaps="false"
+            android:background="@color/lightGray"
+            android:textColor="@color/GIBlue"
+            android:padding="4dp"
+            />
+
+        <Button
+            android:id="@+id/buttonParticipateMaybe"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/lightGray"
+            android:textColor="@color/GIBlue"
+            android:drawableLeft="@drawable/ic_not_interested"
+            android:text="@string/maybe"
+            android:textAllCaps="false"
+            android:padding="4dp"
+            />
+
+        <Button
+            android:id="@+id/buttonNotParticipating"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/lightGray"
+            android:textColor="@color/GIBlue"
+            android:drawableLeft="@drawable/ic_hand"
+            android:text="@string/doNotParticipate"
+            android:textAllCaps="false"
+            android:padding="4dp"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:layout_marginBottom="5dp"
+        >
+
+        <TextView
+            android:id="@+id/textViewEventDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_access_time_white"
+            android:drawablePadding="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Du 22/01/2017 15:00 au 22/01/2017 22:00"
+            android:textColor="@android:color/black"
+            android:textStyle="italic"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/textViewEventLocation"
+            android:layout_below="@+id/textViewEventDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_location"
+            android:drawablePadding="5dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="33 rue de douai, 5900 Lille"
+            android:textColor="@android:color/black"
+            android:textStyle="italic"
+            />
+
+        <TextView
+            android:id="@+id/textViewEventPrice"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/ic_euro_symbol"
+            android:drawablePadding="3dp"
+            android:gravity="center"
+            android:text="0.00"
+            android:textColor="@android:color/black"
+            android:textStyle="italic"
+            />
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            android:background="@color/grayBorder"
+            android:layout_below="@+id/textViewEventLocation"
+            android:layout_marginTop="10dp"
+            />
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:orientation="vertical"
+        >
+        
+        <TextView
+            android:id="@+id/textViewEventDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|top"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="@string/descriptionHolder"
+            android:textColor="@android:color/black"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            android:background="@color/grayBorder"
+            android:layout_below="@+id/textViewEventLocation"
+            android:layout_marginTop="10dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:text="@string/bringBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/GIBlue"
+            />
+
+        <TextView
+            android:id="@+id/textViewEventBringBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|top"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="De la bonne bière"
+            android:textColor="@android:color/black"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            android:background="@color/grayBorder"
+            android:layout_below="@+id/textViewEventLocation"
+            android:layout_marginTop="10dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:text="@string/participants"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/GIBlue"
+            />
+
+        <com.groupin.florianmalapel.groupin.views.GIHorizontalBubbleList
+            android:id="@+id/horizontalBubbleList_members"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbarSize="1dp"
+            android:scrollbarTrackHorizontal="@android:color/black"
+            android:background="@color/lightGray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="vertical"
+            android:background="@color/grayBorder"
+            android:layout_below="@+id/textViewEventLocation"
+            android:layout_marginTop="5dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:text="@string/pollsHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/GIBlue"
+            />
+
+        </LinearLayout>
+
+</LinearLayout>

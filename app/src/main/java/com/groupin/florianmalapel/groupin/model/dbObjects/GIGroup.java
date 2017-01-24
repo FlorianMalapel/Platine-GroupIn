@@ -1,5 +1,7 @@
 package com.groupin.florianmalapel.groupin.model.dbObjects;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,10 +33,23 @@ public class GIGroup implements Serializable{
         this.description = description;
     }
 
-    public GIGroup(String name, String description, String url_image) {
+    public GIGroup(String name, String description, String url_image, ArrayList<GIUser> membersUids) {
         this.name = name;
         this.url_image = url_image;
         this.description = description;
+        this.membersUids = getMembersUidsFrom(membersUids);
+    }
+
+    private ArrayList<String> getMembersUidsFrom(ArrayList<GIUser> members){
+        ArrayList<String> membersUids = new ArrayList<>();
+
+         if (members == null)
+            return membersUids;
+
+        for(GIUser user : members){
+            membersUids.add(user.uid);
+        }
+        return membersUids;
     }
 
     public JSONObject getCreateGroupJSON(String userUid) throws JSONException {
@@ -43,6 +58,14 @@ public class GIGroup implements Serializable{
         group.put("nom", this.name);
         group.put("description", this.description);
         group.put("photoURL", this.url_image);
+        if(membersUids != null && !membersUids.isEmpty()){
+            JSONObject members = new JSONObject();
+            for (String uid : membersUids) {
+                members.put(uid, true);
+            }
+            group.put("membres", members);
+        }
+        Log.v("||| GIGroup", "JSON " + group.toString());
         return group;
     }
 

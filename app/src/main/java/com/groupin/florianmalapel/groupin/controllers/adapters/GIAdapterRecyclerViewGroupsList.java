@@ -3,6 +3,7 @@ package com.groupin.florianmalapel.groupin.controllers.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -50,7 +51,6 @@ public class GIAdapterRecyclerViewGroupsList extends RecyclerView.Adapter<GIAdap
     public GroupViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.custom_view_group, parent, false);
-
         return new GIAdapterRecyclerViewGroupsList.GroupViewHolder(itemView);
     }
 
@@ -94,6 +94,9 @@ public class GIAdapterRecyclerViewGroupsList extends RecyclerView.Adapter<GIAdap
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(context, GIActivityDisplayGroup.class);
+            Bundle bundle = new Bundle();
+            bundle.putString(GIActivityDisplayGroup.GROUP_ID, list_groups.get(getAdapterPosition()).id);
+            intent.putExtra(GIActivityDisplayGroup.BUNDLE_ID, bundle);
             context.startActivity(intent);
         }
     }

@@ -9,17 +9,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.Task;
 import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.helpers.GICommunicationsHelper;
 import com.groupin.florianmalapel.groupin.helpers.GISharedPreferencesHelper;
+import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
+import com.groupin.florianmalapel.groupin.volley.GIRequestData;
+import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
+import com.groupin.florianmalapel.groupin.volley.GIVolleyRequest;
+
+import org.json.JSONObject;
 
 /**
  * Created by florianmalapel on 31/10/2016.
@@ -28,17 +37,20 @@ import com.groupin.florianmalapel.groupin.helpers.GISharedPreferencesHelper;
 public class GIActivityMailSign extends AppCompatActivity implements
         View.OnClickListener,
         View.OnTouchListener,
-        GICommunicationsHelper.FirebaseCreateUserCallback {
+        GICommunicationsHelper.FirebaseCreateUserCallback,
+        GIVolleyRequest.RequestCallback {
 
     private EditText editTextEmail = null;
     private EditText editTextPassword = null;
     private ImageButton imageButtonEye = null;
+    private ImageView imageViewGroupIn = null;
     private TextView textView_emailInvalid = null;
     private TextView textView_passwordInvalid = null;
     private Button buttonConnect = null;
     private Button buttonSignIn  = null;
     private String stringEmail   = null;
     private GICommunicationsHelper commsHelper = null;
+    private GIVolleyHandler volleyHandler = null;
 
 
 
@@ -62,6 +74,7 @@ public class GIActivityMailSign extends AppCompatActivity implements
         buttonConnect = (Button) findViewById(R.id.button_connect);
         buttonSignIn = (Button) findViewById(R.id.button_signIn);
         imageButtonEye = (ImageButton) findViewById(R.id.imageButton_eye);
+        imageViewGroupIn = (ImageView) findViewById(R.id.imageViewGroupIn);
         editTextEmail = (EditText) findViewById(R.id.editText_email);
         editTextPassword = (EditText) findViewById(R.id.editText_password);
         textView_emailInvalid = (TextView) findViewById(R.id.textView_emailInvalid);
@@ -71,6 +84,7 @@ public class GIActivityMailSign extends AppCompatActivity implements
     private void initialize(){
         commsHelper = new GICommunicationsHelper(this);
         editTextEmail.setText(stringEmail);
+        volleyHandler = new GIVolleyHandler();
     }
 
     private void initialize_views(){
@@ -141,24 +155,30 @@ public class GIActivityMailSign extends AppCompatActivity implements
         finish();
     }
 
-    private void saveLoginInfoInPreferences(String email, String pwd){
+        private void saveLoginInfoInPreferences(String email, String pwd){
         GISharedPreferencesHelper prefsHelper = new GISharedPreferencesHelper(this);
         prefsHelper.storeUserLogin(email);
         prefsHelper.storeUserPassword(pwd);
     }
 
+    private void startLoading(ImageView imageView){
+        imageView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.loader_rotation));
+    }
+
+
     @Override
     public void onClick(View view) {
         if(view == buttonConnect){
             displayErrorMessage();
-            commsHelper.createFirebaseUserWithEmailAndPassword(editTextEmail.getText().toString(), editTextPassword.getText().toString(), this);
+            commsHelper.signInWithEmailAndPassword(editTextEmail.getText().toString(), editTextPassword.getText().toString(), this, this);
         }
 
         else if(view == buttonSignIn){
             displayErrorMessage();
-            commsHelper.createFirebaseUserWithEmailAndPassword(editTextEmail.getText().toString(), editTextPassword.getText().toString(), this);
+            commsHelper.createFirebaseUserWithEmailAndPassword(editTextEmail.getText().toString(), editTextPassword.getText().toString(), this, this);
         }
 
+        startLoading(imageViewGroupIn);
     }
 
     @Override
@@ -178,12 +198,37 @@ public class GIActivityMailSign extends AppCompatActivity implements
 
     @Override
     public void firebaseCreateUserSuccess(Task task) {
+        Log.v("))- GIActivityMailSign", task.toString());
         saveLoginInfoInPreferences(editTextEmail.getText().toString(), editTextPassword.getText().toString());
-        goToActivityMain();
     }
 
     @Override
     public void firebaseCreateUserFailed(Task task) {
+        Log.v("))- GIActivityMailSign", "-- )) create user failed");
+    }
+
+    @Override
+    public void onRequestStart() {
+
+    }
+
+    @Override
+    public void onRequestFinishWithSuccess(int request_code, JSONObject object) {
+        Log.v("))- GIActivityMailSign", "On request succeed");
+        GIApplicationDelegate.getInstance().onRequestFinishWithSuccess(request_code, object);
+        if(request_code == GIRequestData.POST_USER_CODE) {
+            GIApplicationDelegate.getInstance().getDataCache().storeCurrentUserInPref();
+            volleyHandler.getGroups(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+        }
+
+        if(request_code == GIRequestData.GET_GROUPS_CODE) {
+//            progressIndicator.stopRotate();
+            goToActivityMain();
+        }
+    }
+
+    @Override
+    public void onRequestFinishWithFailure() {
 
     }
 }

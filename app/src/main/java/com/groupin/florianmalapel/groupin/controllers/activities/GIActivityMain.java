@@ -1,5 +1,8 @@
 package com.groupin.florianmalapel.groupin.controllers.activities;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -12,7 +15,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.controllers.fragments.GIFragmentHomeMenuEvents;
@@ -34,6 +40,7 @@ public class GIActivityMain extends AppCompatActivity
         implements  NavigationView.OnNavigationItemSelectedListener,
                     OnSelectedItemChangeListener,
                     ViewPager.OnPageChangeListener,
+                    View.OnClickListener,
                     GIVolleyRequest.RequestCallback {
 
     private static final int NB_TAB_BOTTOM_MENU = 4;
@@ -46,6 +53,8 @@ public class GIActivityMain extends AppCompatActivity
     private BottomNavigation bottomNavigation = null;
     private CustomPagerAdapter customPagerAdapter = null;
     private ImageView imageViewMenu = null;
+    private ImageButton imageButtonProfile = null;
+    private TextView textViewTitle = null;
     private GIVolleyHandler volleyHandler = null;
 
     @Override
@@ -99,6 +108,8 @@ public class GIActivityMain extends AppCompatActivity
         viewPagerBottomMenu = (ViewPager) findViewById(R.id.viewPagerBottomMenu);
         bottomNavigation = (BottomNavigation) findViewById(R.id.bottomNavigation);
         imageViewMenu = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageViewMenu);
+        imageButtonProfile = (ImageButton) findViewById(R.id.imageButtonProfile);
+        textViewTitle = (TextView) findViewById(R.id.textViewTitle);
     }
 
     private void initialize(){
@@ -111,7 +122,8 @@ public class GIActivityMain extends AppCompatActivity
     }
 
     private void initializeViews(){
-
+        imageButtonProfile.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        textViewTitle.setX(textViewTitle.getX() - (toggle.getDrawerArrowDrawable().getMinimumWidth() * 2));
     }
 
     private void setUserPhotoInMenu(){
@@ -129,21 +141,24 @@ public class GIActivityMain extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         bottomNavigation.setOnSelectedItemChangeListener(this);
         viewPagerBottomMenu.addOnPageChangeListener(this);
+        imageButtonProfile.setOnClickListener(this);
     }
 
     private void setTitleToolbar(String title){
-        toolbar.setTitle(title);
-        setSupportActionBar(toolbar);
-
-//        for(int i=0; i<toolbar.getChildCount(); i++){
-//            if(toolbar.getChildAt(i) instanceof TextView || toolbar.getChildAt(i) instanceof AppCompatTextView){
-//                ((TextView)toolbar.getChildAt(i)).getLayoutParams().width = Toolbar.LayoutParams.MATCH_PARENT;
-//                ((TextView)toolbar.getChildAt(i)).setGravity(Gravity.CENTER);
-//                break;
-//            }
-//        }
+        textViewTitle.setText(title);
     }
 
+    private void launchActivityProfile(){
+        Intent intent = new Intent(this, GIActivityProfile.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if( view == imageButtonProfile ){
+            launchActivityProfile();
+        }
+    }
 
     @Override
     public void onSelectedItemChanged(int i) {
@@ -223,7 +238,7 @@ public class GIActivityMain extends AppCompatActivity
     public void onRequestFinishWithSuccess(int request_code, JSONObject object) {
         GIApplicationDelegate.getInstance().onRequestFinishWithSuccess(request_code, object);
 
-        if(request_code == GIRequestData.GET_USER_CODE)
+        if(request_code == GIRequestData.GET_USER_MY_CODE)
             setUserPhotoInMenu();
     }
 

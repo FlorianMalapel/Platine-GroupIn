@@ -49,7 +49,19 @@ public class GIVolleyRequest implements Response.Listener<JSONObject>, Response.
         };
     }
 
+    public void initGetJSONArray(final Map<String, String> header_params){
+        request = new JsonObjectRequest(method_type, url, null, this, this) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                if(header_params == null)
+                    return super.getHeaders();
+                else return header_params;
+            }
+        };
+    }
+
     public void initPostJSONRequest(final Map<String, String> header_params, JSONObject objectToSend){
+        Log.d("~~VolleyRequest~~", "json : " + objectToSend.toString());
         request = new JsonObjectRequest(method_type, url, objectToSend, this, this){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {

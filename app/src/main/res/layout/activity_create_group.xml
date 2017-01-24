@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:padding="10dp"
-            android:background="@color/GIPurple">
+            android:background="@color/colorPrimaryDark">
 
             <ImageButton
                 android:id="@+id/imageButtonBack"

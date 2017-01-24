@@ -126,7 +126,7 @@ public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickL
         relativeLayoutFormAddFiend.setVisibility(View.GONE);
         if(userSelected == null)
             return;
-        volleyHandler.postFriendShip(GIApplicationDelegate.getInstance(), GIApplicationDelegate.getInstance().getDataCache().getUserUid(), userSelected.uid);
+        volleyHandler.postSendNotifFriendShip(GIApplicationDelegate.getInstance(), GIApplicationDelegate.getInstance().getDataCache().getUserUid(), userSelected.uid);
     }
 
     private void onClickToCancelFriendship(){

@@ -198,7 +198,7 @@ public class GIActivitySocialSign extends AppCompatActivity implements
     @Override
     public void facebookLoginSuccess(LoginResult loginResult) {
         saveAccessTokenInPreference(loginResult.getAccessToken().toString());
-        commsHelper.firebaseAuthWithFacebook(loginResult.getAccessToken(), GIActivitySocialSign.this, this, this);
+        commsHelper.firebaseAuthWithFacebook(loginResult.getAccessToken().getToken(), GIActivitySocialSign.this, this, this);
     }
 
     @Override
@@ -225,8 +225,10 @@ public class GIActivitySocialSign extends AppCompatActivity implements
     public void onRequestFinishWithSuccess(int request_code, JSONObject object) {
         GIApplicationDelegate.getInstance().onRequestFinishWithSuccess(request_code, object);
         if(request_code == GIRequestData.POST_USER_CODE) {
+            GIApplicationDelegate.getInstance().getDataCache().storeCurrentUserInPref();
             volleyHandler.getGroups(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
         }
+
         if(request_code == GIRequestData.GET_GROUPS_CODE) {
             progressIndicator.stopRotate();
             goToActivityMain();

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    >
+
+    <com.groupin.florianmalapel.groupin.views.GIProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:elevation="20dp"
+        android:visibility="gone"
+        />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:padding="10dp"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageButton
+            android:id="@+id/imageButtonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back"
+            android:padding="3dp"
+            android:background="@android:color/transparent"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/textViewUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/user"
+            android:textColor="@android:color/white"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textStyle="normal|bold"/>
+
+        <TextView
+            android:id="@+id/textViewValidateUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/save"
+            android:gravity="right"
+            android:paddingRight="5dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:textColor="@android:color/white"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textStyle="normal|bold"/>
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/relativeLayoutPhoto"
+        android:layout_below="@id/relativeLayoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageView
+            android:id="@+id/imageViewUserPhoto"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_add_a_photo"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/relativeLayoutPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_bottom_light_gray"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:gravity="left|center_vertical"
+                android:layout_marginLeft="20dp"
+                android:textSize="18sp"
+                android:text="@string/displayName"/>
+
+            <EditText
+                android:id="@+id/editTextUserDisplayName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:layout_marginRight="20dp"
+                android:textStyle="italic"
+                android:textSize="17sp"
+                android:inputType="textCapWords"
+                android:background="@android:color/transparent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:hint="@string/displayName"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/logOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@android:color/holo_red_dark"
+            android:textColor="@android:color/white"
+            android:textAllCaps="false"
+            android:text="@string/logOut"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

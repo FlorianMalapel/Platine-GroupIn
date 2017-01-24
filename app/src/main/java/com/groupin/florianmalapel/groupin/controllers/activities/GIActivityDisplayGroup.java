@@ -27,7 +27,9 @@ public class GIActivityDisplayGroup extends AppCompatActivity
                     ViewPager.OnPageChangeListener {
 
     private static final int NB_TAB_BOTTOM_MENU = 4;
-
+    public static final String BUNDLE_ID = "bundleEvent";
+    public static final String GROUP_ID = "group";
+    public String groupId = null;
 
     private BottomNavigation bottomNavigationMenu = null;
     private ViewPager viewPagerBottomMenuGroup = null;
@@ -50,7 +52,16 @@ public class GIActivityDisplayGroup extends AppCompatActivity
         textView_groupName = (TextView) findViewById(R.id.textView_groupName);
     }
 
+    private void tryToGetGroupFromBundle(){
+        try {
+            groupId = (String) getIntent().getBundleExtra(BUNDLE_ID).get(GROUP_ID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void initialize(){
+        tryToGetGroupFromBundle();
         customPagerAdapter = new CustomPagerAdapter(getSupportFragmentManager());
         viewPagerBottomMenuGroup.setAdapter(customPagerAdapter);
     }

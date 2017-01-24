@@ -121,31 +121,29 @@ public class GIAdapterRecyclerViewFriends extends RecyclerView.Adapter<GIAdapter
     public void onBindViewHolder(UserViewHolder holder, int position) {
         if(friendsList.get(position) == null) return;
 
-        if((friendsList.get(position).lastName == null || friendsList.get(position).firstName == null) && friendsList.get(position).display_name != null){
-            holder.textViewLastName.setText(friendsList.get(position).display_name);
-            holder.textViewFirstName.setVisibility(View.GONE);
-            if(position > 0
-                    && friendsList.get(position - 1).display_name != null
-                    && String.valueOf(friendsList.get(position - 1).display_name.charAt(0)).equals(String.valueOf(friendsList.get(position).display_name.charAt(0)))) {
-                holder.textViewFirstLetter.setVisibility(View.INVISIBLE);
-                Log.w("∆∆∆ ∆∆∆ ∆∆∆", friendsList.get(position - 1).display_name + "   - ----   " + friendsList.get(position).display_name);
-            }
-            else holder.textViewFirstLetter.setText(String.valueOf(friendsList.get(position).display_name.charAt(0)));
+        holder.textViewLastName.setText(friendsList.get(position).display_name);
+        holder.textViewFirstName.setVisibility(View.GONE);
+        if(position > 0
+                && friendsList.get(position - 1).display_name != null
+                && String.valueOf(friendsList.get(position - 1).display_name.charAt(0)).equals(String.valueOf(friendsList.get(position).display_name.charAt(0)))) {
+            holder.textViewFirstLetter.setVisibility(View.INVISIBLE);
+            Log.w("∆∆∆ ∆∆∆ ∆∆∆", friendsList.get(position - 1).display_name + "   - ----   " + friendsList.get(position).display_name);
         }
+        else holder.textViewFirstLetter.setText(String.valueOf(friendsList.get(position).display_name.charAt(0)));
 
-        else {
-            if(friendsList.get(position).lastName != null) {
-
-                if(position > 0 && String.valueOf(friendsList.get(position - 1).lastName.charAt(0)).equals(String.valueOf(friendsList.get(position).lastName.charAt(0))))
-                    holder.textViewFirstLetter.setVisibility(View.INVISIBLE);
-                else holder.textViewFirstLetter.setText(String.valueOf(friendsList.get(position).lastName.charAt(0)));
-
-                holder.textViewLastName.setText(friendsList.get(position).lastName);
-            }
-
-            if(friendsList.get(position).firstName != null)
-                holder.textViewFirstName.setText(friendsList.get(position).firstName);
-        }
+//        else {
+//            if(friendsList.get(position).lastName != null) {
+//
+//                if(position > 0 && String.valueOf(friendsList.get(position - 1).lastName.charAt(0)).equals(String.valueOf(friendsList.get(position).lastName.charAt(0))))
+//                    holder.textViewFirstLetter.setVisibility(View.INVISIBLE);
+//                else holder.textViewFirstLetter.setText(String.valueOf(friendsList.get(position).lastName.charAt(0)));
+//
+//                holder.textViewLastName.setText(friendsList.get(position).lastName);
+//            }
+//
+//            if(friendsList.get(position).firstName != null)
+//                holder.textViewFirstName.setText(friendsList.get(position).firstName);
+//        }
 
         if(friendsList.get(position).photoURL != null) { // TODO Need to be changed
             Picasso.with(context).load(friendsList.get(position).photoURL).transform(new CircleTransform()).into(holder.cirleImageViewProfilPic);

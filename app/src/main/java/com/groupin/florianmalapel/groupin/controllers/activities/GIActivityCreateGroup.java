@@ -185,7 +185,7 @@ public class GIActivityCreateGroup extends AppCompatActivity
 
     private void sendGroupToAPI(){
         // TODO check if nothing is null
-        groupToCreate = new GIGroup(editTextGroupName.getText().toString(), editTextGroupDesc.getText().toString(), urlGroupPhoto);
+        groupToCreate = new GIGroup(editTextGroupName.getText().toString(), editTextGroupDesc.getText().toString(), urlGroupPhoto, friendsListChosen);
         try {
             volleyHandler.postNewGroup(this, groupToCreate.getCreateGroupJSON(GIApplicationDelegate.getInstance().getDataCache().getUserUid()));
         } catch (JSONException e) {
@@ -250,7 +250,7 @@ public class GIActivityCreateGroup extends AppCompatActivity
     public void onRequestFinishWithSuccess(int request_code, JSONObject object) {
         GIApplicationDelegate.getInstance().onRequestFinishWithSuccess(request_code, object);
         if(request_code == GIRequestData.POST_GROUP_CODE){
-            volleyHandler.getGroups(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+            volleyHandler.getGroups(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid()); // TODO remove or not ?
         }
         else if(request_code == GIRequestData.GET_GROUPS_CODE) {
             progressIndicator.stopRotate();

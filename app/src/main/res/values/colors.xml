@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#dcdcdc</color>
-    <color name="colorPrimaryDark">@color/GIGray</color>
+    <color name="colorPrimary">@color/GIYellow</color>
+    <color name="colorPrimaryDark">@color/GIPurple</color>
     <!--<color name="colorPrimaryDark">#282f3b</color>-->
     <color name="colorPrimaryDarkAlpha">#da282f3b</color>
-    <color name="colorAccent">@color/GIPurple</color>
+    <color name="colorAccent">@color/GIBlue</color>
     <color name="facebookBlue">#3c5a96</color>
     <color name="googleRed">#DB4C3F</color>
     <color name="lightGray">#f2f2f2</color>
+    <color name="grayBorder">#dcdcdc</color>
     <color name="holoGreen">#9c0</color>
     <color name="holoBlueDark">#09c</color>
 
 
-    <color name="GIPurple">#CC6D8D</color>
+    <color name="GIPurple">#1F234C</color>
     <color name="GIGray">#282f3b</color>
-    <color name="GIYellow">#EACF6A</color>
-    <color name="GIBlue">#115471</color>
+    <color name="GIYellow">#FDD527</color>
+    <color name="GIBlue">#1A91A7</color>
+    <!--<color name="GIPurple">#CC6D8D</color>-->
+    <!--<color name="GIGray">#282f3b</color>-->
+    <!--<color name="GIYellow">#EACF6A</color>-->
+    <!--<color name="GIBlue">#115471</color>-->
     <!--<color name="GIPurple">#882D63</color>-->
     <!--<color name="GIGray">#282f3b</color>-->
     <!--<color name="GIYellow">#fcd915</color>-->

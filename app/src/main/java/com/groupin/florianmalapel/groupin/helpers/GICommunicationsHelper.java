@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.facebook.AccessToken;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,7 +19,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
-import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
 import com.groupin.florianmalapel.groupin.tools.DLog;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyRequest;
@@ -38,11 +36,13 @@ public class GICommunicationsHelper {
     private Context context = null;
     private FirebaseAuth.AuthStateListener mAuthListener = null;
     private GIVolleyHandler volleyHandler = null;
+    private GISharedPreferencesHelper prefsHelper = null;
 
     public GICommunicationsHelper(Context _context) {
         firebaseAuth = FirebaseAuth.getInstance();
         context = _context;
         volleyHandler = new GIVolleyHandler();
+        prefsHelper = new GISharedPreferencesHelper(context);
     }
 
 
@@ -69,24 +69,45 @@ public class GICommunicationsHelper {
      * @param email    - email of the user
      * @param password - password of the user
      */
-    public void createFirebaseUserWithEmailAndPassword(String email, String password, final FirebaseCreateUserCallback firebaseCreateUserCallback) {
+    public void createFirebaseUserWithEmailAndPassword(String email, String password, final FirebaseCreateUserCallback firebaseCreateUserCallback, final GIVolleyRequest.RequestCallback callback) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            GIUser user = new GIUser(task.getResult().getUser());
-                            Log.wtf("~~~~~~  ", user.toString());
-                            volleyHandler.postUser(user, null);
+                            GIApplicationDelegate.getInstance().getDataCache().user.setDataFromFirebase(task.getResult().getUser());
+                            volleyHandler.postUser(GIApplicationDelegate.getInstance().getDataCache().user, callback);
                             firebaseCreateUserCallback.firebaseCreateUserSuccess(task);
                         } else {
+                            Log.v("))- GIComms", task.getException().toString());
                             firebaseCreateUserCallback.firebaseCreateUserFailed(task);
                         }
                     }
                 });
     }
 
-    public void firebaseAuthWithFacebook(AccessToken token, AppCompatActivity activity, final FirebaseFacebookLoginSuccess loginSuccess, final GIVolleyRequest.RequestCallback callback){
+    public void signInWithEmailAndPassword(String email, String password, final FirebaseCreateUserCallback firebaseCreateUserCallback, final GIVolleyRequest.RequestCallback callback){
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            GIApplicationDelegate.getInstance().getDataCache().user.setDataFromFirebase(task.getResult().getUser());
+                            volleyHandler.postUser(GIApplicationDelegate.getInstance().getDataCache().user, callback);
+                            firebaseCreateUserCallback.firebaseCreateUserSuccess(task);
+                        } else {
+                            Log.v("))- GIComms", task.getException().toString());
+                            firebaseCreateUserCallback.firebaseCreateUserFailed(task);
+                        }
+                    }
+                });
+
+    }
+
+
+
+    public void firebaseAuthWithFacebook(String token, AppCompatActivity activity, final FirebaseFacebookLoginSuccess loginSuccess, final GIVolleyRequest.RequestCallback callback){
+        prefsHelper.storeUserAccessTokenFb(token);
         DLog.logwtf(TAG, "facebook is signing");
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -100,7 +121,7 @@ public class GICommunicationsHelper {
             }
         };
 
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        AuthCredential credential = FacebookAuthProvider.getCredential(token);
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -115,15 +136,16 @@ public class GICommunicationsHelper {
                         }
 
                         else {
-                            GIUser user = new GIUser(task.getResult().getUser());
+                            GIApplicationDelegate.getInstance().getDataCache().user.setDataFromFirebase(task.getResult().getUser());
                             loginSuccess.firebaseFacebookLoginSuccess();
-                            volleyHandler.postUser(user, callback);
+                            volleyHandler.postUser(GIApplicationDelegate.getInstance().getDataCache().user, callback);
                         }
                     }
                 });
     }
 
     public void firebaseAuthWithGoogle(String idToken, AppCompatActivity activity, final FirebaseGoogleLoginSuccess googleLoginSuccess, final GIVolleyRequest.RequestCallback callback) {
+        prefsHelper.storeUserIdTokenGoogle(idToken);
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -146,8 +168,8 @@ public class GICommunicationsHelper {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            GIUser user = new GIUser(task.getResult().getUser());
-                            volleyHandler.postUser(user, callback);
+                            GIApplicationDelegate.getInstance().getDataCache().user.setDataFromFirebase(task.getResult().getUser());
+                            volleyHandler.postUser(GIApplicationDelegate.getInstance().getDataCache().user, callback);
                             DLog.logwtf(TAG, "google log success");
                             googleLoginSuccess.firebaseGoogleLoginSuccess();
                         }

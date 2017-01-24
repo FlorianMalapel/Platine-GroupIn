@@ -1,7 +1,5 @@
 package com.groupin.florianmalapel.groupin.model.dbObjects;
 
-import android.util.Log;
-
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.IgnoreExtraProperties;
@@ -33,14 +31,12 @@ public class GIUser {
         this.friendsUids = new ArrayList<>();
     }
 
-    public GIUser(FirebaseUser user) {
+    public void setDataFromFirebase(FirebaseUser user) {
         this.email = user.getEmail();
         this.uid = user.getUid();
-        this.display_name = user.getDisplayName();
         this.providerId = user.getProviders().get(0);
-        this.photoURL = (user.getPhotoUrl() != null) ? user.getPhotoUrl().toString() : null;
-        this.groupsUids = new ArrayList<>();
-        this.friendsUids = new ArrayList<>();
+        if(this.photoURL == null && user.getPhotoUrl() != null)
+            this.photoURL = user.getPhotoUrl().toString();
     }
 
     public GIUser(String email, String display_name) {
@@ -77,12 +73,11 @@ public class GIUser {
 
     public JSONObject getJSONUser() throws JSONException {
         JSONObject userJSON = new JSONObject();
-        userJSON.put("displayName", this.display_name);
+        userJSON.put("displayName", (this.display_name == null) ? "" : this.display_name);
         userJSON.put("email", this.email);
-        userJSON.put("photoURL", this.photoURL);
+        userJSON.put("photoURL", (this.photoURL == null) ? "" : this.photoURL);
         userJSON.put("providerId", this.providerId);
         userJSON.put("uid", this.uid);
-        Log.i("∆∆∆ ∆∆∆ ∆∆∆ ∆∆", userJSON.toString());
         return userJSON;
     }
 

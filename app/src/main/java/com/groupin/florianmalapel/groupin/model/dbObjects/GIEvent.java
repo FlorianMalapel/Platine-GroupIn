@@ -1,18 +1,22 @@
 package com.groupin.florianmalapel.groupin.model.dbObjects;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by florianmalapel on 07/01/2017.
  */
 
-public class GIEvent {
+public class GIEvent implements Serializable {
 
     public String id = null;
     public String id_group = null;
+    public String uid_creator = null;
     public String name = null;
     public String description = null;
     public String theme = null;
@@ -51,18 +55,37 @@ public class GIEvent {
         this.bring_back = bring_back;
     }
 
-    public JSONObject getCreateEventJSON() throws JSONException {
+    public JSONObject getCreateEventJSON(String userId) throws JSONException {
         JSONObject event = new JSONObject();
-        event.put("id", id_group);
+        event.put("groupId", id_group);
+        event.put("userId", userId);
         event.put("nom", name);
         event.put("photoURL", url_image);
         event.put("description", description);
         event.put("dateDebut", date_start);
         event.put("dateFin", date_end);
-        event.put("dateFin", date_end);
         event.put("obj", bring_back);
         event.put("theme", theme);
         event.put("prix", String.valueOf(price));
+        Log.v("ŒŒŒŒ == ∆∆ ||" , event.toString());
         return event;
+    }
+
+    @Override
+    public String toString() {
+        return "GIEvent{" +
+                "id='" + id + '\'' +
+                ", id_group='" + id_group + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", theme='" + theme + '\'' +
+                ", sub_theme='" + sub_theme + '\'' +
+                ", address='" + address + '\'' +
+                ", url_image='" + url_image + '\'' +
+                ", date_start='" + date_start + '\'' +
+                ", date_end='" + date_end + '\'' +
+                ", price=" + price +
+                ", bring_back='" + bring_back + '\'' +
+                '}';
     }
 }
