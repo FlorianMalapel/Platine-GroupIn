@@ -73,7 +73,7 @@ public class GIUser {
 
     public JSONObject getJSONUser() throws JSONException {
         JSONObject userJSON = new JSONObject();
-        userJSON.put("displayName", (this.display_name == null) ? "" : this.display_name);
+        userJSON.put("displayName", this.display_name);
         userJSON.put("email", this.email);
         userJSON.put("photoURL", (this.photoURL == null) ? "" : this.photoURL);
         userJSON.put("providerId", this.providerId);

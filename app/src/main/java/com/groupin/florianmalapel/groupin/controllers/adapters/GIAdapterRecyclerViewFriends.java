@@ -2,7 +2,6 @@ package com.groupin.florianmalapel.groupin.controllers.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,15 +118,14 @@ public class GIAdapterRecyclerViewFriends extends RecyclerView.Adapter<GIAdapter
 
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
-        if(friendsList.get(position) == null) return;
+        if(friendsList.isEmpty() || friendsList.get(position) == null) return;
 
         holder.textViewLastName.setText(friendsList.get(position).display_name);
         holder.textViewFirstName.setVisibility(View.GONE);
-        if(position > 0
-                && friendsList.get(position - 1).display_name != null
+        if(position > 0 && friendsList.get(position - 1) != null
+                && friendsList.get(position - 1).display_name != null && !friendsList.get(position - 1).display_name.isEmpty()
                 && String.valueOf(friendsList.get(position - 1).display_name.charAt(0)).equals(String.valueOf(friendsList.get(position).display_name.charAt(0)))) {
             holder.textViewFirstLetter.setVisibility(View.INVISIBLE);
-            Log.w("∆∆∆ ∆∆∆ ∆∆∆", friendsList.get(position - 1).display_name + "   - ----   " + friendsList.get(position).display_name);
         }
         else holder.textViewFirstLetter.setText(String.valueOf(friendsList.get(position).display_name.charAt(0)));
 

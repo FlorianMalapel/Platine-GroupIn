@@ -7,8 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
@@ -25,7 +27,6 @@ import com.groupin.florianmalapel.groupin.helpers.GIGoogleLoginHelper;
 import com.groupin.florianmalapel.groupin.helpers.GISharedPreferencesHelper;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 import com.groupin.florianmalapel.groupin.tools.DLog;
-import com.groupin.florianmalapel.groupin.views.GIProgressIndicator;
 import com.groupin.florianmalapel.groupin.volley.GIRequestData;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyRequest;
@@ -52,8 +53,8 @@ public class GIActivitySocialSign extends AppCompatActivity implements
     private Button                  buttonContinue              = null;
     private EditText                editTextEmail               = null;
     private GISharedPreferencesHelper prefsHelper               = null;
-    private GIProgressIndicator     progressIndicator           = null;
     private GIVolleyHandler         volleyHandler               = null;
+    private ImageView               imageViewGilogo             = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class GIActivitySocialSign extends AppCompatActivity implements
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_gisign);
         findViewById();
-        checkIfUserLoggedIn();
+//        checkIfUserLoggedIn();
         setListeners();
         initialize();
     }
@@ -97,7 +98,7 @@ public class GIActivitySocialSign extends AppCompatActivity implements
         buttonFacebookSignIn = (Button) findViewById(R.id.button_facebook_login);
         buttonContinue = (Button) findViewById(R.id.button_continue);
         editTextEmail = (EditText) findViewById(R.id.editText_email);
-        progressIndicator = (GIProgressIndicator) findViewById(R.id.progressIndicator);
+        imageViewGilogo = (ImageView) findViewById(R.id.gilogo);
     }
 
 
@@ -144,6 +145,10 @@ public class GIActivitySocialSign extends AppCompatActivity implements
         else if(view == buttonContinue){
             goToActivityMailSign();
         }
+    }
+
+    private void startAnimLoading(){
+        imageViewGilogo.startAnimation(AnimationUtils.loadAnimation(this, R.anim.loader_rotation));
     }
 
     @Override
@@ -212,8 +217,7 @@ public class GIActivitySocialSign extends AppCompatActivity implements
         if(requestCode == googleLoginHelper.GOOGLE_LOGIN_ID)
             googleLoginHelper.handleResponse(data, requestCode);
         else facebookLoginHelper.handleActivityResult(requestCode, resultCode, data);
-        progressIndicator.startRotating();
-        progressIndicator.setVisibility(View.VISIBLE);
+        startAnimLoading();
     }
 
     @Override
@@ -230,7 +234,14 @@ public class GIActivitySocialSign extends AppCompatActivity implements
         }
 
         if(request_code == GIRequestData.GET_GROUPS_CODE) {
-            progressIndicator.stopRotate();
+            volleyHandler.getEventsOfUser(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+        }
+
+        if(request_code == GIRequestData.GET_EVENTS_USER_CODE){
+            volleyHandler.getNotifications(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+        }
+
+        if(request_code == GIRequestData.GET_NOTIFICATIONS_CODE) {
             goToActivityMain();
         }
     }

@@ -4,17 +4,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -37,7 +34,7 @@ import com.ss.bottomnavigation.events.OnSelectedItemChangeListener;
 import org.json.JSONObject;
 
 public class GIActivityMain extends AppCompatActivity
-        implements  NavigationView.OnNavigationItemSelectedListener,
+        implements  /*NavigationView.OnNavigationItemSelectedListener,*/
                     OnSelectedItemChangeListener,
                     ViewPager.OnPageChangeListener,
                     View.OnClickListener,
@@ -45,9 +42,9 @@ public class GIActivityMain extends AppCompatActivity
 
     private static final int NB_TAB_BOTTOM_MENU = 4;
 
-    private DrawerLayout drawer = null;
-    private ActionBarDrawerToggle toggle = null;
-    private NavigationView navigationView = null;
+//    private DrawerLayout drawer = null;
+//    private ActionBarDrawerToggle toggle = null;
+//    private NavigationView navigationView = null;
     private Toolbar toolbar = null;
     private ViewPager viewPagerBottomMenu = null;
     private BottomNavigation bottomNavigation = null;
@@ -81,33 +78,33 @@ public class GIActivityMain extends AppCompatActivity
     }
 
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_credits) {
-
-        } else if (id == R.id.nav_help) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
+//    @SuppressWarnings("StatementWithEmptyBody")
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//
+//        if (id == R.id.nav_share) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+//        } else if (id == R.id.nav_credits) {
+//
+//        } else if (id == R.id.nav_help) {
+//
+//        }
+//
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//        return true;
+//    }
 
     private void findViewByID(){
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        navigationView = (NavigationView) findViewById(R.id.nav_view);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         viewPagerBottomMenu = (ViewPager) findViewById(R.id.viewPagerBottomMenu);
         bottomNavigation = (BottomNavigation) findViewById(R.id.bottomNavigation);
-        imageViewMenu = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageViewMenu);
+//        imageViewMenu = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageViewMenu);
         imageButtonProfile = (ImageButton) findViewById(R.id.imageButtonProfile);
         textViewTitle = (TextView) findViewById(R.id.textViewTitle);
     }
@@ -115,15 +112,15 @@ public class GIActivityMain extends AppCompatActivity
     private void initialize(){
         volleyHandler = new GIVolleyHandler();
         setSupportActionBar(toolbar);
-        toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         customPagerAdapter = new CustomPagerAdapter(getSupportFragmentManager());
         viewPagerBottomMenu.setAdapter(customPagerAdapter);
     }
 
     private void initializeViews(){
         imageButtonProfile.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-        textViewTitle.setX(textViewTitle.getX() - (toggle.getDrawerArrowDrawable().getMinimumWidth() * 2));
+//        textViewTitle.setX(textViewTitle.getX() - (toggle.getDrawerArrowDrawable().getMinimumWidth() * 2));
     }
 
     private void setUserPhotoInMenu(){
@@ -136,9 +133,9 @@ public class GIActivityMain extends AppCompatActivity
     }
 
     private void setListeners(){
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
+//        drawer.setDrawerListener(toggle);
+//        toggle.syncState();
+//        navigationView.setNavigationItemSelectedListener(this);
         bottomNavigation.setOnSelectedItemChangeListener(this);
         viewPagerBottomMenu.addOnPageChangeListener(this);
         imageButtonProfile.setOnClickListener(this);

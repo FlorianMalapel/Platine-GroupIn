@@ -64,15 +64,17 @@ public class GIDataCache implements GIVolleyRequest.RequestCallback {
         user.providerId = prefsHelper.getUserProviderId();
         user.photoURL = prefsHelper.getUserPhotoUrl();
 
+        Log.v("|| GIDATACACHE ||", " GET user : " + user.toString());
         return user;
     }
 
     public void logOut(){
         prefsHelper.reset();
+        this.user = new GIUser();
     }
 
     public void storeCurrentUserInPref(){
-        Log.v("|| GIDATACACHE ||", "user : " + user.toString());
+        Log.v("|| GIDATACACHE ||", " POST user : " + user.toString());
         prefsHelper.storeUserUid(user.uid);
         prefsHelper.storeUserLogin(user.email);
         prefsHelper.storePhotoURL(user.photoURL);
@@ -251,6 +253,15 @@ public class GIDataCache implements GIVolleyRequest.RequestCallback {
                 }
             }
         }
+    }
+
+    public String getGroupIdByName(String name){
+        for(String key : userGroupsList.keySet()){
+            if(name == userGroupsList.get(key).id){
+                return key;
+            }
+        }
+        return null;
     }
 
     @Override

@@ -37,14 +37,8 @@ public class GISharedPreferencesHelper {
     }
 
     public void reset(){
-        editor.remove(KEY_USER_LOGIN);
-        editor.remove(KEY_USER_PASSWORD);
-        editor.remove(KEY_USER_ACCESS_TOKEN_FB);
-        editor.remove(KEY_USER_ACCESS_TOKEN_GOOGLE);
-        editor.remove(KEY_USER_DISPLAY_NAME);
-        editor.remove(KEY_USER_PHOTO_URL);
-        editor.remove(KEY_USER_PROVIDER_ID);
-        editor.remove(KEY_USER_UID);
+        editor.clear();
+        editor.commit();
     }
 
     public void storeUserLogin(String login){

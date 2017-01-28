@@ -126,7 +126,9 @@ public class GIActivityProfile extends AppCompatActivity
     private void onClickOnButtonLogOut(){
         GIApplicationDelegate.getInstance().getDataCache().logOut();
         Intent intent = new Intent(this, GIActivitySocialSign.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(intent);
         finish();
     }

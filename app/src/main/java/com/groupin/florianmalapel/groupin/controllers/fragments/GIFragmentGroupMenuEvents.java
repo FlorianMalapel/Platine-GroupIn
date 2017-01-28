@@ -134,7 +134,7 @@ public class GIFragmentGroupMenuEvents extends Fragment
     private void sendInvitationToJoinGroup(){
         for(GIUser user : friendsListChosen){
             Log.v("∆∆ GIFragmentGroupMenu", "-------  : " + ((GIActivityDisplayGroup) getContext()).groupId + "  " + user.uid);
-            volleyHandler.postAddUserInGroup(this, ((GIActivityDisplayGroup) getContext()).groupId, user.uid);
+            volleyHandler.postNotifAddUserInGroup(this, ((GIActivityDisplayGroup) getContext()).groupId, user.uid);
         }
     }
 

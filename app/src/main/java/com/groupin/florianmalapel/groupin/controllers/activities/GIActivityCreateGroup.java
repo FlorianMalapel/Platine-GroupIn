@@ -224,6 +224,13 @@ public class GIActivityCreateGroup extends AppCompatActivity
         }
     }
 
+    private void sendInvitationToTheGroupToFriendsSelected(){
+        String idGroup = GIApplicationDelegate.getInstance().getDataCache().getGroupIdByName(editTextGroupName.getText().toString());
+        for(GIUser friend : friendsListChosen){
+            volleyHandler.postUserJoinGroup(null, friend.uid, idGroup);
+        }
+    }
+
     @Override
     public void itemDeletedAddPosition(int position) {
         if(this.friendsListChosen != null)
@@ -250,10 +257,7 @@ public class GIActivityCreateGroup extends AppCompatActivity
     public void onRequestFinishWithSuccess(int request_code, JSONObject object) {
         GIApplicationDelegate.getInstance().onRequestFinishWithSuccess(request_code, object);
         if(request_code == GIRequestData.POST_GROUP_CODE){
-            volleyHandler.getGroups(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid()); // TODO remove or not ?
-        }
-        else if(request_code == GIRequestData.GET_GROUPS_CODE) {
-            progressIndicator.stopRotate();
+            sendInvitationToTheGroupToFriendsSelected();
             finish();
         }
     }

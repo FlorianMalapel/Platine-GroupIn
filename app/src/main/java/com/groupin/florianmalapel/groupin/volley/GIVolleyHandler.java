@@ -110,7 +110,7 @@ public class GIVolleyHandler {
         request.startRequest();
     }
 
-    public void postAddUserInGroup(GIVolleyRequest.RequestCallback callback, String id_group, String uid_userToAdd){
+    public void postNotifAddUserInGroup(GIVolleyRequest.RequestCallback callback, String id_group, String uid_userToAdd){
         String url = GIRequestData.API_URL + GIRequestData.NOTIF_ENDPOINT + GIRequestData.GROUP_ENDPOINT;
         GIVolleyRequest request = new GIVolleyRequest(GIRequestData.POST_NOTIF_ADD_GROUP_CODE, Request.Method.POST, url, callback);
 
@@ -127,7 +127,7 @@ public class GIVolleyHandler {
     }
 
     public void postSendNotifFriendShip(GIVolleyRequest.RequestCallback callback, String userUid, String friendUid){
-        String url = GIRequestData.API_URL + GIRequestData.NOTIF_ENDPOINT + GIRequestData.FRIENDS_ENDPOINT + GIRequestData.FRIENDS_ENDPOINT;
+        String url = GIRequestData.API_URL + GIRequestData.NOTIF_ENDPOINT + GIRequestData.AMIS_ENDPOINT;
         GIVolleyRequest request = new GIVolleyRequest(GIRequestData.POST_FRIENDSHIP_CODE, Request.Method.POST, url, callback);
         JSONObject object = new JSONObject();
         try {
@@ -139,4 +139,40 @@ public class GIVolleyHandler {
         request.initPostJSONRequest(null, object);
         request.startRequest();
     }
+
+    public void postUserJoinGroup(GIVolleyRequest.RequestCallback callback, String userUid, String groupId){
+        String url = GIRequestData.API_URL + GIRequestData.USER_ENDPOINT + GIRequestData.GROUP_ENDPOINT;
+        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.POST_FRIENDSHIP_CODE, Request.Method.POST, url, callback);
+        JSONObject object = new JSONObject();
+        try {
+            object.put("idG", groupId); // Ask for friendship
+            object.put("uidR", userUid); // Asked for friendship
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        request.initPostJSONRequest(null, object);
+        request.startRequest();
+    }
+
+    public void deleteNotifFriend(GIVolleyRequest.RequestCallback callback, String userUid, String friendUid){
+        String url = GIRequestData.API_URL + GIRequestData.NOTIF_ENDPOINT + userUid + GIRequestData.USER_ENDPOINT + "/" + userUid + GIRequestData.FRIENDS_ENDPOINT + "/" + friendUid;
+        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.DELETE_GROUP_CODE, Request.Method.DELETE, url, callback);
+        request.initDeleteJSONRequest(null);
+        request.startRequest();
+    }
+
+    public void deleteNotifGroup(GIVolleyRequest.RequestCallback callback, String userUid, String idGroup){
+        String url = GIRequestData.API_URL + GIRequestData.NOTIF_ENDPOINT + userUid + GIRequestData.USER_ENDPOINT + "/" + userUid + GIRequestData.GROUP_ENDPOINT + "/" + idGroup;
+        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.DELETE_GROUP_CODE, Request.Method.DELETE, url, callback);
+        request.initDeleteJSONRequest(null);
+        request.startRequest();
+    }
+
+    public void getMessagesChatFromGroup(GIVolleyRequest.RequestCallback callback, String userUid, String idGroup){
+        String url = GIRequestData.API_URL + GIRequestData.CHAT_ENDPOINT + GIRequestData.USER_ENDPOINT + userUid + GIRequestData.GROUP_ENDPOINT + "/" + idGroup;
+        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.GET_CHAT_GROUP_CODE, Request.Method.GET, url, callback);
+        request.initGetJSONRequest(null);
+        request.startRequest();
+    }
+
 }

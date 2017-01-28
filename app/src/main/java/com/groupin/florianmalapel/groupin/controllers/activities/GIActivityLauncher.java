@@ -4,8 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.google.android.gms.tasks.Task;
@@ -25,8 +24,7 @@ import org.json.JSONObject;
  */
 
 public class GIActivityLauncher extends AppCompatActivity
-        implements Animation.AnimationListener,
-                    GIVolleyRequest.RequestCallback,
+        implements  GIVolleyRequest.RequestCallback,
                     GICommunicationsHelper.FirebaseFacebookLoginSuccess,
                     GICommunicationsHelper.FirebaseGoogleLoginSuccess,
                     GICommunicationsHelper.FirebaseCreateUserCallback {
@@ -76,43 +74,19 @@ public class GIActivityLauncher extends AppCompatActivity
         else if(logInApiChecker.isUserLoggedIn() == GILogInApiChecker.STATE.CONNECTED_MAIL){
             commsHelper.signInWithEmailAndPassword(prefsHelper.getUserLogin(), prefsHelper.getUserPassword(), this, this);
         }
+
+        else if (logInApiChecker.isUserLoggedIn() == GILogInApiChecker.STATE.NOT_CONNECTED) {
+            goToLoginActivity();
+        }
     }
 
 
     private void initializeViews() {
-        startAnimationOnLogo();
+        startAnimationLoader();
     }
 
-    private void onAnimationTerminated(){
-        if(currentNbRotateAnim == NB_ROTATE_ANIM) {
-            if (logInApiChecker.isUserLoggedIn() == GILogInApiChecker.STATE.NOT_CONNECTED) {
-                goToLoginActivity();
-            }
-            else {
-                currentNbRotateAnim = 0;
-                startAnimationOnLogo();
-            }
-//            if (isUserConnected) {
-//                goToMainActivity();
-//            } else {
-//                goToLoginActivity();
-//            }
-
-        }
-
-        else {
-            currentNbRotateAnim++;
-            startAnimationOnLogo();
-        }
-    }
-
-    private void startAnimationOnLogo(){
-        RotateAnimation rotateAnimation = new RotateAnimation((currentNbRotateAnim * 90), 90 + (currentNbRotateAnim * 90), Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        rotateAnimation.setDuration(800);
-        rotateAnimation.setFillAfter(true);
-        rotateAnimation.setAnimationListener(this);
-        imageViewGroupInLogo.setAnimation(rotateAnimation);
-        imageViewGroupInLogo.startAnimation(rotateAnimation);
+    private void startAnimationLoader(){
+        imageViewGroupInLogo.startAnimation(AnimationUtils.loadAnimation(this, R.anim.loader_rotation));
     }
 
     private void goToMainActivity(){
@@ -127,18 +101,6 @@ public class GIActivityLauncher extends AppCompatActivity
         finish();
     }
 
-    @Override
-    public void onAnimationStart(Animation animation) {
-    }
-
-    @Override
-    public void onAnimationEnd(Animation animation) {
-        onAnimationTerminated();
-    }
-
-    @Override
-    public void onAnimationRepeat(Animation animation) {
-    }
 
     @Override
     public void onRequestStart() {
@@ -151,11 +113,17 @@ public class GIActivityLauncher extends AppCompatActivity
         if(request_code == GIRequestData.POST_USER_CODE) {
             GIApplicationDelegate.getInstance().getDataCache().storeCurrentUserInPref();
             volleyHandler.getGroups(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
-            volleyHandler.getEventsOfUser(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
-            volleyHandler.getNotifications(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
         }
 
         if(request_code == GIRequestData.GET_GROUPS_CODE) {
+            volleyHandler.getEventsOfUser(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+        }
+
+        if(request_code == GIRequestData.GET_EVENTS_USER_CODE){
+            volleyHandler.getNotifications(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+        }
+
+        if(request_code == GIRequestData.GET_NOTIFICATIONS_CODE){
             goToMainActivity();
         }
     }

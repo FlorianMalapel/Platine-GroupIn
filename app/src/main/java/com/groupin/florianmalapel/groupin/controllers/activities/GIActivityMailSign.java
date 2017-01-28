@@ -42,6 +42,7 @@ public class GIActivityMailSign extends AppCompatActivity implements
 
     private EditText editTextEmail = null;
     private EditText editTextPassword = null;
+    private EditText editTextDisplayName = null;
     private ImageButton imageButtonEye = null;
     private ImageView imageViewGroupIn = null;
     private TextView textView_emailInvalid = null;
@@ -222,7 +223,14 @@ public class GIActivityMailSign extends AppCompatActivity implements
         }
 
         if(request_code == GIRequestData.GET_GROUPS_CODE) {
-//            progressIndicator.stopRotate();
+            volleyHandler.getEventsOfUser(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+        }
+
+        if(request_code == GIRequestData.GET_EVENTS_USER_CODE){
+            volleyHandler.getNotifications(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+        }
+
+        if(request_code == GIRequestData.GET_NOTIFICATIONS_CODE){
             goToActivityMain();
         }
     }

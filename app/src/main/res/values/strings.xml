@@ -21,6 +21,8 @@
     <string name="lastname">Prénom</string>
 
     <!--Divers-->
+    <string name="notifsFriendship">Demande d\'amis</string>
+    <string name="notifsGroup">Demande d\'ajout dans un groupe</string>
     <string name="logOut">Se déconnecter</string>
     <string name="confirm">Confirmer</string>
     <string name="save">Enregistrer</string>

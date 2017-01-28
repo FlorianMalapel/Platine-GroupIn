@@ -48,7 +48,8 @@ public class GIJsonToObjectHelper {
                 listObjects.add(new ItemReceived(getUsersFromJSON(object), GIRequestData.MY_USER));
                 break;
             case GIRequestData.POST_GROUP_CODE:
-                listObjects.add(new ItemReceived(getGroupFromJSON(object), GIRequestData.GROUP));
+                listObjects.add(new ItemReceived(getUserFromJSON(object), GIRequestData.MY_USER));
+                listObjects.add(new ItemReceived(getGroupsFromJSON(object), GIRequestData.ALL_GROUPS));
                 break;
             case GIRequestData.GET_GROUPS_CODE:
                 listObjects.add(new ItemReceived(getGroupsFromJSON(object), GIRequestData.ALL_GROUPS));
