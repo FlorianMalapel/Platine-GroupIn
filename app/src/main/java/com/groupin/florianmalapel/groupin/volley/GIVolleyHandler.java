@@ -169,10 +169,45 @@ public class GIVolleyHandler {
     }
 
     public void getMessagesChatFromGroup(GIVolleyRequest.RequestCallback callback, String userUid, String idGroup){
-        String url = GIRequestData.API_URL + GIRequestData.CHAT_ENDPOINT + GIRequestData.USER_ENDPOINT + userUid + GIRequestData.GROUP_ENDPOINT + "/" + idGroup;
+        String url = GIRequestData.API_URL + GIRequestData.CHAT_ENDPOINT + GIRequestData.USER_ENDPOINT + "/" + userUid + GIRequestData.GROUP_ENDPOINT + "/" + idGroup;
         GIVolleyRequest request = new GIVolleyRequest(GIRequestData.GET_CHAT_GROUP_CODE, Request.Method.GET, url, callback);
         request.initGetJSONRequest(null);
         request.startRequest();
     }
 
+    public void postChatMessage(GIVolleyRequest.RequestCallback callback, String userUid, String groupId, String message){
+        String url = GIRequestData.API_URL + GIRequestData.CHAT_ENDPOINT;
+        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.POST_FRIENDSHIP_CODE, Request.Method.POST, url, callback);
+        JSONObject object = new JSONObject();
+        try {
+            object.put("uid", userUid);
+            object.put("groupId", groupId);
+            object.put("message", message);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        request.initPostJSONRequest(null, object);
+        request.startRequest();
+    }
+
+    public void getPollsFromGroup(GIVolleyRequest.RequestCallback callback, String userUid, String idGroup){
+        String url = GIRequestData.API_URL + GIRequestData.POLLS_ENDPOINT + GIRequestData.USER_ENDPOINT + "/" + userUid + GIRequestData.GROUP_ENDPOINT + "/" + idGroup;
+        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.GET_POLLS_GROUP_CODE, Request.Method.GET, url, callback);
+        request.initGetJSONRequest(null);
+        request.startRequest();
+    }
+
+    public void postPoll(GIVolleyRequest.RequestCallback callback, JSONObject pollObject){
+        String  url = GIRequestData.API_URL + GIRequestData.POLLS_ENDPOINT;
+        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.POST_POLLS_GROUP_CODE, Request.Method.POST, url, callback);
+        request.initPostJSONRequest(null, pollObject);
+        request.startRequest();
+    }
+
+    public void postPollAnswer(GIVolleyRequest.RequestCallback callback, JSONObject pollAnswerObject){
+        String  url = GIRequestData.API_URL + GIRequestData.POLLS_ENDPOINT + GIRequestData.USER_ENDPOINT;
+        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.POST_POLLS_ANSWER_CODE, Request.Method.POST, url, callback);
+        request.initPostJSONRequest(null, pollAnswerObject);
+        request.startRequest();
+    }
 }

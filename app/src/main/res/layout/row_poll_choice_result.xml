@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="60dp"
+              android:layout_marginBottom="10dp"
+              android:paddingLeft="50dp"
+              >
+
+    <com.eralp.circleprogressview.CircleProgressView
+        android:id="@+id/circle_progress_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:layout_gravity="center"
+        app:cpv_circle_color="#27375c"
+        app:cpv_circle_width="4dp"
+        app:cpv_background_circle_width="1dp"
+        app:cpv_background_circle_color="#5b253048"
+        app:cpv_text_prefix="%"
+        app:cpv_text_size="10"
+        app:cpv_text_color="#27375c"/>
+
+    <TextView
+        android:id="@+id/textViewChoice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textColor="@android:color/black"
+        android:paddingLeft="11dp"
+        android:text="Choice"/>
+
+</LinearLayout>

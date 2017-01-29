@@ -14,7 +14,7 @@ import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIEvent;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
-import com.groupin.florianmalapel.groupin.tools.GIColors;
+import com.groupin.florianmalapel.groupin.tools.GIDesign;
 import com.groupin.florianmalapel.groupin.transformations.CircleTransform;
 import com.groupin.florianmalapel.groupin.views.GIHorizontalBubbleList;
 import com.squareup.picasso.Picasso;
@@ -90,13 +90,13 @@ public class GIActivityDisplayEvent extends AppCompatActivity implements View.On
     private void initializeViews() {
         initTopBubbleFriendList();
         initializeViewsWithEvent();
-        imageButtonBack.getDrawable().mutate().setColorFilter(GIColors.getColorFromXml(this, R.color.GIYellow), PorterDuff.Mode.SRC_ATOP);
-        buttonParticipate.getCompoundDrawables()[0].mutate().setColorFilter(GIColors.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
-        buttonNotParticipating.getCompoundDrawables()[0].mutate().setColorFilter(GIColors.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
-        buttonParticipateMaybe.getCompoundDrawables()[0].mutate().setColorFilter(GIColors.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
-        textViewEventLocation.getCompoundDrawables()[0].mutate().setColorFilter(GIColors.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
-        textViewEventDate.getCompoundDrawables()[0].mutate().setColorFilter(GIColors.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
-        textViewEventPrice.getCompoundDrawables()[2].mutate().setColorFilter(GIColors.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
+        imageButtonBack.getDrawable().mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.GIYellow), PorterDuff.Mode.SRC_ATOP);
+        buttonParticipate.getCompoundDrawables()[0].mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
+        buttonNotParticipating.getCompoundDrawables()[0].mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
+        buttonParticipateMaybe.getCompoundDrawables()[0].mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
+        textViewEventLocation.getCompoundDrawables()[0].mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
+        textViewEventDate.getCompoundDrawables()[0].mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
+        textViewEventPrice.getCompoundDrawables()[2].mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
     }
 
     private void initializeViewsWithEvent(){
@@ -136,7 +136,7 @@ public class GIActivityDisplayEvent extends AppCompatActivity implements View.On
     }
 
     private void selectButton(Button button, boolean isSelected, int color){
-        int colorDefault = GIColors.getColorFromXml(this, R.color.GIBlue);
+        int colorDefault = GIDesign.getColorFromXml(this, R.color.GIBlue);
         button.getCompoundDrawables()[0].mutate().setColorFilter((isSelected) ? color : colorDefault, PorterDuff.Mode.SRC_ATOP);
         button.setTextColor((isSelected) ? color : colorDefault);
     }
@@ -148,21 +148,21 @@ public class GIActivityDisplayEvent extends AppCompatActivity implements View.On
         }
 
         else if(view == buttonParticipate){
-            selectButton(buttonParticipate, true, GIColors.getColorFromXml(this, R.color.holoGreen));
+            selectButton(buttonParticipate, true, GIDesign.getColorFromXml(this, R.color.holoGreen));
             selectButton(buttonNotParticipating, false, 0);
             selectButton(buttonParticipateMaybe, false, 0);
         }
 
         else if(view == buttonNotParticipating){
             selectButton(buttonParticipate, false, 0);
-            selectButton(buttonNotParticipating, true, GIColors.getColorFromXml(this, R.color.googleRed));
+            selectButton(buttonNotParticipating, true, GIDesign.getColorFromXml(this, R.color.googleRed));
             selectButton(buttonParticipateMaybe, false, 0);
         }
 
         else if(view == buttonParticipateMaybe){
             selectButton(buttonParticipate, false, 0);
             selectButton(buttonNotParticipating, false, 0);
-            selectButton(buttonParticipateMaybe, true, GIColors.getColorFromXml(this, R.color.GIYellow));
+            selectButton(buttonParticipateMaybe, true, GIDesign.getColorFromXml(this, R.color.GIYellow));
         }
     }
 }

@@ -18,7 +18,7 @@ import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecyclerViewNotifsFriend;
 import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecyclerViewNotifsGroup;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
-import com.groupin.florianmalapel.groupin.tools.GIColors;
+import com.groupin.florianmalapel.groupin.tools.GIDesign;
 
 /**
  * Created by florianmalapel on 04/12/2016.
@@ -76,7 +76,7 @@ public class GIFragmentHomeMenuHome extends Fragment implements View.OnClickList
             textViewNotifsFriends.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getContext(), R.drawable.ic_keyboard_arrow_up), null);
             textViewNotifsFriends.setText(textViewNotifsFriends.getText() + " (" + GIApplicationDelegate.getInstance().getDataCache().notifsFriendList.size() + ")" );
         }
-        textViewNotifsFriends.getCompoundDrawables()[2].mutate().setColorFilter(GIColors.getColorFromXml(getContext(), R.color.GIYellow), PorterDuff.Mode.SRC_ATOP);
+        textViewNotifsFriends.getCompoundDrawables()[2].mutate().setColorFilter(GIDesign.getColorFromXml(getContext(), R.color.GIYellow), PorterDuff.Mode.SRC_ATOP);
     }
 
     private void initViewNotificationGroups(){
@@ -88,7 +88,7 @@ public class GIFragmentHomeMenuHome extends Fragment implements View.OnClickList
             textViewNotifsGroups.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getContext(), R.drawable.ic_keyboard_arrow_up), null);
             textViewNotifsGroups.setText(textViewNotifsGroups.getText() + " (" + GIApplicationDelegate.getInstance().getDataCache().notifsGroupList.size() + ")" );
         }
-        textViewNotifsGroups.getCompoundDrawables()[2].mutate().setColorFilter(GIColors.getColorFromXml(getContext(), R.color.GIYellow), PorterDuff.Mode.SRC_ATOP);
+        textViewNotifsGroups.getCompoundDrawables()[2].mutate().setColorFilter(GIDesign.getColorFromXml(getContext(), R.color.GIYellow), PorterDuff.Mode.SRC_ATOP);
     }
 
     private void initRecyclerViewNotifsGroup(){

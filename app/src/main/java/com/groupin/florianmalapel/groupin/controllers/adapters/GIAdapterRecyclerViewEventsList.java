@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.controllers.activities.GIActivityDisplayEvent;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIEvent;
-import com.groupin.florianmalapel.groupin.tools.GIColors;
+import com.groupin.florianmalapel.groupin.tools.GIDesign;
 import com.groupin.florianmalapel.groupin.transformations.CircleTransform;
 import com.squareup.picasso.Picasso;
 
@@ -76,8 +76,8 @@ public class GIAdapterRecyclerViewEventsList extends RecyclerView.Adapter<GIAdap
 //        Bitmap normalImage = ((BitmapDrawable)holder.imageView_eventPicture.getDrawable()).getBitmap();
 //        Bitmap circleImage = circleTransform.transform(normalImage);
 //        holder.imageView_eventPicture.setImageBitmap(circleImage);
-        holder.imageView_personLogo.getDrawable().mutate().setColorFilter(Color.parseColor(GIColors.GREEN), PorterDuff.Mode.SRC_ATOP);
-        holder.imageView_personLogo.getBackground().mutate().setColorFilter(Color.parseColor(GIColors.GREEN), PorterDuff.Mode.SRC_ATOP);
+        holder.imageView_personLogo.getDrawable().mutate().setColorFilter(Color.parseColor(GIDesign.GREEN), PorterDuff.Mode.SRC_ATOP);
+        holder.imageView_personLogo.getBackground().mutate().setColorFilter(Color.parseColor(GIDesign.GREEN), PorterDuff.Mode.SRC_ATOP);
     }
 
     @Override

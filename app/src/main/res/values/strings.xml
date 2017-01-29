@@ -21,6 +21,7 @@
     <string name="lastname">Prénom</string>
 
     <!--Divers-->
+    <string name="write">Ecrire ...</string>
     <string name="notifsFriendship">Demande d\'amis</string>
     <string name="notifsGroup">Demande d\'ajout dans un groupe</string>
     <string name="logOut">Se déconnecter</string>
@@ -75,5 +76,10 @@
     <string name="menu_chat_tab">Chat</string>
     <string name="menu_polls_tab">Votes</string>
     <string name="menu_money_tab">Dépenses</string>
+
+    <!-- Polls -->
+    <string name="answer">Répondre</string>
+    <string name="valid">Valider</string>
+
 
 </resources>

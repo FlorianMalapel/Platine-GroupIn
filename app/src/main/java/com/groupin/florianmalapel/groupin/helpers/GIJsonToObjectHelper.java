@@ -1,11 +1,12 @@
 package com.groupin.florianmalapel.groupin.helpers;
 
-import android.util.Log;
-
+import com.groupin.florianmalapel.groupin.model.dbObjects.GIChatMessage;
+import com.groupin.florianmalapel.groupin.model.dbObjects.GIChoice;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIEvent;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIGroup;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GINotificationFriend;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GINotificationGroup;
+import com.groupin.florianmalapel.groupin.model.dbObjects.GIPoll;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
 import com.groupin.florianmalapel.groupin.volley.GIRequestData;
 
@@ -14,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 /**
@@ -28,8 +30,8 @@ public class GIJsonToObjectHelper {
         switch (requestCode) {
             case GIRequestData.POST_USER_CODE:
                 listObjects.add(new ItemReceived(getUserFromJSON(object), GIRequestData.MY_USER));
-                listObjects.add(new ItemReceived(getNotifsFriendsFromJSON(object), GIRequestData.NOTIFS_FRIENDS));
-                listObjects.add(new ItemReceived(getNotifsGroupsFromJSON(object), GIRequestData.NOTIFS_GROUP));
+                listObjects.add(new ItemReceived(getArrayNotificationFriendFromJSON(object), GIRequestData.NOTIFS_FRIENDS));
+                listObjects.add(new ItemReceived(getArrayNotificationGroupFromJSON(object), GIRequestData.NOTIFS_GROUP));
                 break;
 
             case GIRequestData.GET_USER_CODE:
@@ -65,6 +67,10 @@ public class GIJsonToObjectHelper {
                 listObjects.add(new ItemReceived(getArrayNotificationFriendFromJSON(object), GIRequestData.NOTIFS_FRIENDS));
                 listObjects.add(new ItemReceived(getArrayNotificationGroupFromJSON(object), GIRequestData.NOTIFS_GROUP));
                 break;
+//            case GIRequestData.CHATS:
+//                listObjects.add(new ItemReceived(getUserFromJSON(object), GIRequestData.MY_USER));
+//                listObjects.add(new ItemReceived(getArrayMessagesFromJSON(object), GIRequestData.CHATS));
+//                break;
         }
 
 
@@ -303,8 +309,6 @@ public class GIJsonToObjectHelper {
             arrayNotifsGroup.add(new GINotificationGroup(getGroupFromJSON(arrayNotifsGroupJSON.getJSONObject(index))));
         }
 
-        Log.v("~~~ = GIJsonToObj", " --> -->  " + arrayNotifsGroup.toString());
-
         return arrayNotifsGroup;
     }
 
@@ -320,18 +324,107 @@ public class GIJsonToObjectHelper {
             arrayNotifsFriend.add(new GINotificationFriend(getUserFromJSON(arrayNotifsFriendJSON.getJSONObject(index))));
         }
 
-        Log.v("~~~ = GIJsonToObj", " --> -->  " + arrayNotifsFriend.toString());
-
         return arrayNotifsFriend;
     }
 
-    public static Object getNotifsFriendsFromJSON(JSONObject object){
-        // TODO NEED TO FINISH
-        return null;
+    public static GIChatMessage getMessageFromJSON(JSONObject object) throws JSONException {
+
+        GIChatMessage message = new GIChatMessage();
+
+        if(object.has("auteur")){
+            GIUser author = getUserFromJSON(object.getJSONObject("auteur"));
+            message.authorUid = author.uid;
+        }
+
+        if(object.has("date")){
+            message.date = object.getLong("date");
+        }
+
+        if(object.has("id")){
+            message.messageId = object.getString("id");
+        }
+
+        if(object.has("message")){
+            message.messageContent = object.getString("message");
+        }
+
+        return message;
     }
 
-    public static Object getNotifsGroupsFromJSON(JSONObject object){
-        return null;
+
+    public static ArrayList<GIChatMessage> getArrayMessagesFromJSON(JSONObject object) throws JSONException {
+        ArrayList<GIChatMessage> arrayMessages = new ArrayList<>();
+        JSONArray jsonArrayMessages = null;
+        if(object.has("messages")){
+            jsonArrayMessages = object.getJSONArray("messages");
+        }
+        else return arrayMessages;
+
+        for(int index=0; index<jsonArrayMessages.length(); index++){
+            arrayMessages.add(getMessageFromJSON(jsonArrayMessages.getJSONObject(index)));
+        }
+
+        Collections.sort(arrayMessages);
+
+        return arrayMessages;
+    }
+
+    public static ArrayList<GIPoll> getArrayPollsFromJSON(JSONObject object, String groupId) throws JSONException {
+        ArrayList<GIPoll> arrayPolls = new ArrayList<>();
+        JSONArray jsonArrayPolls = null;
+
+        if(object.has("votes")){
+            jsonArrayPolls = object.getJSONArray("votes");
+        }
+        else return arrayPolls;
+
+        for(int index=0; index<jsonArrayPolls.length(); index++){
+            arrayPolls.add(getPollFromJSON(jsonArrayPolls.getJSONObject(index), groupId));
+        }
+
+        return arrayPolls;
+    }
+
+    public static ArrayList<GIChoice> getChoicesFromJSON(JSONObject pollJSON) throws JSONException {
+        ArrayList<GIChoice> arrayChoices = new ArrayList<>();
+        JSONArray arrayChoicesJSON = pollJSON.getJSONArray("choix");
+        for(int i=0; i<arrayChoicesJSON.length(); i++){
+            JSONObject object = arrayChoicesJSON.getJSONObject(i);
+            arrayChoices.add(new GIChoice(object.getString("choix"), (object.has("pourcentage")) ? object.getInt("pourcentage") : 0));
+        }
+        return arrayChoices;
+    }
+
+    public static GIPoll getPollFromJSON(JSONObject pollJSON, String groupId) throws JSONException {
+        GIPoll poll = new GIPoll();
+
+        if(pollJSON.has("QCM")){
+            poll.isQcm = pollJSON.getBoolean("QCM");
+        }
+
+        if(pollJSON.has("id")){
+            poll.pollId = pollJSON.getString("id");
+        }
+
+        if(pollJSON.has("createur")){
+            poll.creatorUid = pollJSON.getString("createur");
+        }
+
+        if(pollJSON.has("question")){
+            poll.question = pollJSON.getString("question");
+        }
+
+        if(pollJSON.has("hasalreadyvote")){
+            poll.hasAlreadyVote = pollJSON.getBoolean("hasalreadyvote");
+        }
+
+        if(pollJSON.has("choix")){
+            poll.listChoice = getChoicesFromJSON(pollJSON);
+        }
+
+        poll.groupId = groupId;
+
+        return poll;
     }
 
     public static class ItemReceived {

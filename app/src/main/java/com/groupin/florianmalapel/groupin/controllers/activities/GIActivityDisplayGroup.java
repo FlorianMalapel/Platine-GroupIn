@@ -140,6 +140,11 @@ public class GIActivityDisplayGroup extends AppCompatActivity
         public int getCount() {
             return NB_TAB_BOTTOM_MENU;
         }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
+        }
     }
 
 }

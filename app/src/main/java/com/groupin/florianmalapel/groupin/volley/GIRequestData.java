@@ -15,6 +15,7 @@ public class GIRequestData {
     public static String EVENT_ENDPOINT = "/events";
     public static String NOTIF_ENDPOINT = "/notifications";
     public static String CHAT_ENDPOINT = "/chats";
+    public static String POLLS_ENDPOINT = "/votes";
 
 
     // Volley requests code
@@ -33,6 +34,10 @@ public class GIRequestData {
     public final static int DELETE_NOTIFICATION_FRIEND_CODE = 122;
     public final static int DELETE_NOTIFICATION_GROUP_CODE = 123;
     public final static int GET_CHAT_GROUP_CODE = 124;
+    public final static int POST_CHAT_MESSAG_GROUP_CODE = 125;
+    public final static int GET_POLLS_GROUP_CODE = 126;
+    public final static int POST_POLLS_GROUP_CODE = 127;
+    public final static int POST_POLLS_ANSWER_CODE = 127;
 
     // Volley receive item type
     public final static int USER = 221;
@@ -44,6 +49,7 @@ public class GIRequestData {
     public final static int ALL_GROUPS = 227;
     public final static int EVENTS = 228;
     public final static int CHATS = 229;
+    public final static int POLLS = 230;
 
 
 }

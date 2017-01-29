@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/lightGray"
+                android:elevation="4dp"
+                android:layout_margin="10dp">
+
+    <TextView
+        android:id="@+id/textViewQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Ici votre question"
+        android:textColor="@android:color/black"
+        />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutChoices"
+        android:layout_below="@+id/textViewQuestion"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+    
+    <com.groupin.florianmalapel.groupin.views.GISelectChoiceInListView
+        android:id="@+id/choiceList"
+        android:layout_below="@+id/textViewQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:visibility="gone"
+        />
+
+    <ImageButton
+        android:id="@+id/imageButtonSeeMore"
+        android:layout_below="@+id/linearLayoutChoices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_keyboard_arrow_down"
+        android:background="@android:color/transparent"
+        />
+
+    <Button
+        android:id="@+id/buttonAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/answer"
+        android:textAllCaps="false"
+        android:textSize="@dimen/normalTextSize"
+        android:layout_below="@+id/choiceList"
+        android:background="@color/GIYellow"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

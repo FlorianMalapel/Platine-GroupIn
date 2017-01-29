@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="chatmessageview-1.2.3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/jp.bassaer/chatmessageview/1.2.3/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/jp.bassaer/chatmessageview/1.2.3/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/jp.bassaer/chatmessageview/1.2.3/3c655a63bfa012b9860aeb0bb73b459d68135233/chatmessageview-1.2.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

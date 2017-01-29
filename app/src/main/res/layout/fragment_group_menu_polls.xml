@@ -2,6 +2,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/holo_blue_bright">
+                android:background="@android:color/background_light">
+
+    <!--<com.groupin.florianmalapel.groupin.views.GIPollResultView-->
+        <!--android:id="@+id/pollResultView"-->
+        <!--android:layout_width="150dp"-->
+        <!--android:layout_height="150dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:background="@color/lightGray"-->
+        <!--android:scaleX="1"-->
+        <!--android:scaleY="1"-->
+        <!--/>-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewPolls"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.groupin.florianmalapel.groupin.views.GIProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>
