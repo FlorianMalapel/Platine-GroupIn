@@ -95,10 +95,10 @@ public class GIPollResultView extends LinearLayout implements View.OnClickListen
             if (viewState == STATE_VIEW.SMALL) {
                 linearLayoutChoicesStats.removeAllViews();
                 linearLayoutChoicesStats.addView(getLinearLayoutViewChoice(poll.getCurrentTopChoice()));
-                imageButtonSeeMore.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_arrow_up));
+                imageButtonSeeMore.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_arrow_down));
             } else if (viewState == STATE_VIEW.LARGE) {
                 linearLayoutChoicesStats.removeAllViews();
-                imageButtonSeeMore.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_arrow_down));
+                imageButtonSeeMore.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_arrow_up));
                 for (GIChoice choice : poll.listChoice) {
                     linearLayoutChoicesStats.addView(getLinearLayoutViewChoice(choice));
                 }
@@ -109,7 +109,7 @@ public class GIPollResultView extends LinearLayout implements View.OnClickListen
             linearLayoutChoicesStats.setVisibility(GONE);
             if(viewState == STATE_VIEW.SMALL) {
                 choiceList.setVisibility(GONE);
-                buttonAnswer.setText(context.getString(R.string.answer));
+                buttonAnswer.setText(context.getString(R.string.toAnswer));
             }
             else {
                 choiceList.setVisibility(VISIBLE);

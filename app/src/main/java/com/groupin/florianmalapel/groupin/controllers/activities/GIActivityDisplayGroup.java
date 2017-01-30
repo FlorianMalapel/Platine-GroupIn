@@ -14,7 +14,8 @@ import com.groupin.florianmalapel.groupin.controllers.fragments.GIFragmentGroupM
 import com.groupin.florianmalapel.groupin.controllers.fragments.GIFragmentGroupMenuEvents;
 import com.groupin.florianmalapel.groupin.controllers.fragments.GIFragmentGroupMenuMoney;
 import com.groupin.florianmalapel.groupin.controllers.fragments.GIFragmentGroupMenuPolls;
-import com.groupin.florianmalapel.groupin.model.dbObjects.GIGroup;
+import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
+import com.groupin.florianmalapel.groupin.tools.GIDesign;
 import com.ss.bottomnavigation.BottomNavigation;
 import com.ss.bottomnavigation.events.OnSelectedItemChangeListener;
 
@@ -35,7 +36,6 @@ public class GIActivityDisplayGroup extends AppCompatActivity
     private ViewPager viewPagerBottomMenuGroup = null;
     private CustomPagerAdapter customPagerAdapter = null;
     private TextView textView_groupName = null;
-    private GIGroup group = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +62,8 @@ public class GIActivityDisplayGroup extends AppCompatActivity
 
     private void initialize(){
         tryToGetGroupFromBundle();
+        textView_groupName.setTypeface(GIDesign.getBoldFont(this));
+        textView_groupName.setText(GIApplicationDelegate.getInstance().getDataCache().userGroupsList.get(groupId).name);
         customPagerAdapter = new CustomPagerAdapter(getSupportFragmentManager());
         viewPagerBottomMenuGroup.setAdapter(customPagerAdapter);
     }

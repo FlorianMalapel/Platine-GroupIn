@@ -2,13 +2,13 @@ package com.groupin.florianmalapel.groupin.controllers.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIPoll;
 import com.groupin.florianmalapel.groupin.views.GIPollResultView;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
+import com.groupin.florianmalapel.groupin.volley.GIVolleyRequest;
 
 import org.json.JSONObject;
 
@@ -22,11 +22,13 @@ public class GIAdapterRecyclerViewPolls extends RecyclerView.Adapter<GIAdapterRe
 
     private Context context = null;
     private ArrayList<GIPoll> pollsList = null;
+    private GIVolleyRequest.RequestCallback callback = null;
     private GIVolleyHandler volleyHandler = null;
 
-    public GIAdapterRecyclerViewPolls(Context context, ArrayList<GIPoll> pollsList) {
+    public GIAdapterRecyclerViewPolls(Context context, ArrayList<GIPoll> pollsList, GIVolleyRequest.RequestCallback callback) {
         this.context = context;
         this.pollsList = pollsList;
+        this.callback = callback;
         this.volleyHandler = new GIVolleyHandler();
     }
 
@@ -55,8 +57,7 @@ public class GIAdapterRecyclerViewPolls extends RecyclerView.Adapter<GIAdapterRe
 
     @Override
     public void validateChoice(JSONObject objectPollAnswer) {
-        Log.v("∂∂∆∆††∆∆∂∂", "AdapterRecyclerViewPolls" + objectPollAnswer.toString());
-        volleyHandler.postPollAnswer(null, objectPollAnswer);
+        volleyHandler.postPollAnswer(callback, objectPollAnswer);
     }
 
     public class PollsViewHolder extends RecyclerView.ViewHolder {

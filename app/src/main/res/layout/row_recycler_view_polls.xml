@@ -47,11 +47,11 @@
         android:id="@+id/buttonAnswer"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:text="@string/answer"
+        android:text="@string/toAnswer"
         android:textAllCaps="false"
         android:textSize="@dimen/normalTextSize"
         android:layout_below="@+id/choiceList"
-        android:background="@color/GIYellow"
+        android:background="@color/buttonBackgroundColor"
         android:visibility="gone"
         />
 

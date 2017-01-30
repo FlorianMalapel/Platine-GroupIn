@@ -2,7 +2,6 @@ package com.groupin.florianmalapel.groupin.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -96,9 +95,8 @@ public class GISelectChoiceInListView extends ScrollView implements View.OnClick
                     && itemListArray.get(i).checkBox.isChecked()){
                 itemListArray.get(i).checkBox.setChecked(false);
                 int position = getPositionOfChoice(arrayChoicesChosen, choicesArray.get(i).choice);
-                if(position != -1)
+                if(position != -1 && position != arrayChoicesChosen.size())
                     arrayChoicesChosen.remove(position);
-                arrayChoicesChosen.remove(position);
             }
 
             else if(view == itemListArray.get(i).viewChoice
@@ -137,7 +135,6 @@ public class GISelectChoiceInListView extends ScrollView implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        Log.v("∆∆DD∆∆††††††", "CLICK CLICK CLICK CLICK");
         refreshOnCheck(view);
     }
 

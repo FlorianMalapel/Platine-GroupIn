@@ -2,22 +2,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:background="@android:color/background_light">
 
-    <!--<com.groupin.florianmalapel.groupin.views.GIPollResultView-->
-        <!--android:id="@+id/pollResultView"-->
-        <!--android:layout_width="150dp"-->
-        <!--android:layout_height="150dp"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:background="@color/lightGray"-->
-        <!--android:scaleX="1"-->
-        <!--android:scaleY="1"-->
-        <!--/>-->
+    <TextView
+        android:id="@+id/textViewGroupPolls"
+        android:layout_width="match_parent"
+        android:text="@string/groupPolls"
+        android:layout_alignParentTop="true"
+        android:layout_height="@dimen/bannerCategoryHeight"
+        android:textColor="@color/bannerCategoryTextColor"
+        android:textSize="@dimen/bannerCategoryTextSize"
+        android:background="@color/bannerCategoryBackgroundColor"
+        android:padding="@dimen/bannerCategoryPadding"
+        android:gravity="left|center_vertical"
+        />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textViewGroupPolls"
+        >
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewPolls"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <com.groupin.florianmalapel.groupin.views.GIProgressIndicator
         android:id="@+id/progressIndicator"
@@ -25,5 +41,20 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabAddPoll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_black_24dp"
+        app:elevation="5dp"
+        app:fabSize="auto"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        app:backgroundTint="@color/buttonBackgroundColor"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        />
 
 </RelativeLayout>

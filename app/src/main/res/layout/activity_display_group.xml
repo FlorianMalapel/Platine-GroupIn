@@ -11,8 +11,7 @@
         android:text="Group name"
         android:gravity="center"
         android:padding="10dp"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
+        android:textColor="@color/bannerCategoryTextColor"
         android:background="@color/colorPrimaryDark"
         android:layout_alignParentTop="true"
         />
@@ -31,7 +30,7 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
+        android:background="@color/colorPrimaryDark"
         android:elevation="10dp"
         android:layout_alignParentBottom="true">
 
@@ -41,7 +40,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:tab_text="@string/menu_calendar_tab"
-            app:tab_text_color="@color/colorPrimaryDark"
+            app:tab_text_color="@color/bottomMenuTextColor"
             app:tab_icon="@drawable/ic_event"
             />
         <com.ss.bottomnavigation.TabItem
@@ -50,7 +49,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:tab_text="@string/menu_chat_tab"
-            app:tab_text_color="@color/colorPrimaryDark"
+            app:tab_text_color="@color/bottomMenuTextColor"
             app:tab_icon="@drawable/ic_chat"
             />
         <com.ss.bottomnavigation.TabItem
@@ -59,7 +58,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:tab_text="@string/menu_polls_tab"
-            app:tab_text_color="@color/colorPrimaryDark"
+            app:tab_text_color="@color/bottomMenuTextColor"
             app:tab_icon="@drawable/ic_poll"
             />
         <com.ss.bottomnavigation.TabItem
@@ -68,7 +67,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:tab_text="@string/menu_money_tab"
-            app:tab_text_color="@color/colorPrimaryDark"
+            app:tab_text_color="@color/bottomMenuTextColor"
             app:tab_icon="@drawable/ic_money"
             />
 

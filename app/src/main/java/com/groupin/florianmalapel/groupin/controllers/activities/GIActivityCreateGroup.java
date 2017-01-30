@@ -100,14 +100,14 @@ public class GIActivityCreateGroup extends AppCompatActivity
     private void findViewById() {
         buttonBack = (ImageButton) findViewById(R.id.imageButtonBack);
         imageViewAddPhotoGroup = (ImageView) findViewById(R.id.imageButtonAddPhotoGroup);
-        buttonAddFriend = (ImageButton) findViewById(R.id.imageButtonAddFriend);
+        buttonAddFriend = (ImageButton) findViewById(R.id.imageButtonAddAnswer);
         editTextGroupName = (EditText) findViewById(R.id.editTextGroupName);
-        editTextGroupDesc = (EditText) findViewById(R.id.editTextEventDesc);
+        editTextGroupDesc = (EditText) findViewById(R.id.editTextPollQuestion);
         textViewCancel = (TextView) findViewById(R.id.textViewCancel);
         textViewValidateCreate = (TextView) findViewById(R.id.textViewValidateCreate);
         textViewOk = (TextView) findViewById(R.id.textViewOk);
         recyclerViewFriends = (RecyclerView) findViewById(R.id.recyclerViewFriends);
-        recyclerViewFriendsDeleteList = (RecyclerView) findViewById(R.id.recyclerViewFriendsDeleteList);
+        recyclerViewFriendsDeleteList = (RecyclerView) findViewById(R.id.recyclerViewDeletableItems);
         relativeLayoutFriends = (RelativeLayout) findViewById(R.id.relativeLayoutFriendsPopUp);
         relativeLayoutPhotoGroup = (RelativeLayout) findViewById(R.id.relativeLayoutPhotoEvent);
         progressIndicator = (GIProgressIndicator) findViewById(R.id.progressIndicator);
@@ -149,6 +149,27 @@ public class GIActivityCreateGroup extends AppCompatActivity
         buttonAddFriend.setOnClickListener(this);
     }
 
+    private boolean areFieldsFill(){
+        boolean isFill = true;
+
+        if(bitmapImageGroup == null){
+            imageViewAddPhotoGroup.getDrawable().mutate().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+            isFill = false;
+        }
+
+        if(editTextGroupName.getText() == null || editTextGroupName.getText().toString().isEmpty()){
+            editTextGroupName.setHintTextColor(Color.RED);
+            isFill = false;
+        }
+
+        if(editTextGroupDesc.getText() == null || editTextGroupDesc.getText().toString().isEmpty()){
+            editTextGroupDesc.setHintTextColor(Color.RED);
+            isFill = false;
+        }
+
+        return isFill;
+    }
+
     private void onClickOnTextViewCancel(){
         relativeLayoutFriends.setVisibility(View.GONE);
     }
@@ -178,6 +199,8 @@ public class GIActivityCreateGroup extends AppCompatActivity
     }
 
     private void confirmGroupCreation(){
+        if(!areFieldsFill())
+            return;
         progressIndicator.startRotating();
         progressIndicator.setVisibility(View.VISIBLE);
         GICommunicationsHelper.firebaseUploadBitmap(GIApplicationDelegate.getInstance().getDataCache().getUserUid() + System.currentTimeMillis() + ".jpg", bitmapImageGroup, this);
@@ -187,7 +210,9 @@ public class GIActivityCreateGroup extends AppCompatActivity
         // TODO check if nothing is null
         groupToCreate = new GIGroup(editTextGroupName.getText().toString(), editTextGroupDesc.getText().toString(), urlGroupPhoto, friendsListChosen);
         try {
-            volleyHandler.postNewGroup(this, groupToCreate.getCreateGroupJSON(GIApplicationDelegate.getInstance().getDataCache().getUserUid()));
+            JSONObject groupJSON = groupToCreate.getCreateGroupJSON(GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+            groupJSON.put("email", GIApplicationDelegate.getInstance().getDataCache().user.email);
+            volleyHandler.postNewGroup(this, groupJSON);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -226,9 +251,10 @@ public class GIActivityCreateGroup extends AppCompatActivity
 
     private void sendInvitationToTheGroupToFriendsSelected(){
         String idGroup = GIApplicationDelegate.getInstance().getDataCache().getGroupIdByName(editTextGroupName.getText().toString());
-        for(GIUser friend : friendsListChosen){
-            volleyHandler.postUserJoinGroup(null, friend.uid, idGroup);
-        }
+        if(friendsListChosen != null)
+            for(GIUser friend : friendsListChosen){
+                volleyHandler.postUserJoinGroup(null, friend.uid, idGroup);
+            }
     }
 
     @Override

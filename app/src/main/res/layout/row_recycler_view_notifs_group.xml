@@ -18,7 +18,10 @@
         android:layout_height="wrap_content"
         android:text="@string/displayName"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/imageViewProfilPictureGroup"/>
+        android:layout_below="@+id/imageViewProfilPictureGroup"
+        android:textSize="@dimen/normalTextSize"
+        android:textColor="@color/textViewBasicTextColor"
+        />
 
     <ImageButton
         android:id="@+id/imageButtonReject"

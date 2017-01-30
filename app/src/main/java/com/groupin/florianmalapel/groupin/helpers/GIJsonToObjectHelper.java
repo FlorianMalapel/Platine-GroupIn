@@ -267,7 +267,12 @@ public class GIJsonToObjectHelper {
         }
 
         if(object.has("obj")){
-            event.bring_back = object.getString("obj");
+            ArrayList<String> objectsBringBack = new ArrayList<>();
+            JSONArray objectsBringBackJSON = object.getJSONArray("obj");
+            for(int i=0; i<objectsBringBackJSON.length(); i++){
+                objectsBringBack.add(objectsBringBackJSON.getString(i));
+            }
+            event.bring_back_list = objectsBringBack;
         }
 
         if(object.has("theme")){
@@ -369,7 +374,7 @@ public class GIJsonToObjectHelper {
         return arrayMessages;
     }
 
-    public static ArrayList<GIPoll> getArrayPollsFromJSON(JSONObject object, String groupId) throws JSONException {
+    public static ArrayList<GIPoll> getArrayPollsSortedFromJSON(JSONObject object, String groupId) throws JSONException {
         ArrayList<GIPoll> arrayPolls = new ArrayList<>();
         JSONArray jsonArrayPolls = null;
 
@@ -382,7 +387,18 @@ public class GIJsonToObjectHelper {
             arrayPolls.add(getPollFromJSON(jsonArrayPolls.getJSONObject(index), groupId));
         }
 
-        return arrayPolls;
+        ArrayList<GIPoll> arrayPollsSorted = new ArrayList<>();
+        for(GIPoll poll : arrayPolls){
+            if(!poll.hasAlreadyVote)
+                arrayPollsSorted.add(poll);
+        }
+
+        for(GIPoll poll : arrayPolls){
+            if(poll.hasAlreadyVote)
+                arrayPollsSorted.add(poll);
+        }
+
+        return arrayPollsSorted;
     }
 
     public static ArrayList<GIChoice> getChoicesFromJSON(JSONObject pollJSON) throws JSONException {

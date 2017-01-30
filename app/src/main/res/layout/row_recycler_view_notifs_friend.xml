@@ -17,6 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/displayName"
+            android:textSize="@dimen/normalTextSize"
+            android:textColor="@color/textViewBasicTextColor"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/imageViewProfilPictureFriend"/>
 

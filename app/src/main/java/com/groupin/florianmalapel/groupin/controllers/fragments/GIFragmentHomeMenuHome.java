@@ -48,6 +48,8 @@ public class GIFragmentHomeMenuHome extends Fragment implements View.OnClickList
     }
 
     private void initViews(){
+        textViewNotifsGroups.setTypeface(GIDesign.getBoldFont(getContext()));
+        textViewNotifsFriends.setTypeface(GIDesign.getBoldFont(getContext()));
         initViewNotificationFriends();
         initViewNotificationGroups();
     }
@@ -83,6 +85,7 @@ public class GIFragmentHomeMenuHome extends Fragment implements View.OnClickList
         initRecyclerViewNotifsGroup();
         if(GIApplicationDelegate.getInstance().getDataCache().notifsGroupList.isEmpty()) {
             recyclerViewNotifsGroups.setVisibility(View.GONE);
+            textViewNotifsGroups.setText(textViewNotifsGroups.getText() + " (0)");
         }
         else {
             textViewNotifsGroups.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(getContext(), R.drawable.ic_keyboard_arrow_up), null);

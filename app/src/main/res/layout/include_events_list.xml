@@ -5,32 +5,24 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-    <RelativeLayout
-        android:id="@+id/relativeLayoutTop"
-        android:layout_alignParentTop="true"
+    <TextView
+        android:id="@+id/textViewMyEvents"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:layout_marginTop="2dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:text="@string/eventsToCome"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            />
-
-    </RelativeLayout>
+        android:text="@string/eventsToCome"
+        android:layout_alignParentTop="true"
+        android:layout_height="@dimen/bannerCategoryHeight"
+        android:textColor="@color/bannerCategoryTextColor"
+        android:textSize="@dimen/bannerCategoryTextSize"
+        android:background="@color/bannerCategoryBackgroundColor"
+        android:padding="@dimen/bannerCategoryPadding"
+        android:gravity="left|center_vertical"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewEvents"
-        android:layout_below="@id/relativeLayoutTop"
+        android:layout_below="@id/textViewMyEvents"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="2dp"
         android:scrollbars="vertical"
         android:background="@android:color/white">
 
@@ -47,7 +39,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        app:backgroundTint="@color/GIYellow"
+        app:backgroundTint="@color/buttonBackgroundColor"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         />

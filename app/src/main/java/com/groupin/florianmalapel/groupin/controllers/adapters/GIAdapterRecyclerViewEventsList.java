@@ -21,7 +21,6 @@ import com.groupin.florianmalapel.groupin.transformations.CircleTransform;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by florianmalapel on 07/01/2017.
@@ -35,22 +34,6 @@ public class GIAdapterRecyclerViewEventsList extends RecyclerView.Adapter<GIAdap
     public GIAdapterRecyclerViewEventsList(ArrayList<GIEvent> list_events, Context context) {
         this.list_events = list_events;
         this.context = context;
-    }
-
-//    public GIAdapterRecyclerViewEventsList(HashMap<String, GIEvent> list_events, Context context) {
-//        this.list_events = getList_events(list_events);
-//        this.context = context;
-//    }
-
-    public ArrayList<GIEvent> getList_events(HashMap<String,GIEvent> list){
-        if(list == null)
-            return new ArrayList<>();
-
-        ArrayList<GIEvent> events = new ArrayList<>();
-        for(String key: list.keySet()){
-            events.add(list.get(key));
-        }
-        return events;
     }
 
     @Override
@@ -69,13 +52,7 @@ public class GIAdapterRecyclerViewEventsList extends RecyclerView.Adapter<GIAdap
             int nbMembers = list_events.get(position).participantsUids.size();
             holder.textView_nbParticipantEvent.setText(nbMembers + " " + context.getString(R.string.participants));
         }
-
         Picasso.with(context).load(list_events.get(position).url_image).transform(new CircleTransform()).into(holder.imageView_eventPicture);
-
-//        CircleTransform circleTransform = new CircleTransform();
-//        Bitmap normalImage = ((BitmapDrawable)holder.imageView_eventPicture.getDrawable()).getBitmap();
-//        Bitmap circleImage = circleTransform.transform(normalImage);
-//        holder.imageView_eventPicture.setImageBitmap(circleImage);
         holder.imageView_personLogo.getDrawable().mutate().setColorFilter(Color.parseColor(GIDesign.GREEN), PorterDuff.Mode.SRC_ATOP);
         holder.imageView_personLogo.getBackground().mutate().setColorFilter(Color.parseColor(GIDesign.GREEN), PorterDuff.Mode.SRC_ATOP);
     }
@@ -97,8 +74,11 @@ public class GIAdapterRecyclerViewEventsList extends RecyclerView.Adapter<GIAdap
             super(itemView);
             itemView.setOnClickListener(this);
             textView_nameEvent = (TextView) itemView.findViewById(R.id.textView_eventName);
+            textView_nameEvent.setTypeface(GIDesign.getBoldFont(context));
             textView_dateEvent = (TextView) itemView.findViewById(R.id.textView_eventDate);
+            textView_dateEvent.setTypeface(GIDesign.getRegularFont(context));
             textView_nbParticipantEvent = (TextView) itemView.findViewById(R.id.textView_groupNbParticipant);
+            textView_nbParticipantEvent.setTypeface(GIDesign.getLightFont(context));
             imageView_eventPicture = (ImageView) itemView.findViewById(R.id.imageView_event);
             imageView_personLogo = (ImageView) itemView.findViewById(R.id.imageView_personLogo);
         }

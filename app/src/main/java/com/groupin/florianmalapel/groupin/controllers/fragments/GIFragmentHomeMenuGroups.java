@@ -13,11 +13,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.controllers.activities.GIActivityCreateGroup;
 import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecyclerViewGroupsList;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
+import com.groupin.florianmalapel.groupin.tools.GIDesign;
 
 /**
  * Created by florianmalapel on 04/12/2016.
@@ -27,6 +29,7 @@ public class GIFragmentHomeMenuGroups extends Fragment implements View.OnClickLi
 
     private RecyclerView recyclerViewGroups = null;
     private FloatingActionButton fabAddGroup = null;
+    private TextView textViewMyGroups = null;
     private GIAdapterRecyclerViewGroupsList groupsAdapter = null;
 
     @Nullable
@@ -42,6 +45,7 @@ public class GIFragmentHomeMenuGroups extends Fragment implements View.OnClickLi
     private void findViewById(View view){
         recyclerViewGroups = (RecyclerView) view.findViewById(R.id.recyclerViewGroups);
         fabAddGroup = (FloatingActionButton) view.findViewById(R.id.fabAddGroup);
+        textViewMyGroups = (TextView) view.findViewById(R.id.textViewMyEvents);
     }
 
     private void initRecyclerView(){
@@ -54,6 +58,7 @@ public class GIFragmentHomeMenuGroups extends Fragment implements View.OnClickLi
 
     private void initViews(){
         fabAddGroup.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        textViewMyGroups.setTypeface(GIDesign.getBoldFont(getContext()));
         initRecyclerView();
     }
 

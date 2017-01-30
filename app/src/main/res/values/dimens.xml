@@ -11,5 +11,21 @@
     <dimen name="size50dp">50dp</dimen>
 
     <!-- Style text button -->
-    <dimen name="normalTextSize">13dp</dimen>
+    <dimen name="normalTextSize">14sp</dimen>
+    <dimen name="largeTextSize">17sp</dimen>
+    <dimen name="smallTextSize">12sp</dimen>
+
+    <!-- Banner category -->
+    <dimen name="bannerCategoryPadding">10dp</dimen>
+    <dimen name="bannerCategoryTextSize">@dimen/normalTextSize</dimen>
+    <dimen name="bannerCategoryHeight">40dp</dimen>
+
+    <!-- Event row recycler view -->
+    <dimen name="eventRowNameTextSize">@dimen/normalTextSize</dimen>
+    <dimen name="eventRowDateTextSize">@dimen/normalTextSize</dimen>
+    <dimen name="eventRowNbParticipantTextSize">@dimen/smallTextSize</dimen>
+
+    <!-- Top textView toolBar -->
+    <dimen name="toolBarTextViewTextSize">@dimen/normalTextSize</dimen>
+
 </resources>

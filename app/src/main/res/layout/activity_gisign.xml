@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.groupin.florianmalapel.groupin.controllers.activities.GIActivitySocialSign"
-    android:background="@color/colorPrimaryDark">
+    android:background="@android:color/white">
 
 
     <ImageView

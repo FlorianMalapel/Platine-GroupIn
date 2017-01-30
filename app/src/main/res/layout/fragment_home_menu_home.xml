@@ -17,12 +17,13 @@
         <TextView
             android:id="@+id/textViewNotifsFriends"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="@string/notifsFriendship"
-            android:textColor="@android:color/white"
-            android:background="@color/GIBlue"
+            android:layout_height="@dimen/bannerCategoryHeight"
+            android:textColor="@color/bannerCategoryTextColor"
+            android:textSize="@dimen/bannerCategoryTextSize"
+            android:background="@color/bannerCategoryBackgroundColor"
             android:drawableRight="@drawable/ic_keyboard_arrow_up"
-            android:padding="10dp"
+            android:padding="@dimen/bannerCategoryPadding"
             android:gravity="left|center_vertical"
             />
 
@@ -46,12 +47,13 @@
         <TextView
             android:id="@+id/textViewNotifsGroups"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="@string/notifsGroup"
-            android:textColor="@android:color/white"
-            android:background="@color/GIBlue"
+            android:layout_height="@dimen/bannerCategoryHeight"
+            android:textColor="@color/bannerCategoryTextColor"
+            android:textSize="@dimen/bannerCategoryTextSize"
+            android:background="@color/bannerCategoryBackgroundColor"
             android:drawableRight="@drawable/ic_keyboard_arrow_up"
-            android:padding="10dp"
+            android:padding="@dimen/bannerCategoryPadding"
             android:gravity="left|center_vertical"
             />
 

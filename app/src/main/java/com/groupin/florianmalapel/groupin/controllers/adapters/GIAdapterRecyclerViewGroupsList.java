@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.controllers.activities.GIActivityDisplayGroup;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIGroup;
+import com.groupin.florianmalapel.groupin.tools.GIDesign;
 import com.groupin.florianmalapel.groupin.transformations.CircleTransform;
 import com.squareup.picasso.Picasso;
 
@@ -87,6 +88,7 @@ public class GIAdapterRecyclerViewGroupsList extends RecyclerView.Adapter<GIAdap
             super(itemView);
             itemView.setOnClickListener(this);
             textView_nameGroup = (TextView) itemView.findViewById(R.id.textView_groupName);
+            textView_nameGroup.setTypeface(GIDesign.getRegularFont(context));
             textView_nbParticipant = (TextView) itemView.findViewById(R.id.textView_groupNbParticipant);
             imageView_groupPicture = (ImageView) itemView.findViewById(R.id.imageView_group);
         }

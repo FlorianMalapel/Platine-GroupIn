@@ -15,6 +15,10 @@ public class GIChoice implements Serializable {
         this.percentage = percentage;
     }
 
+    public GIChoice(String choice) {
+        this.choice = choice;
+    }
+
     @Override
     public String toString() {
         return "GIChoice{" +

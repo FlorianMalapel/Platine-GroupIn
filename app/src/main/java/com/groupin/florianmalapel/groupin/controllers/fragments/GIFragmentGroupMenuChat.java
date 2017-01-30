@@ -9,6 +9,7 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.controllers.activities.GIActivityDisplayGroup;
@@ -43,6 +44,7 @@ public class GIFragmentGroupMenuChat extends Fragment implements GIVolleyRequest
     private GIProgressIndicator progressIndicator = null;
     private GIVolleyHandler volleyHandler = null;
     private ArrayList<GIChatMessage> chatMessagesList = null;
+    private TextView textViewGroupChat = null;
 
     @Nullable
     @Override
@@ -58,11 +60,13 @@ public class GIFragmentGroupMenuChat extends Fragment implements GIVolleyRequest
     private void findViewById(View view){
         chatView = (ChatView) view.findViewById(R.id.chatView);
         progressIndicator = (GIProgressIndicator) view.findViewById(R.id.progressIndicator);
+        textViewGroupChat = (TextView) view.findViewById(R.id.textViewGroupPolls);
     }
 
     private void initialize(){
         volleyHandler = new GIVolleyHandler();
         chatMessagesList = new ArrayList<>();
+        textViewGroupChat.setTypeface(GIDesign.getBoldFont(getContext()));
     }
 
     private void requestGetMessages(){
@@ -75,7 +79,7 @@ public class GIFragmentGroupMenuChat extends Fragment implements GIVolleyRequest
         chatView.setRightBubbleColor(ContextCompat.getColor(getContext(), R.color.GIYellow));
         chatView.setLeftBubbleColor(ContextCompat.getColor(getContext(), R.color.GIBlue));
         chatView.setBackgroundColor(Color.WHITE);
-        chatView.setSendButtonColor(ContextCompat.getColor(getContext(), R.color.GIYellow));
+        chatView.setSendButtonColor(ContextCompat.getColor(getContext(), R.color.GIBlue));
         chatView.setSendIcon(R.drawable.ic_action_send);
         chatView.setRightMessageTextColor(ContextCompat.getColor(getContext(), R.color.GIBlue));
         chatView.setLeftMessageTextColor(ContextCompat.getColor(getContext(), R.color.GIYellow));

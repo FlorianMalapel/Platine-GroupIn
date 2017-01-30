@@ -2,6 +2,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/holo_blue_dark">
+                >
+
+    <TextView
+        android:id="@+id/textViewGroupPolls"
+        android:layout_width="match_parent"
+        android:text="@string/groupMoney"
+        android:layout_alignParentTop="true"
+        android:layout_height="@dimen/bannerCategoryHeight"
+        android:textColor="@color/bannerCategoryTextColor"
+        android:textSize="@dimen/bannerCategoryTextSize"
+        android:background="@color/bannerCategoryBackgroundColor"
+        android:padding="@dimen/bannerCategoryPadding"
+        android:gravity="left|center_vertical"
+        />
 
 </RelativeLayout>

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
+import com.groupin.florianmalapel.groupin.tools.GIDesign;
 import com.groupin.florianmalapel.groupin.transformations.CircleTransform;
 import com.squareup.picasso.Picasso;
 
@@ -70,12 +71,12 @@ public class GIAdapterRecyclerViewFriends extends RecyclerView.Adapter<GIAdapter
 
             textViewFirstLetter = (TextView) itemView.findViewById(R.id.textViewFirstLetter);
             textViewLastName = (TextView) itemView.findViewById(R.id.textViewLastName);
+            textViewLastName.setTypeface(GIDesign.getRegularFont(context));
             textViewFirstName = (TextView) itemView.findViewById(R.id.textViewFirstName);
             cirleImageViewProfilPic = (ImageView) itemView.findViewById(R.id.imageViewProfilPicture);
             checkBox = (CheckBox) itemView.findViewById(R.id.checkboxFriend);
             if(isCheckBoxVisible)
                 checkBox.setVisibility(View.VISIBLE);
-//            itemView.setOnClickListener(this);
             checkBox.setOnCheckedChangeListener(this);
         }
 
@@ -128,20 +129,6 @@ public class GIAdapterRecyclerViewFriends extends RecyclerView.Adapter<GIAdapter
             holder.textViewFirstLetter.setVisibility(View.INVISIBLE);
         }
         else holder.textViewFirstLetter.setText(String.valueOf(friendsList.get(position).display_name.charAt(0)));
-
-//        else {
-//            if(friendsList.get(position).lastName != null) {
-//
-//                if(position > 0 && String.valueOf(friendsList.get(position - 1).lastName.charAt(0)).equals(String.valueOf(friendsList.get(position).lastName.charAt(0))))
-//                    holder.textViewFirstLetter.setVisibility(View.INVISIBLE);
-//                else holder.textViewFirstLetter.setText(String.valueOf(friendsList.get(position).lastName.charAt(0)));
-//
-//                holder.textViewLastName.setText(friendsList.get(position).lastName);
-//            }
-//
-//            if(friendsList.get(position).firstName != null)
-//                holder.textViewFirstName.setText(friendsList.get(position).firstName);
-//        }
 
         if(friendsList.get(position).photoURL != null) { // TODO Need to be changed
             Picasso.with(context).load(friendsList.get(position).photoURL).transform(new CircleTransform()).into(holder.cirleImageViewProfilPic);

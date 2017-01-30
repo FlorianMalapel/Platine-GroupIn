@@ -152,7 +152,7 @@
                 >
 
                 <EditText
-                    android:id="@+id/editTextEventDesc"
+                    android:id="@+id/editTextPollQuestion"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/GIBlue"
@@ -176,7 +176,7 @@
             android:layout_marginRight="20dp">
 
             <TextView
-                android:id="@+id/textViewGroupMembers"
+                android:id="@+id/textViewAnswers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/groupMembers"
@@ -189,7 +189,7 @@
                 />
 
             <ImageButton
-                android:id="@+id/imageButtonAddFriend"
+                android:id="@+id/imageButtonAddAnswer"
                 android:layout_width="wrap_content"
                 android:padding="3dp"
                 android:layout_height="wrap_content"
@@ -200,14 +200,14 @@
                 />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerViewFriendsDeleteList"
+                android:id="@+id/recyclerViewDeletableItems"
                 android:scrollbars="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
                 android:layout_margin="0dp"
                 android:padding="0dp"
-                android:layout_below="@+id/textViewGroupMembers"/>
+                android:layout_below="@+id/textViewAnswers"/>
 
         </RelativeLayout>
 

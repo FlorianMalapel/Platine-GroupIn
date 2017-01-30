@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GINotificationFriend;
+import com.groupin.florianmalapel.groupin.tools.GIDesign;
 import com.groupin.florianmalapel.groupin.transformations.CircleTransform;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
 import com.squareup.picasso.Picasso;
@@ -74,6 +75,7 @@ public class GIAdapterRecyclerViewNotifsFriend extends RecyclerView.Adapter<GIAd
         public NotifUserViewHolder(View itemView) {
             super(itemView);
             textViewDisplayNameFriend = (TextView) itemView.findViewById(R.id.textViewDisplayNameFriend);
+            textViewDisplayNameFriend.setTypeface(GIDesign.getRegularFont(context));
             imageViewProfilPictureFriend = (ImageView) itemView.findViewById(R.id.imageViewProfilPictureFriend);
             imageButtonReject = (ImageButton) itemView.findViewById(R.id.imageButtonReject);
             imageButtonConfirm = (ImageButton) itemView.findViewById(R.id.imageButtonConfirm);

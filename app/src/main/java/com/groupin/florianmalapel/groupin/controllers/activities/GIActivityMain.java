@@ -23,6 +23,7 @@ import com.groupin.florianmalapel.groupin.controllers.fragments.GIFragmentHomeMe
 import com.groupin.florianmalapel.groupin.controllers.fragments.GIFragmentHomeMenuGroups;
 import com.groupin.florianmalapel.groupin.controllers.fragments.GIFragmentHomeMenuHome;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
+import com.groupin.florianmalapel.groupin.tools.GIDesign;
 import com.groupin.florianmalapel.groupin.transformations.CircleTransform;
 import com.groupin.florianmalapel.groupin.volley.GIRequestData;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
@@ -41,10 +42,6 @@ public class GIActivityMain extends AppCompatActivity
                     GIVolleyRequest.RequestCallback {
 
     private static final int NB_TAB_BOTTOM_MENU = 4;
-
-//    private DrawerLayout drawer = null;
-//    private ActionBarDrawerToggle toggle = null;
-//    private NavigationView navigationView = null;
     private Toolbar toolbar = null;
     private ViewPager viewPagerBottomMenu = null;
     private BottomNavigation bottomNavigation = null;
@@ -64,7 +61,6 @@ public class GIActivityMain extends AppCompatActivity
         initializeViews();
         setListeners();
         volleyHandler.getUser(GIApplicationDelegate.getInstance().getDataCache().getUserUid(), this);
-//        volleyHandler.getAllUsers(this);
     }
 
     @Override
@@ -77,34 +73,10 @@ public class GIActivityMain extends AppCompatActivity
         }
     }
 
-
-//    @SuppressWarnings("StatementWithEmptyBody")
-//    @Override
-//    public boolean onNavigationItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_credits) {
-//
-//        } else if (id == R.id.nav_help) {
-//
-//        }
-//
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
-//        return true;
-//    }
-
     private void findViewByID(){
-//        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        navigationView = (NavigationView) findViewById(R.id.nav_view);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         viewPagerBottomMenu = (ViewPager) findViewById(R.id.viewPagerBottomMenu);
         bottomNavigation = (BottomNavigation) findViewById(R.id.bottomNavigation);
-//        imageViewMenu = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.imageViewMenu);
         imageButtonProfile = (ImageButton) findViewById(R.id.imageButtonProfile);
         textViewTitle = (TextView) findViewById(R.id.textViewTitle);
     }
@@ -112,15 +84,13 @@ public class GIActivityMain extends AppCompatActivity
     private void initialize(){
         volleyHandler = new GIVolleyHandler();
         setSupportActionBar(toolbar);
-//        toggle = new ActionBarDrawerToggle(
-//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         customPagerAdapter = new CustomPagerAdapter(getSupportFragmentManager());
         viewPagerBottomMenu.setAdapter(customPagerAdapter);
     }
 
     private void initializeViews(){
         imageButtonProfile.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-//        textViewTitle.setX(textViewTitle.getX() - (toggle.getDrawerArrowDrawable().getMinimumWidth() * 2));
+        textViewTitle.setTypeface(GIDesign.getBoldFont(this));
     }
 
     private void setUserPhotoInMenu(){
@@ -133,9 +103,6 @@ public class GIActivityMain extends AppCompatActivity
     }
 
     private void setListeners(){
-//        drawer.setDrawerListener(toggle);
-//        toggle.syncState();
-//        navigationView.setNavigationItemSelectedListener(this);
         bottomNavigation.setOnSelectedItemChangeListener(this);
         viewPagerBottomMenu.addOnPageChangeListener(this);
         imageButtonProfile.setOnClickListener(this);

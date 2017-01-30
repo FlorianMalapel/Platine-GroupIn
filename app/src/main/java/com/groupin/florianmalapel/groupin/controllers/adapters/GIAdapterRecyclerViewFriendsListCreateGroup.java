@@ -35,7 +35,8 @@ public class GIAdapterRecyclerViewFriendsListCreateGroup
 
     public void refreshList(ArrayList<GIUser> listFriendsChosen){
         this.listFriendsChosen = listFriendsChosen;
-        this.notifyItemRangeInserted(0, listFriendsChosen.size());
+        this.notifyDataSetChanged();
+//        this.notifyItemRangeInserted(0, listFriendsChosen.size());
     }
 
     @Override

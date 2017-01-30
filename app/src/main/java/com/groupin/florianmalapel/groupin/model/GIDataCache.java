@@ -191,7 +191,6 @@ public class GIDataCache implements GIVolleyRequest.RequestCallback {
         for(String key : eventsList.keySet()){
             eventsArray.add(eventsList.get(key));
         }
-        Log.v("∆∆ ∆∆ GIDataCache", " -->  events array : " + eventsArray.toString());
         return eventsArray;
     }
 

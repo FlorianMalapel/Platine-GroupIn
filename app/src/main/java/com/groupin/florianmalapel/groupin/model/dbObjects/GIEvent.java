@@ -1,7 +1,6 @@
 package com.groupin.florianmalapel.groupin.model.dbObjects;
 
-import android.util.Log;
-
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,7 +25,7 @@ public class GIEvent implements Serializable {
     public String date_start = null;
     public String date_end = null;
     public float price = 0;
-    public String bring_back = null;
+    public ArrayList<String> bring_back_list = null;
     public ArrayList<String> participantsUids = null;
     public ArrayList<String> votesIds = null;
 
@@ -42,7 +41,7 @@ public class GIEvent implements Serializable {
         this.url_image = url_image;
     }
 
-    public GIEvent(String id_group, String name, String description, String theme, String address, String url_image, String date_start, String date_end, float price, String bring_back) {
+    public GIEvent(String id_group, String name, String description, String theme, String address, String url_image, String date_start, String date_end, float price, ArrayList<String> bring_back) {
         this.id_group = id_group;
         this.name = name;
         this.description = description;
@@ -52,10 +51,17 @@ public class GIEvent implements Serializable {
         this.date_start = date_start;
         this.date_end = date_end;
         this.price = price;
-        this.bring_back = bring_back;
+        this.bring_back_list = bring_back;
     }
 
     public JSONObject getCreateEventJSON(String userId) throws JSONException {
+        JSONArray bring_back_list_json = new JSONArray();
+        if(bring_back_list != null && !bring_back_list.isEmpty()){
+            for(String object : bring_back_list){
+                bring_back_list_json.put(object);
+            }
+        }
+
         JSONObject event = new JSONObject();
         event.put("groupId", id_group);
         event.put("userId", userId);
@@ -64,10 +70,9 @@ public class GIEvent implements Serializable {
         event.put("description", description);
         event.put("dateDebut", date_start);
         event.put("dateFin", date_end);
-        event.put("obj", bring_back);
+        event.put("obj", bring_back_list_json);
         event.put("theme", theme);
         event.put("prix", String.valueOf(price));
-        Log.v("ŒŒŒŒ == ∆∆ ||" , event.toString());
         return event;
     }
 
@@ -85,7 +90,7 @@ public class GIEvent implements Serializable {
                 ", date_start='" + date_start + '\'' +
                 ", date_end='" + date_end + '\'' +
                 ", price=" + price +
-                ", bring_back='" + bring_back + '\'' +
+                ", bring_back='" + bring_back_list.toString() + '\'' +
                 '}';
     }
 }

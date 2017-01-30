@@ -31,6 +31,9 @@
     <string name="home">Accueil</string>
     <string name="participants">Participants</string>
     <string name="eventsToCome">Evénements à venir</string>
+    <string name="groupChat">Communiquez avec vos amis</string>
+    <string name="groupPolls">Les votes du groupe</string>
+    <string name="groupMoney">Les dépenses du groupe</string>
 
     <!--Create an event-->
     <string name="createEvent">Créer un événement</string>
@@ -57,13 +60,17 @@
     <string name="descriptionHolder">Lorem ipsum dolor sit amet, summo iracundia nam te, legendos sententiae assueverit vel no, doming constituam nam no. Mel te mollis aliquam repudiandae, nonumes intellegat definitiones per in. Delicata inimicus ut eos, quo impetus debitis placerat ad, per oportere postulant id. Mea nonumy eirmod admodum ne, pro et mucius habemus oportere, clita voluptatum mea te.</string>
 
 
-    <!--Create a group-->
+    <!--Group-->
     <string name="createGroup">Créer un groupe</string>
     <string name="groupName">Nom du groupe</string>
     <string name="groupNameHolder">Nom</string>
     <string name="groupDesc">Description</string>
     <string name="groupDescHolder">Ecrire ici la description du groupe</string>
     <string name="groupMembers">Membres du groupes</string>
+    <string name="yourGroups">Mes groupes</string>
+
+    <!--Friend-->
+    <string name="myFriends">Mes amis</string>
 
     <!--Menu items-->
     <string name="menu_friend_tab">Amis</string>
@@ -78,8 +85,14 @@
     <string name="menu_money_tab">Dépenses</string>
 
     <!-- Polls -->
-    <string name="answer">Répondre</string>
+    <string name="qcm">QCM</string>
+    <string name="createPoll">Créer un vote</string>
+    <string name="toAnswer">Répondre</string>
     <string name="valid">Valider</string>
+    <string name="question">Question</string>
+    <string name="answers">Réponses</string>
+    <string name="addAnswerHere">Ajouter un choix de réponse ici</string>
+    <string name="questionHolder">La question que vouz voulez poser au groupe.</string>
 
 
 </resources>

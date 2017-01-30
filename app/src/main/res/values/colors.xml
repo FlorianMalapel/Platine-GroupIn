@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/GIYellow</color>
-    <color name="colorPrimaryDark">@color/GIPurple</color>
+    <color name="colorPrimary">@color/GIPurple</color>
+    <color name="colorPrimaryDark">@color/GIYellow</color>
     <!--<color name="colorPrimaryDark">#282f3b</color>-->
     <color name="colorPrimaryDarkAlpha">#da282f3b</color>
     <color name="colorAccent">@color/GIBlue</color>
@@ -14,16 +14,30 @@
 
 
     <color name="GIPurple">#CA6F8D</color>
+    <color name="GIRed">#7b241b</color>
     <color name="GIGray">#282f3b</color>
     <color name="GIYellow">#EAD06D</color>
     <color name="GIBlue">#245874</color>
-    <!--<color name="GIPurple">#CC6D8D</color>-->
-    <!--<color name="GIGray">#282f3b</color>-->
-    <!--<color name="GIYellow">#EACF6A</color>-->
-    <!--<color name="GIBlue">#115471</color>-->
-    <!--<color name="GIPurple">#882D63</color>-->
-    <!--<color name="GIGray">#282f3b</color>-->
-    <!--<color name="GIYellow">#fcd915</color>-->
-    <!--<color name="GIBlue">#3362e5</color>-->
+
+    <!-- Top textView toolBar -->
+    <color name="toolbarTextViewTextColor">#ffffff</color>
+    <!-- Banner category -->
+    <color name="bannerCategoryBackgroundColor">@color/GIBlue</color>
+    <color name="bannerCategoryTextColor">#ffffff</color>
+    <!-- Button -->
+    <color name="buttonBackgroundColor">@color/GIPurple</color>
+    <!-- EditText -->
+    <color name="editTextBasicTextColor">@color/GIBlue</color>
+
+    <!-- TextView -->
+    <color name="textViewBasicTextColor">#000000</color>
+    <color name="textViewToolbarTextColor">#000000</color>
+    <color name="textViewBasicTextColorLight">@color/lightGray</color>
+    <!-- Event row recycler view -->
+    <color name="eventRowNameTextColor">#000000</color>
+    <color name="eventRowDateTextColor">@color/grayBorder</color>
+    <color name="eventRowNbParticipantTextColor">@color/holoGreen</color>
+    <!-- BottomNavigationView -->
+    <color name="bottomMenuTextColor">#000000</color>
 
 </resources>

@@ -14,11 +14,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.controllers.activities.GIActivityCreateEvent;
 import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecyclerViewEventsList;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
+import com.groupin.florianmalapel.groupin.tools.GIDesign;
 
 /**
  * Created by florianmalapel on 04/12/2016.
@@ -26,9 +28,9 @@ import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 
 public class GIFragmentHomeMenuEvents extends Fragment implements View.OnClickListener {
 
-//    private ArrayList<GIEvent> list_events = null;
     private RecyclerView recyclerViewEvents = null;
     private GIAdapterRecyclerViewEventsList eventsAdapter = null;
+    private TextView textViewMyGroups = null;
     private FloatingActionButton fabAddEvent = null;
 
 
@@ -45,11 +47,13 @@ public class GIFragmentHomeMenuEvents extends Fragment implements View.OnClickLi
     private void findViewById(View view) {
         recyclerViewEvents = (RecyclerView) view.findViewById(R.id.recyclerViewEvents);
         fabAddEvent = (FloatingActionButton) view.findViewById(R.id.fabAddEvent);
+        textViewMyGroups = (TextView) view.findViewById(R.id.textViewMyEvents);
     }
 
     private void initViews(){
-        initRecyclerView();
         fabAddEvent.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        textViewMyGroups.setTypeface(GIDesign.getBoldFont(getContext()));
+        initRecyclerView();
     }
 
     private void setListeners(){

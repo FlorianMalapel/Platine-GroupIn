@@ -1,6 +1,8 @@
 package com.groupin.florianmalapel.groupin.controllers.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GINotificationGroup;
+import com.groupin.florianmalapel.groupin.tools.GIDesign;
 import com.groupin.florianmalapel.groupin.transformations.CircleTransform;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
 import com.squareup.picasso.Picasso;
@@ -72,11 +75,14 @@ public class GIAdapterRecyclerViewNotifsGroup  extends RecyclerView.Adapter<GIAd
         public NotifGroupViewHolder(View itemView) {
             super(itemView);
             textViewDisplayNameGroup = (TextView) itemView.findViewById(R.id.textViewDisplayNameGroup);
+            textViewDisplayNameGroup.setTypeface(GIDesign.getRegularFont(context));
             imageViewProfilPictureGroup = (ImageView) itemView.findViewById(R.id.imageViewProfilPictureGroup);
             imageButtonReject = (ImageButton) itemView.findViewById(R.id.imageButtonReject);
             imageButtonConfirm = (ImageButton) itemView.findViewById(R.id.imageButtonConfirm);
             imageButtonConfirm.setOnClickListener(this);
             imageButtonReject.setOnClickListener(this);
+            imageButtonReject.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+            imageButtonConfirm.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
         }
 
 

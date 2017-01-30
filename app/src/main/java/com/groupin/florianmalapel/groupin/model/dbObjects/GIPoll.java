@@ -53,7 +53,7 @@ public class GIPoll implements Serializable {
         return currentTopChoice;
     }
 
-    public JSONObject getCreatePollJSON(String userId) throws JSONException {
+    public JSONObject getCreatePollJSON() throws JSONException {
         JSONObject poll = new JSONObject();
         poll.put("question", question);
         poll.put("qcm", isQcm);

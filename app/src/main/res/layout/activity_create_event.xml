@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:background="@android:color/white">
 
     <com.groupin.florianmalapel.groupin.views.GIProgressIndicator
@@ -36,9 +37,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/createEvent"
-            android:textColor="@android:color/white"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textStyle="normal|bold"/>
+            android:textColor="@color/textViewToolbarTextColor"
+            android:textSize="@dimen/normalTextSize"/>
 
         <TextView
             android:id="@+id/textViewValidateCreate"
@@ -52,15 +52,16 @@
             android:paddingLeft="20dp"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:textColor="@android:color/white"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textStyle="normal|bold"/>
+            android:textColor="@color/textViewToolbarTextColor"
+            android:textSize="@dimen/normalTextSize"
+            />
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/relativeLayoutTop"
+        android:scrollbars="vertical"
         >
 
         <RelativeLayout
@@ -107,10 +108,10 @@
                         android:text="@string/eventName"
                         android:layout_marginTop="7dp"
                         android:layout_marginBottom="7dp"
-                        android:textColor="@android:color/black"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:textSize="14sp"
+                        android:textColor="@color/textViewBasicTextColor"
+                        android:textSize="@dimen/normalTextSize"
                         />
 
                     <EditText
@@ -124,7 +125,7 @@
                         android:gravity="end"
                         android:layout_marginRight="20dp"
                         android:textStyle="italic"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/normalTextSize"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
                         android:inputType="textCapSentences"
@@ -147,15 +148,16 @@
                         android:layout_marginRight="20dp"
                         >
                         <TextView
+                            android:id="@+id/textViewStartDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/startDate"
                             android:layout_marginTop="7dp"
                             android:layout_marginBottom="7dp"
-                            android:textColor="@android:color/black"
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
-                            android:textSize="14sp"
+                            android:textSize="@dimen/normalTextSize"
+                            android:textColor="@color/textViewBasicTextColor"
                             android:layout_alignParentTop="true"
                             />
 
@@ -163,14 +165,14 @@
                             android:id="@+id/textViewEventStartDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/GIBlue"
                             android:hint="@string/dateHolder"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:gravity="right"
                             android:textStyle="italic"
-                            android:textSize="13sp"
                             android:inputType="textCapSentences"
+                            android:textColor="@color/editTextBasicTextColor"
+                            android:textSize="@dimen/normalTextSize"
                             android:background="@android:color/transparent"
                             android:padding="2dp"
                             android:paddingTop="10dp"
@@ -185,15 +187,16 @@
                         android:layout_marginRight="20dp"
                         >
                         <TextView
+                            android:id="@+id/textViewEndDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/endDate"
                             android:layout_marginTop="7dp"
                             android:layout_marginBottom="7dp"
-                            android:textColor="@android:color/black"
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
-                            android:textSize="14sp"
+                            android:textColor="@color/textViewBasicTextColor"
+                            android:textSize="@dimen/normalTextSize"
                             android:layout_alignParentTop="true"
                             />
 
@@ -201,13 +204,13 @@
                             android:id="@+id/textViewEventEndDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/GIBlue"
                             android:hint="@string/dateHolder"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:gravity="right"
+                            android:textColor="@color/editTextBasicTextColor"
+                            android:textSize="@dimen/normalTextSize"
                             android:textStyle="italic"
-                            android:textSize="13sp"
                             android:inputType="textCapSentences"
                             android:background="@android:color/transparent"
                             android:padding="2dp"
@@ -231,10 +234,10 @@
                         android:text="@string/groupDesc"
                         android:layout_marginTop="7dp"
                         android:layout_marginBottom="7dp"
-                        android:textColor="@android:color/black"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:textSize="14sp"
+                        android:textColor="@color/textViewBasicTextColor"
+                        android:textSize="@dimen/normalTextSize"
                         android:layout_alignParentTop="true"
                         />
 
@@ -248,61 +251,14 @@
                         >
 
                         <EditText
-                            android:id="@+id/editTextEventDesc"
+                            android:id="@+id/editTextPollQuestion"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textColor="@color/GIBlue"
                             android:hint="@string/eventDescHolder"
                             android:gravity="top|left"
                             android:textStyle="italic"
-                            android:textSize="14sp"
-                            android:inputType="textCapSentences"
-                            android:background="@android:color/transparent"
-                            android:padding="2dp"
-                            />
-
-                    </RelativeLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/relativeLayoutEventBringBack"
-                    android:layout_below="@+id/relativeLayoutEventDesc"
-                    android:background="@drawable/border_bottom_light_gray"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/textViewEventBringBack"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/eventBringBack"
-                        android:layout_marginTop="7dp"
-                        android:layout_marginBottom="7dp"
-                        android:textColor="@android:color/black"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:textSize="14sp"
-                        android:layout_alignParentTop="true"
-                        />
-
-                    <RelativeLayout
-                        android:layout_below="@+id/textViewEventBringBack"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/border_light_gray"
-                        >
-
-                        <EditText
-                            android:id="@+id/editTextEventBringBack"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:textColor="@color/GIBlue"
-                            android:hint="@string/eventBringBackHolder"
-                            android:gravity="top|left"
-                            android:textStyle="italic"
-                            android:textSize="14sp"
+                            android:textSize="@dimen/normalTextSize"
                             android:inputType="textCapSentences"
                             android:background="@android:color/transparent"
                             android:padding="2dp"
@@ -313,7 +269,7 @@
 
                 <LinearLayout
                     android:id="@+id/linearLayoutEventThemes"
-                    android:layout_below="@+id/relativeLayoutEventBringBack"
+                    android:layout_below="@+id/relativeLayoutEventDesc"
                     android:background="@drawable/border_bottom_light_gray"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -326,15 +282,16 @@
                         android:layout_marginRight="10dp"
                         >
                         <TextView
+                            android:id="@+id/textViewTheme"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/eventTheme"
                             android:layout_marginTop="7dp"
                             android:layout_marginBottom="7dp"
-                            android:textColor="@android:color/black"
+                            android:textColor="@color/textViewBasicTextColor"
+                            android:textSize="@dimen/normalTextSize"
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
-                            android:textSize="14sp"
                             android:layout_alignParentTop="true"
                             />
 
@@ -363,15 +320,17 @@
                         android:layout_marginRight="20dp"
                         >
                         <TextView
+                            android:id="@+id/textViewSecondTheme"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/eventSecondTheme"
                             android:layout_marginTop="7dp"
                             android:layout_marginBottom="7dp"
-                            android:textColor="@android:color/black"
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
-                            android:textSize="14sp"
+                            android:textColor="@color/textViewBasicTextColor"
+                            android:textSize="@dimen/normalTextSize"
+                            android:textStyle="italic"
                             android:layout_alignParentTop="true"
                             />
 
@@ -385,7 +344,7 @@
                             android:hint="@string/eventSecondTheme"
                             android:gravity="end"
                             android:textStyle="italic"
-                            android:textSize="14sp"
+                            android:textSize="@dimen/normalTextSize"
                             android:inputType="textCapSentences"
                             android:background="@android:color/transparent"
                             android:paddingTop="10dp"
@@ -407,10 +366,10 @@
                         android:text="@string/eventPlace"
                         android:layout_marginTop="7dp"
                         android:layout_marginBottom="7dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="@color/textViewBasicTextColor"
+                        android:textSize="@dimen/normalTextSize"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:textSize="14sp"
                         />
 
                     <EditText
@@ -423,7 +382,7 @@
                         android:hint="@string/eventPlaceHolder"
                         android:gravity="end"
                         android:textStyle="italic"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/normalTextSize"
                         android:inputType="textCapSentences"
                         android:background="@android:color/transparent"
                         android:paddingTop="10dp"
@@ -455,10 +414,10 @@
                         android:text="@string/eventPrice"
                         android:layout_marginTop="7dp"
                         android:layout_marginBottom="7dp"
-                        android:textColor="@android:color/black"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:textSize="14sp"
+                        android:textColor="@color/textViewBasicTextColor"
+                        android:textSize="@dimen/normalTextSize"
                         />
 
                     <EditText
@@ -471,7 +430,7 @@
                         android:hint="@string/eventPriceHolder"
                         android:gravity="end"
                         android:textStyle="italic"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/normalTextSize"
                         android:inputType="numberDecimal"
                         android:background="@android:color/transparent"
                         android:paddingTop="10dp"
@@ -489,14 +448,109 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/relativeLayoutEventBringBack"
+                    android:layout_below="@+id/linearLayoutEventPrice"
+                    android:background="@drawable/border_bottom_light_gray"
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textViewEventBringBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/eventBringBack"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="7dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/textViewBasicTextColor"
+                        android:textSize="@dimen/normalTextSize"
+                        android:layout_alignParentTop="true"
+                        />
+
+                    <RelativeLayout
+                        android:id="@+id/relativeLayoutAddObjectBringBack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textViewEventBringBack"
+                        >
+
+                        <EditText
+                            android:id="@+id/editTextEventBringBack"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/GIBlue"
+                            android:hint="@string/eventBringBackHolder"
+                            android:gravity="top|left"
+                            android:textStyle="italic"
+                            android:layout_toLeftOf="@+id/imageButtonAddObject"
+                            android:layout_centerVertical="true"
+                            android:textSize="@dimen/normalTextSize"
+                            android:inputType="textCapSentences"
+                            android:background="@android:color/transparent"
+                            android:padding="2dp"
+                            />
+
+                        <ImageButton
+                            android:id="@+id/imageButtonAddObject"
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:padding="3dp"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_add_black_24dp"
+                            android:background="@drawable/circled_background"
+                            android:layout_gravity="center"
+                            android:textStyle="italic"
+                            />
+
+                    </RelativeLayout>
+
+
+
+                    <RelativeLayout
+                        android:layout_below="@+id/relativeLayoutAddObjectBringBack"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="10dp"
+                        >
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recyclerViewDeletableItems"
+                            android:scrollbars="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:layout_margin="0dp"
+                            android:padding="0dp"
+                            />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+                
+                <Spinner
+                    android:id="@+id/spinnerGroupList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relativeLayoutEventBringBack"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="100dp"
+                    android:layout_marginRight="20dp"
+                    ></Spinner>
+
                 <com.jaredrummler.materialspinner.MaterialSpinner
                     android:id="@+id/spinnerGroups"
-                    android:layout_below="@+id/linearLayoutEventPrice"
+                    android:layout_below="@+id/relativeLayoutEventBringBack"
                     android:layout_width="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="50dp"
                     android:layout_marginRight="20dp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible"
+
+                    />
 
             </RelativeLayout>
         </RelativeLayout>

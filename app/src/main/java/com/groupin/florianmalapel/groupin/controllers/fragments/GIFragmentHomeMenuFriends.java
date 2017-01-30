@@ -24,6 +24,7 @@ import com.groupin.florianmalapel.groupin.R;
 import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecyclerViewFriends;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
+import com.groupin.florianmalapel.groupin.tools.GIDesign;
 import com.groupin.florianmalapel.groupin.transformations.CircleTransform;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
 import com.squareup.picasso.Picasso;
@@ -43,6 +44,7 @@ public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickL
     private EditText editTextMailAddress = null;
     private ImageView circularImageViewProfilPic = null;
     private TextView textViewNameFriend = null;
+    private TextView textViewMyFriends = null;
     private Button buttonAddFriendCancel = null;
     private Button buttonAddFriendOk = null;
     private ArrayList<GIUser> friendsList = null;
@@ -54,7 +56,6 @@ public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickL
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_menu_friends, container, false);
-//        fixture();
         findViewById(view);
         initialize();
         initViews();
@@ -72,6 +73,7 @@ public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickL
         editTextMailAddress = (EditText) view.findViewById(R.id.editTextMailAddress);
         textViewNameFriend = (TextView) view.findViewById(R.id.textViewNameFriend);
         circularImageViewProfilPic = (ImageView) view.findViewById(R.id.circularImageViewProfilPic);
+        textViewMyFriends = (TextView) view.findViewById(R.id.textViewMyFriends);
     }
 
     private void initialize(){
@@ -88,6 +90,7 @@ public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickL
     }
 
     private void initViews(){
+        textViewMyFriends.setTypeface(GIDesign.getBoldFont(getContext()));
         fabAddFriend.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
         initRecyclerView();
     }
@@ -107,22 +110,7 @@ public class GIFragmentHomeMenuFriends extends Fragment implements View.OnClickL
         recyclerViewFriends.setAdapter(friendsAdapter);
     }
 
-//    private void fixture(){
-//        friendsList = new ArrayList<>();
-//        friendsList.add(new GIUser("marty@mc.fly", "01", "McFly", "McFly", "Marty"));
-//        friendsList.add(new GIUser("george@mc.fly", "02", "McFly", "McFly", "George"));
-//        friendsList.add(new GIUser("daniel@gmail.com", "03", "Daniel", "Sandoval", "Daniel"));
-//        friendsList.add(new GIUser("biff@tanon.ws", "04", "Biff", "Tanon", "Biff"));
-//        friendsList.add(new GIUser("zoé@dubois.ws", "05", "Zoé", "Dubois", "Zoé"));
-//        friendsList.add(new GIUser("edouard@delbove.sj", "06", "Edouard", "Delbove", "Edouard"));
-//        friendsList.add(new GIUser("guitou@blank.sj", "07", "Guitou", "Blank", "Guillaume"));
-//        friendsList.add(new GIUser("elodie@girot.sj", "08", "Elodie", "Girot", "Elodie"));
-//        friendsList.add(new GIUser("alan@turing.ws", "09", "Alan", "Turing", "Alan"));
-//        friendsList.add(new GIUser("shledon@cooper.tbbt", "10", "Sheldon", "Cooper", "Sheldon"));
-//        sortFriendsListAlphabetically(friendsList);
-//    }
-
-    private void onClickToValidateFriendship(){
+     private void onClickToValidateFriendship(){
         relativeLayoutFormAddFiend.setVisibility(View.GONE);
         if(userSelected == null)
             return;

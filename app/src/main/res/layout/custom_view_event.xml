@@ -37,8 +37,8 @@
             android:id="@+id/textView_eventName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
+            android:textSize="@dimen/eventRowNameTextSize"
+            android:textColor="@color/eventRowNameTextColor"
             android:text="Nom événement"/>
 
         <TextView
@@ -47,7 +47,9 @@
             android:layout_height="wrap_content"
             android:textStyle="italic"
             android:text="Dans 30min"
-            android:fontFamily="sans-serif-condensed"/>
+            android:textSize="@dimen/eventRowNameTextSize"
+            android:textColor="@color/eventRowNameTextColor"
+            />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -71,11 +73,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@+id/imageView_personLogo"
-                android:textColor="@color/holoGreen"
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical"
                 android:textStyle="italic"
-                android:textSize="11sp"
+                android:textSize="@dimen/eventRowNbParticipantTextSize"
+                android:textColor="@color/eventRowNbParticipantTextColor"
                 android:text="10 participants"/>
 
         </LinearLayout>

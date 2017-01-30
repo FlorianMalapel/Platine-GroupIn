@@ -4,8 +4,22 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimaryDark">
 
+    <TextView
+        android:id="@+id/textViewGroupPolls"
+        android:layout_width="match_parent"
+        android:text="@string/groupChat"
+        android:layout_alignParentTop="true"
+        android:layout_height="@dimen/bannerCategoryHeight"
+        android:textColor="@color/bannerCategoryTextColor"
+        android:textSize="@dimen/bannerCategoryTextSize"
+        android:background="@color/bannerCategoryBackgroundColor"
+        android:padding="@dimen/bannerCategoryPadding"
+        android:gravity="left|center_vertical"
+        />
+
     <jp.bassaer.chatmessageview.views.ChatView
         android:id="@+id/chatView"
+        android:layout_below="@+id/textViewGroupPolls"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />

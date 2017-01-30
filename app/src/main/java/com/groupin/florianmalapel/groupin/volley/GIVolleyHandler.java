@@ -1,7 +1,5 @@
 package com.groupin.florianmalapel.groupin.volley;
 
-import android.util.Log;
-
 import com.android.volley.Request;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
 
@@ -60,7 +58,6 @@ public class GIVolleyHandler {
     }
 
     public void postNewGroup(GIVolleyRequest.RequestCallback callback, JSONObject groupObject) {
-        Log.v("∆∆ volleyHandler ∆∆", groupObject.toString());
         String  url = GIRequestData.API_URL + GIRequestData.GROUP_ENDPOINT;
         GIVolleyRequest request = new GIVolleyRequest(GIRequestData.POST_GROUP_CODE, Request.Method.POST, url, callback);
         request.initPostJSONRequest(null, groupObject);

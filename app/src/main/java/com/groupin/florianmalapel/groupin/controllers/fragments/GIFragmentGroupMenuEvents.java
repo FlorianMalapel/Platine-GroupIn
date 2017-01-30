@@ -27,6 +27,7 @@ import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecycler
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIEvent;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
+import com.groupin.florianmalapel.groupin.tools.GIDesign;
 import com.groupin.florianmalapel.groupin.views.GIHorizontalBubbleList;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyRequest;
@@ -52,6 +53,7 @@ public class GIFragmentGroupMenuEvents extends Fragment
     private GIAdapterRecyclerViewFriends adapterRecyclerViewFriends = null;
     private TextView textViewCancel = null;
     private TextView textViewOk = null;
+    private TextView textViewMyEvents = null;
     private ArrayList<GIUser> friendsListChosen = null;
     private GIVolleyHandler volleyHandler = null;
 
@@ -76,13 +78,17 @@ public class GIFragmentGroupMenuEvents extends Fragment
         textViewOk = (TextView) view.findViewById(R.id.textViewOk);
         relativeLayoutFriendsPopUp = (RelativeLayout) view.findViewById(R.id.relativeLayoutFriendsPopUp);
         textViewCancel = (TextView) view.findViewById(R.id.textViewCancel);
+        textViewMyEvents = (TextView) view.findViewById(R.id.textViewMyEvents);
         fabAddEvent = (FloatingActionButton) view.findViewById(R.id.fabAddEvent);
         horizontalBubbleList_members = (GIHorizontalBubbleList) view.findViewById(R.id.horizontalBubbleList_members);
     }
 
     private void initViews(){
-        initRecyclerView();
+        textViewOk.setTypeface(GIDesign.getRegularFont(getContext()));
+        textViewCancel.setTypeface(GIDesign.getRegularFont(getContext()));
+        textViewMyEvents.setTypeface(GIDesign.getBoldFont(getContext()));
         fabAddEvent.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        initRecyclerView();
         initTopBubbleFriendList();
         initRecyclerViewFriends();
     }
@@ -113,7 +119,20 @@ public class GIFragmentGroupMenuEvents extends Fragment
         recyclerViewFriends.setAdapter(adapterRecyclerViewFriends);
     }
 
+    private boolean isEventListEmpty(ArrayList<GIEvent> eventArrayList){
+        if(eventArrayList == null || eventArrayList.isEmpty())
+            return true;
+        else for(GIEvent event : eventArrayList){
+            if(event == null)
+                return true;
+        }
+        return false;
+    }
+
     private void initRecyclerView(){
+        if(isEventListEmpty(GIApplicationDelegate.getInstance().getDataCache().getArrayEventFromGroup(getCurrentGroupId())))
+            return;
+
         eventsAdapter = new GIAdapterRecyclerViewEventsList(GIApplicationDelegate.getInstance().getDataCache().getArrayEventFromGroup(getCurrentGroupId()), getContext()); // TODO SHOULD NOT BE NULL
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerViewEvents.setLayoutManager(layoutManager);

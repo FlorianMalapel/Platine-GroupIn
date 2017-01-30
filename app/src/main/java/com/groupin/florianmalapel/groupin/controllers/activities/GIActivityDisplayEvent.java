@@ -106,7 +106,7 @@ public class GIActivityDisplayEvent extends AppCompatActivity implements View.On
         textViewEventPrice.setText(String.valueOf(eventToDisplay.price));
         textViewEventLocation.setText(eventToDisplay.address);
         textViewEventDesc.setText(eventToDisplay.description);
-        textViewEventBringBack.setText(eventToDisplay.bring_back);
+        textViewEventBringBack.setText(eventToDisplay.bring_back_list.toString());
     }
 
     private String getTimeFormatted(String start, String end){
