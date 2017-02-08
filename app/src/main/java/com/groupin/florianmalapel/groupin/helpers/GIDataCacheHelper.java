@@ -74,6 +74,10 @@ public class GIDataCacheHelper {
             cache.setEventsList((HashMap<String,GIEvent>) itemReceived.object);
         }
 
+        else if(itemReceived.request_code == GIRequestData.EVENT) {
+            cache.setEventList((GIEvent) itemReceived.object);
+        }
+
         else if(itemReceived.request_code == GIRequestData.NOTIFS_FRIENDS) {
             cache.setNotificationsFriend((ArrayList<GINotificationFriend>) itemReceived.object);
         }

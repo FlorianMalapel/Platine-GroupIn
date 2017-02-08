@@ -36,6 +36,10 @@ public class GIAdapterRecyclerViewGroupsList extends RecyclerView.Adapter<GIAdap
         this.context = context;
     }
 
+    public void refreshList(HashMap<String,GIGroup> list_groups){
+        this.list_groups = getList_groups(list_groups);
+        this.notifyDataSetChanged();
+    }
 
     public ArrayList<GIGroup> getList_groups(HashMap<String,GIGroup> list){
         if(list == null)

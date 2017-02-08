@@ -76,13 +76,13 @@ public class GIActivityCreatePoll extends AppCompatActivity
     private void findViewById() {
         progressIndicator = (GIProgressIndicator) findViewById(R.id.progressIndicator);
         imageButtonBack = (ImageButton) findViewById(R.id.imageButtonBack);
-        imageButtonAddAnswer = (ImageButton) findViewById(R.id.imageButtonAddAnswer);
+        imageButtonAddAnswer = (ImageButton) findViewById(R.id.imageButtonAddAFriend);
         switchQCM = (Switch) findViewById(R.id.switchQCM);
         textViewQCM = (TextView) findViewById(R.id.textViewQCM);
-        textViewCreateGroup = (TextView) findViewById(R.id.textViewCreateGroup);
+        textViewCreateGroup = (TextView) findViewById(R.id.textViewCreateBill);
         textViewValidateCreate = (TextView) findViewById(R.id.textViewValidateCreate);
         textViewPollQuestion = (TextView) findViewById(R.id.textViewEventDesc);
-        textViewAnswers = (TextView) findViewById(R.id.textViewAnswers);
+        textViewAnswers = (TextView) findViewById(R.id.textViewPaidFor);
         editTextPollQuestion = (EditText) findViewById(R.id.editTextPollQuestion);
         editTextAnswer = (EditText) findViewById(R.id.editTextAnswer);
         recyclerViewDeletableItems = (RecyclerView) findViewById(R.id.recyclerViewDeletableItems);
@@ -94,7 +94,13 @@ public class GIActivityCreatePoll extends AppCompatActivity
     }
 
     private void initializeViews() {
-        imageButtonBack.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        imageButtonBack.getDrawable().mutate().setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_ATOP);
+//        imageButtonBack.getDrawable().mutate().setColorFilter(GIDesign.getColorFromXml(this, GIDesign.getColorFromXml(this, R.color.toolbarTextViewTextColor)), PorterDuff.Mode.SRC_ATOP);
+        textViewQCM.setTypeface(GIDesign.getRegularFont(this));
+        textViewCreateGroup.setTypeface(GIDesign.getBoldFont(this));
+        textViewValidateCreate.setTypeface(GIDesign.getBoldFont(this));
+        textViewPollQuestion.setTypeface(GIDesign.getRegularFont(this));
+        textViewAnswers.setTypeface(GIDesign.getRegularFont(this));
         initRecyclerViewDeletableItemList();
     }
 

@@ -1,8 +1,6 @@
 package com.groupin.florianmalapel.groupin.controllers.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -89,7 +87,7 @@ public class GIActivityMailSign extends AppCompatActivity implements
     }
 
     private void initialize_views(){
-        imageButtonEye.getDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+//        imageButtonEye.getDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
     }
 
     private void setClickListeners(){

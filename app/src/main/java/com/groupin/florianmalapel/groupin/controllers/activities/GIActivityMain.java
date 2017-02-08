@@ -1,7 +1,6 @@
 package com.groupin.florianmalapel.groupin.controllers.activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -89,7 +88,7 @@ public class GIActivityMain extends AppCompatActivity
     }
 
     private void initializeViews(){
-        imageButtonProfile.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        imageButtonProfile.getDrawable().mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.textViewToolbarTextColor), PorterDuff.Mode.SRC_ATOP);
         textViewTitle.setTypeface(GIDesign.getBoldFont(this));
     }
 

@@ -30,7 +30,7 @@ public class GIActivityDisplayGroup extends AppCompatActivity
     private static final int NB_TAB_BOTTOM_MENU = 4;
     public static final String BUNDLE_ID = "bundleEvent";
     public static final String GROUP_ID = "group";
-    public String groupId = null;
+    private String groupId = null;
 
     private BottomNavigation bottomNavigationMenu = null;
     private ViewPager viewPagerBottomMenuGroup = null;
@@ -118,20 +118,31 @@ public class GIActivityDisplayGroup extends AppCompatActivity
         @Override
         public Fragment getItem(int position) {
 
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(GROUP_ID, groupId);
+
             if( position == 0 ) {
-                return new GIFragmentGroupMenuEvents();
+                GIFragmentGroupMenuEvents fragEvents = new GIFragmentGroupMenuEvents();
+                fragEvents.setArguments(bundle);
+                return fragEvents;
             }
 
             else if( position == 1 ) {
-                return new GIFragmentGroupMenuChat();
+                GIFragmentGroupMenuChat fragChat = new GIFragmentGroupMenuChat();
+                fragChat.setArguments(bundle);
+                return fragChat;
             }
 
             else if( position == 2 ) {
-                return new GIFragmentGroupMenuPolls();
+                GIFragmentGroupMenuPolls fragPoll = new GIFragmentGroupMenuPolls();
+                fragPoll.setArguments(bundle);
+                return fragPoll;
             }
 
             else if( position == 3 ) {
-                return new GIFragmentGroupMenuMoney();
+                GIFragmentGroupMenuMoney fragMoney = new GIFragmentGroupMenuMoney();
+                fragMoney.setArguments(bundle);
+                return fragMoney;
             }
 
 

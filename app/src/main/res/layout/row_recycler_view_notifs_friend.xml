@@ -40,7 +40,6 @@
             android:background="@drawable/circled_background_green"
             android:src="@drawable/ic_done"
             android:elevation="5dp"
-
             android:layout_marginRight="20dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

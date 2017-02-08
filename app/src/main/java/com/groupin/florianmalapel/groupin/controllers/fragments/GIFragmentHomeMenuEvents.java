@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,17 +21,24 @@ import com.groupin.florianmalapel.groupin.controllers.activities.GIActivityCreat
 import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecyclerViewEventsList;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 import com.groupin.florianmalapel.groupin.tools.GIDesign;
+import com.groupin.florianmalapel.groupin.volley.GIRequestData;
+import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
+import com.groupin.florianmalapel.groupin.volley.GIVolleyRequest;
+
+import org.json.JSONObject;
 
 /**
  * Created by florianmalapel on 04/12/2016.
  */
 
-public class GIFragmentHomeMenuEvents extends Fragment implements View.OnClickListener {
+public class GIFragmentHomeMenuEvents extends Fragment implements View.OnClickListener, SwipeRefreshLayout.OnRefreshListener, GIVolleyRequest.RequestCallback {
 
     private RecyclerView recyclerViewEvents = null;
     private GIAdapterRecyclerViewEventsList eventsAdapter = null;
     private TextView textViewMyGroups = null;
     private FloatingActionButton fabAddEvent = null;
+    private SwipeRefreshLayout swipeRefreshLayout = null;
+    private GIVolleyHandler volleyHandler = null;
 
 
     @Nullable
@@ -39,6 +46,7 @@ public class GIFragmentHomeMenuEvents extends Fragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_menu_events, container, false);
         findViewById(view);
+        initialize();
         initViews();
         setListeners();
         return view;
@@ -48,6 +56,11 @@ public class GIFragmentHomeMenuEvents extends Fragment implements View.OnClickLi
         recyclerViewEvents = (RecyclerView) view.findViewById(R.id.recyclerViewEvents);
         fabAddEvent = (FloatingActionButton) view.findViewById(R.id.fabAddEvent);
         textViewMyGroups = (TextView) view.findViewById(R.id.textViewMyEvents);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+    }
+
+    private void initialize(){
+        volleyHandler = new GIVolleyHandler();
     }
 
     private void initViews(){
@@ -58,6 +71,7 @@ public class GIFragmentHomeMenuEvents extends Fragment implements View.OnClickLi
 
     private void setListeners(){
         fabAddEvent.setOnClickListener(this);
+        swipeRefreshLayout.setOnRefreshListener(this);
     }
 
     private void initRecyclerView(){
@@ -65,7 +79,6 @@ public class GIFragmentHomeMenuEvents extends Fragment implements View.OnClickLi
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerViewEvents.setLayoutManager(layoutManager);
         recyclerViewEvents.setItemAnimator(new DefaultItemAnimator());
-        recyclerViewEvents.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
         recyclerViewEvents.setAdapter(eventsAdapter);
     }
 
@@ -82,7 +95,9 @@ public class GIFragmentHomeMenuEvents extends Fragment implements View.OnClickLi
     @Override
     public void onResume() {
         super.onResume();
-        initRecyclerView();
+        if(eventsAdapter != null)
+            eventsAdapter.refreshList(GIApplicationDelegate.getInstance().getDataCache().getArrayEvent());
+        else initRecyclerView();
     }
 
     @Override
@@ -90,5 +105,29 @@ public class GIFragmentHomeMenuEvents extends Fragment implements View.OnClickLi
         if( view == fabAddEvent ){
             onClickFabAddEvent();
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        volleyHandler.getEventsOfUser(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+    }
+
+    @Override
+    public void onRequestStart() {
+
+    }
+
+    @Override
+    public void onRequestFinishWithSuccess(int request_code, JSONObject object) {
+        if(request_code == GIRequestData.GET_EVENTS_USER_CODE){
+            swipeRefreshLayout.setRefreshing(false);
+//            initRecyclerView();
+            eventsAdapter.refreshList(GIApplicationDelegate.getInstance().getDataCache().getArrayEvent());
+        }
+    }
+
+    @Override
+    public void onRequestFinishWithFailure() {
+
     }
 }

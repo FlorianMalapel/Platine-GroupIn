@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">@color/GIPurple</color>
     <color name="colorPrimaryDark">@color/GIYellow</color>
-    <!--<color name="colorPrimaryDark">#282f3b</color>-->
+    <!--<color name="colorPrimaryDark">@color/GIPurple</color>-->
     <color name="colorPrimaryDarkAlpha">#da282f3b</color>
     <color name="colorAccent">@color/GIBlue</color>
     <color name="facebookBlue">#3c5a96</color>
@@ -14,29 +14,46 @@
 
 
     <color name="GIPurple">#CA6F8D</color>
+    <color name="GIViolet">#9D818E</color>
     <color name="GIRed">#7b241b</color>
     <color name="GIGray">#282f3b</color>
     <color name="GIYellow">#EAD06D</color>
     <color name="GIBlue">#245874</color>
+    <color name="GIWhite">#ffffff</color>
 
     <!-- Top textView toolBar -->
-    <color name="toolbarTextViewTextColor">#ffffff</color>
+    <color name="toolbarTextViewTextColor">#000000</color>
+    <!--<color name="toolbarTextViewTextColor">#ffffff</color>-->
     <!-- Banner category -->
     <color name="bannerCategoryBackgroundColor">@color/GIBlue</color>
-    <color name="bannerCategoryTextColor">#ffffff</color>
+    <color name="bannerCategoryTextColor">@color/GIWhite</color>
+    <!--<color name="bannerCategoryTextColor">@color/GIYellow</color>-->
     <!-- Button -->
     <color name="buttonBackgroundColor">@color/GIPurple</color>
+    <!--<color name="buttonBackgroundColor">@color/GIYellow</color>-->
     <!-- EditText -->
     <color name="editTextBasicTextColor">@color/GIBlue</color>
+    <color name="editTextHolderTextColor">@color/grayBorder</color>
+
+    <!-- Group view -->
+    <color name="groupViewBackgroundColor">@color/lightGray</color>
+
+    <!-- Separator -->
+    <color name="separatorBackgroundColor">@color/GIBlue</color>
+
+    <!-- List with deletable items -->
+    <color name="listViewDeletableItmsBackgroundColor">@color/GIBlue</color>
 
     <!-- TextView -->
     <color name="textViewBasicTextColor">#000000</color>
-    <color name="textViewToolbarTextColor">#000000</color>
+    <color name="textViewToolbarTextColor">@color/toolbarTextViewTextColor</color>
     <color name="textViewBasicTextColorLight">@color/lightGray</color>
+
     <!-- Event row recycler view -->
     <color name="eventRowNameTextColor">#000000</color>
     <color name="eventRowDateTextColor">@color/grayBorder</color>
     <color name="eventRowNbParticipantTextColor">@color/holoGreen</color>
+
     <!-- BottomNavigationView -->
     <color name="bottomMenuTextColor">#000000</color>
 

@@ -64,17 +64,19 @@ public class GIDataCache implements GIVolleyRequest.RequestCallback {
         user.providerId = prefsHelper.getUserProviderId();
         user.photoURL = prefsHelper.getUserPhotoUrl();
 
-        Log.v("|| GIDATACACHE ||", " GET user : " + user.toString());
         return user;
     }
 
     public void logOut(){
         prefsHelper.reset();
         this.user = new GIUser();
+        eventsList = new HashMap<>();
+        userGroupsList = new HashMap<>();
+        notifsGroupList = new ArrayList<>();
+        notifsFriendList = new ArrayList<>();
     }
 
     public void storeCurrentUserInPref(){
-        Log.v("|| GIDATACACHE ||", " POST user : " + user.toString());
         prefsHelper.storeUserUid(user.uid);
         prefsHelper.storeUserLogin(user.email);
         prefsHelper.storePhotoURL(user.photoURL);
@@ -136,6 +138,14 @@ public class GIDataCache implements GIVolleyRequest.RequestCallback {
         }
     }
 
+    public void setEventList(GIEvent event){
+        if(this.eventsList.containsKey(event.id)){
+            this.eventsList.remove(event.id);
+            this.eventsList.put(event.id, eventsList.get(event));
+        }
+        else this.eventsList.put(event.id, eventsList.get(event));
+    }
+
     public void addGroupOrUpdate(GIGroup group){
         if(userGroupsList.containsKey(group.id)){
             userGroupsList.remove(group.id);
@@ -173,6 +183,7 @@ public class GIDataCache implements GIVolleyRequest.RequestCallback {
                 eventsArray.add(eventsList.get(eventId));
             }
         }
+        Log.v("∂∂∂∂∆∆∆∆∂∂∂∂∂∂∂∂", "-- --- -- -- --" + eventsArray.toString());
         return eventsArray;
     }
 
@@ -215,6 +226,15 @@ public class GIDataCache implements GIVolleyRequest.RequestCallback {
 
         sortFriendsListAlphabetically(friendList);
         return friendList;
+    }
+
+    public ArrayList<GIUser> getUserFromGroup(String groupId){
+        ArrayList<GIUser> groupMembers = new ArrayList<>();
+        for(String key : userGroupsList.get(groupId).membersUids){
+            groupMembers.add(userFriendList.get(key));
+        }
+        sortFriendsListAlphabetically(groupMembers);
+        return groupMembers;
     }
 
     private void sortFriendsListAlphabetically(ArrayList<GIUser> friendsList){

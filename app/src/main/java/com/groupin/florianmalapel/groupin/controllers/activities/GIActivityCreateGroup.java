@@ -26,6 +26,7 @@ import com.groupin.florianmalapel.groupin.helpers.GICommunicationsHelper;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIGroup;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
+import com.groupin.florianmalapel.groupin.tools.GIDesign;
 import com.groupin.florianmalapel.groupin.views.GIProgressIndicator;
 import com.groupin.florianmalapel.groupin.volley.GIRequestData;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
@@ -59,6 +60,10 @@ public class GIActivityCreateGroup extends AppCompatActivity
     private TextView textViewCancel = null;
     private TextView textViewOk = null;
     private TextView textViewValidateCreate = null;
+    private TextView textViewCreateGroup = null;
+    private TextView textViewNameGroup = null;
+    private TextView textViewDescGroup = null;
+    private TextView textViewMembersGroup = null;
 
     private RelativeLayout relativeLayoutFriends = null;
     private RelativeLayout relativeLayoutPhotoGroup = null;
@@ -100,12 +105,16 @@ public class GIActivityCreateGroup extends AppCompatActivity
     private void findViewById() {
         buttonBack = (ImageButton) findViewById(R.id.imageButtonBack);
         imageViewAddPhotoGroup = (ImageView) findViewById(R.id.imageButtonAddPhotoGroup);
-        buttonAddFriend = (ImageButton) findViewById(R.id.imageButtonAddAnswer);
+        buttonAddFriend = (ImageButton) findViewById(R.id.imageButtonAddAFriend);
         editTextGroupName = (EditText) findViewById(R.id.editTextGroupName);
         editTextGroupDesc = (EditText) findViewById(R.id.editTextPollQuestion);
         textViewCancel = (TextView) findViewById(R.id.textViewCancel);
         textViewValidateCreate = (TextView) findViewById(R.id.textViewValidateCreate);
         textViewOk = (TextView) findViewById(R.id.textViewOk);
+        textViewCreateGroup = (TextView) findViewById(R.id.textViewCreateBill);
+        textViewNameGroup = (TextView) findViewById(R.id.textViewGroupName);
+        textViewDescGroup = (TextView) findViewById(R.id.textViewEventDesc);
+        textViewMembersGroup = (TextView) findViewById(R.id.textViewPaidFor);
         recyclerViewFriends = (RecyclerView) findViewById(R.id.recyclerViewFriends);
         recyclerViewFriendsDeleteList = (RecyclerView) findViewById(R.id.recyclerViewDeletableItems);
         relativeLayoutFriends = (RelativeLayout) findViewById(R.id.relativeLayoutFriendsPopUp);
@@ -135,7 +144,14 @@ public class GIActivityCreateGroup extends AppCompatActivity
     }
 
     private void initializeViews() {
-        buttonBack.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        buttonBack.getDrawable().mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.textViewToolbarTextColor), PorterDuff.Mode.SRC_ATOP);
+        textViewCancel.setTypeface(GIDesign.getRegularFont(this));
+        textViewValidateCreate.setTypeface(GIDesign.getBoldFont(this));
+        textViewOk.setTypeface(GIDesign.getRegularFont(this));
+        textViewCreateGroup.setTypeface(GIDesign.getBoldFont(this));
+        textViewNameGroup.setTypeface(GIDesign.getRegularFont(this));
+        textViewDescGroup.setTypeface(GIDesign.getRegularFont(this));
+        textViewMembersGroup.setTypeface(GIDesign.getRegularFont(this));
         initRecyclerViewFriends();
         initRecyclerViewFriendDeleteList();
     }

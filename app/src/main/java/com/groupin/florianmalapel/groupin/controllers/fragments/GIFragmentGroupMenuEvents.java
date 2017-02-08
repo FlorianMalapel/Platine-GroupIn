@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,6 +30,7 @@ import com.groupin.florianmalapel.groupin.model.dbObjects.GIEvent;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
 import com.groupin.florianmalapel.groupin.tools.GIDesign;
 import com.groupin.florianmalapel.groupin.views.GIHorizontalBubbleList;
+import com.groupin.florianmalapel.groupin.volley.GIRequestData;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyRequest;
 
@@ -41,7 +43,9 @@ import java.util.ArrayList;
  */
 
 public class GIFragmentGroupMenuEvents extends Fragment
-        implements View.OnClickListener, GIHorizontalBubbleList.OnClick, GIVolleyRequest.RequestCallback {
+        implements  View.OnClickListener,
+                    GIHorizontalBubbleList.OnClick, GIVolleyRequest.RequestCallback,
+                    SwipeRefreshLayout.OnRefreshListener {
 
     private ArrayList<GIEvent> list_events = null;
     private RecyclerView recyclerViewEvents = null;
@@ -56,6 +60,9 @@ public class GIFragmentGroupMenuEvents extends Fragment
     private TextView textViewMyEvents = null;
     private ArrayList<GIUser> friendsListChosen = null;
     private GIVolleyHandler volleyHandler = null;
+    private SwipeRefreshLayout swipeRefreshLayout = null;
+    private String groupId = null;
+
 
     @Nullable
     @Override
@@ -69,6 +76,7 @@ public class GIFragmentGroupMenuEvents extends Fragment
     }
 
     private void initialize(){
+        groupId = getArguments().getString(GIActivityDisplayGroup.GROUP_ID);
         volleyHandler = new GIVolleyHandler();
     }
 
@@ -81,6 +89,7 @@ public class GIFragmentGroupMenuEvents extends Fragment
         textViewMyEvents = (TextView) view.findViewById(R.id.textViewMyEvents);
         fabAddEvent = (FloatingActionButton) view.findViewById(R.id.fabAddEvent);
         horizontalBubbleList_members = (GIHorizontalBubbleList) view.findViewById(R.id.horizontalBubbleList_members);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
     }
 
     private void initViews(){
@@ -109,6 +118,7 @@ public class GIFragmentGroupMenuEvents extends Fragment
         fabAddEvent.setOnClickListener(this);
         textViewCancel.setOnClickListener(this);
         textViewOk.setOnClickListener(this);
+        swipeRefreshLayout.setOnRefreshListener(this);
     }
 
     private void initRecyclerViewFriends(){
@@ -122,11 +132,14 @@ public class GIFragmentGroupMenuEvents extends Fragment
     private boolean isEventListEmpty(ArrayList<GIEvent> eventArrayList){
         if(eventArrayList == null || eventArrayList.isEmpty())
             return true;
-        else for(GIEvent event : eventArrayList){
-            if(event == null)
-                return true;
+        else {
+            boolean isNull = true;
+            for(GIEvent event : eventArrayList){
+                if(event != null)
+                    isNull = false;
+            }
+            return isNull;
         }
-        return false;
     }
 
     private void initRecyclerView(){
@@ -142,7 +155,7 @@ public class GIFragmentGroupMenuEvents extends Fragment
     }
 
     private String getCurrentGroupId(){
-        return ((GIActivityDisplayGroup) getContext()).groupId;
+        return groupId;
     }
 
 
@@ -152,8 +165,8 @@ public class GIFragmentGroupMenuEvents extends Fragment
 
     private void sendInvitationToJoinGroup(){
         for(GIUser user : friendsListChosen){
-            Log.v("∆∆ GIFragmentGroupMenu", "-------  : " + ((GIActivityDisplayGroup) getContext()).groupId + "  " + user.uid);
-            volleyHandler.postNotifAddUserInGroup(this, ((GIActivityDisplayGroup) getContext()).groupId, user.uid);
+            Log.v("∆∆ GIFragmentGroupMenu", "-------  : " + groupId + "  " + user.uid);
+            volleyHandler.postNotifAddUserInGroup(this, groupId, user.uid);
         }
     }
 
@@ -183,17 +196,23 @@ public class GIFragmentGroupMenuEvents extends Fragment
         Intent intent = new Intent(getContext(), GIActivityCreateEvent.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(GIActivityCreateEvent.GROUP_ID,
-                GIApplicationDelegate.getInstance().getDataCache().userGroupsList.get(
-                        ((GIActivityDisplayGroup)getContext()).groupId)
+                GIApplicationDelegate.getInstance().getDataCache().userGroupsList.get(groupId)
         );
         intent.putExtra(GIActivityCreateEvent.BUNDLE_ID, bundle);
         getContext().startActivity(intent);
     }
 
     @Override
+    public void onRefresh() {
+        volleyHandler.getEventsOfUser(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        initRecyclerView();
+        /*if(eventsAdapter != null)
+            eventsAdapter.refreshList(GIApplicationDelegate.getInstance().getDataCache().getArrayEventFromGroup(getCurrentGroupId()));
+        else */initRecyclerView();
     }
 
 
@@ -230,7 +249,13 @@ public class GIFragmentGroupMenuEvents extends Fragment
 
     @Override
     public void onRequestFinishWithSuccess(int request_code, JSONObject object) {
-        Log.v("∆∆ ∆∆ ∆∆ ∆∆", "GIFragGroupMenuEvents  --> " + object.toString());
+        GIApplicationDelegate.getInstance().onRequestFinishWithSuccess(request_code, object);
+        if(request_code == GIRequestData.GET_EVENTS_USER_CODE){
+            swipeRefreshLayout.setRefreshing(false);
+            initRecyclerView();
+//            if(eventsAdapter != null)
+//                eventsAdapter.refreshList(GIApplicationDelegate.getInstance().getDataCache().getArrayEventFromGroup(getCurrentGroupId()));
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.groupin.florianmalapel.groupin.volley;
 
 import com.android.volley.Request;
+import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
 
 import org.json.JSONException;
@@ -93,6 +94,24 @@ public class GIVolleyHandler {
         request.startRequest();
     }
 
+    public void postParticipateEvent(GIVolleyRequest.RequestCallback callback, String eventId, String groupId, boolean isParticipating){
+        String  url = GIRequestData.API_URL + GIRequestData.EVENT_ENDPOINT + GIRequestData.PARTICIP_ENDPOINT;
+        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.POST_PARTICIP_EVENT_CODE, Request.Method.POST, url, callback);
+
+        JSONObject object = new JSONObject();
+        try {
+            object.put("uid", GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+            object.put("participe", isParticipating);
+            object.put("event", eventId);
+            object.put("groupe", groupId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        request.initPostJSONRequest(null, object);
+        request.startRequest();
+    }
+
     public void getEventsOfUser(GIVolleyRequest.RequestCallback callback, String uid){
         String url = GIRequestData.API_URL + GIRequestData.EVENT_ENDPOINT + GIRequestData.USER_ENDPOINT + "/" + uid + GIRequestData.ANDROID_ENDPOINT;
         GIVolleyRequest request = new GIVolleyRequest(GIRequestData.GET_EVENTS_USER_CODE, Request.Method.GET, url, callback);
@@ -152,14 +171,14 @@ public class GIVolleyHandler {
     }
 
     public void deleteNotifFriend(GIVolleyRequest.RequestCallback callback, String userUid, String friendUid){
-        String url = GIRequestData.API_URL + GIRequestData.NOTIF_ENDPOINT + userUid + GIRequestData.USER_ENDPOINT + "/" + userUid + GIRequestData.FRIENDS_ENDPOINT + "/" + friendUid;
+        String url = GIRequestData.API_URL + GIRequestData.NOTIF_ENDPOINT + GIRequestData.USER_ENDPOINT + "/" + userUid + GIRequestData.FRIENDS_ENDPOINT + "/" + friendUid;
         GIVolleyRequest request = new GIVolleyRequest(GIRequestData.DELETE_GROUP_CODE, Request.Method.DELETE, url, callback);
         request.initDeleteJSONRequest(null);
         request.startRequest();
     }
 
     public void deleteNotifGroup(GIVolleyRequest.RequestCallback callback, String userUid, String idGroup){
-        String url = GIRequestData.API_URL + GIRequestData.NOTIF_ENDPOINT + userUid + GIRequestData.USER_ENDPOINT + "/" + userUid + GIRequestData.GROUP_ENDPOINT + "/" + idGroup;
+        String url = GIRequestData.API_URL + GIRequestData.NOTIF_ENDPOINT + GIRequestData.USER_ENDPOINT + "/" + userUid + GIRequestData.GROUP_ENDPOINT + "/" + idGroup;
         GIVolleyRequest request = new GIVolleyRequest(GIRequestData.DELETE_GROUP_CODE, Request.Method.DELETE, url, callback);
         request.initDeleteJSONRequest(null);
         request.startRequest();
@@ -205,6 +224,27 @@ public class GIVolleyHandler {
         String  url = GIRequestData.API_URL + GIRequestData.POLLS_ENDPOINT + GIRequestData.USER_ENDPOINT;
         GIVolleyRequest request = new GIVolleyRequest(GIRequestData.POST_POLLS_ANSWER_CODE, Request.Method.POST, url, callback);
         request.initPostJSONRequest(null, pollAnswerObject);
+        request.startRequest();
+    }
+
+    public void postBill(GIVolleyRequest.RequestCallback callback, JSONObject billJSON){
+        String  url = GIRequestData.API_URL + GIRequestData.EUROS_ENDPOINT + GIRequestData.BILLS_ENDPOINT;
+        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.POST_BILL_CODE, Request.Method.POST, url, callback);
+        request.initPostJSONRequest(null, billJSON);
+        request.startRequest();
+    }
+
+    public void getBills(GIVolleyRequest.RequestCallback callback, String groupId){
+        String  url = GIRequestData.API_URL + GIRequestData.EUROS_ENDPOINT + "/" + groupId + GIRequestData.BILLS_ENDPOINT;
+        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.GET_BILLS_GROUP_CODE, Request.Method.GET, url, callback);
+        request.initGetJSONRequest(null);
+        request.startRequest();
+    }
+
+    public void deleteBills(GIVolleyRequest.RequestCallback callback, String groupId, String billId){
+        String url = GIRequestData.API_URL + GIRequestData.EUROS_ENDPOINT + "/" + groupId + GIRequestData.BILLS_ENDPOINT + "/" + billId;
+        GIVolleyRequest request = new GIVolleyRequest(GIRequestData.DELETE_BILLS_GROUP_CODE, Request.Method.DELETE, url, callback);
+        request.initDeleteJSONRequest(null);
         request.startRequest();
     }
 }

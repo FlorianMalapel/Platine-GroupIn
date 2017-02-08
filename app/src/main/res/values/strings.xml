@@ -24,6 +24,10 @@
     <string name="write">Ecrire ...</string>
     <string name="notifsFriendship">Demande d\'amis</string>
     <string name="notifsGroup">Demande d\'ajout dans un groupe</string>
+    <string name="notifsEvents">Notifications</string>
+    <string name="youOwn">Vous devez</string>
+    <string name="weOwnYou">On vous doit</string>
+    <string name="moneyTotal">Total</string>
     <string name="logOut">Se déconnecter</string>
     <string name="confirm">Confirmer</string>
     <string name="save">Enregistrer</string>
@@ -83,6 +87,11 @@
     <string name="menu_chat_tab">Chat</string>
     <string name="menu_polls_tab">Votes</string>
     <string name="menu_money_tab">Dépenses</string>
+
+    <!-- Bills -->
+    <string name="createBill">Ajouter une dépense</string>
+    <string name="paidFor">J\'ai payé pour</string>
+    <string name="nameBill">Achat</string>
 
     <!-- Polls -->
     <string name="qcm">QCM</string>

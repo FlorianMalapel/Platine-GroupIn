@@ -23,6 +23,7 @@ public class GIUser {
     public String photoURL = null;
     public String firstName = null;
     public String lastName = null;
+    public double balance = 0;
     public ArrayList<String> friendsUids = null;
     public ArrayList<String> groupsUids = null;
 

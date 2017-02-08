@@ -58,7 +58,9 @@ public class GIEvent implements Serializable {
         JSONArray bring_back_list_json = new JSONArray();
         if(bring_back_list != null && !bring_back_list.isEmpty()){
             for(String object : bring_back_list){
-                bring_back_list_json.put(object);
+                JSONObject objectJSON = new JSONObject();
+                objectJSON.put("obj", object);
+                bring_back_list_json.put(objectJSON);
             }
         }
 
@@ -90,7 +92,6 @@ public class GIEvent implements Serializable {
                 ", date_start='" + date_start + '\'' +
                 ", date_end='" + date_end + '\'' +
                 ", price=" + price +
-                ", bring_back='" + bring_back_list.toString() + '\'' +
                 '}';
     }
 }

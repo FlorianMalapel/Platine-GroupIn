@@ -5,6 +5,7 @@ import android.app.Application;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.storage.FirebaseStorage;
 import com.groupin.florianmalapel.groupin.helpers.GIDataCacheHelper;
 import com.groupin.florianmalapel.groupin.volley.GIRequestData;
@@ -13,6 +14,8 @@ import com.groupin.florianmalapel.groupin.volley.GIVolleyRequest;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by florianmalapel on 23/11/2016.
@@ -32,6 +35,9 @@ public class GIApplicationDelegate extends Application implements GIVolleyReques
 
     @Override
     public void onCreate() {
+//        PsiMethod:onCreateFabric.with(this, new Crashlytics());
+//        if(!BuildConfig.DEBUG)
+            Fabric.with(this, new Crashlytics());
         app_instance = this;
         dataCache = new GIDataCache(this);
         firebaseStorage = FirebaseStorage.getInstance();

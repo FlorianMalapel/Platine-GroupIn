@@ -32,14 +32,15 @@
                 android:layout_alignParentLeft="true"/>
 
             <TextView
-                android:id="@+id/textViewCreateGroup"
+                android:id="@+id/textViewCreateBill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/createGroup"
-                android:textColor="@android:color/white"
+                android:textColor="@color/textViewToolbarTextColor"
+                android:textSize="@dimen/normalTextSize"
                 android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textStyle="normal|bold"/>
+                />
 
             <TextView
                 android:id="@+id/textViewValidateCreate"
@@ -53,9 +54,10 @@
                 android:paddingLeft="20dp"
                 android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:textColor="@android:color/white"
                 android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textStyle="normal|bold"/>
+                android:textColor="@color/textViewToolbarTextColor"
+                android:textSize="@dimen/normalTextSize"
+                />
         </RelativeLayout>
 
     <RelativeLayout
@@ -98,10 +100,10 @@
                 android:text="@string/groupName"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="7dp"
-                android:textColor="@android:color/black"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:textSize="16sp"
+                android:textColor="@color/textViewBasicTextColor"
+                android:textSize="@dimen/largeTextSize"
                 />
 
             <EditText
@@ -110,12 +112,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:textColor="@color/GIBlue"
+                android:textColor="@color/editTextBasicTextColor"
+                android:textSize="@dimen/normalTextSize"
                 android:hint="@string/groupNameHolder"
                 android:gravity="end"
                 android:layout_marginRight="20dp"
                 android:textStyle="italic"
-                android:textSize="14sp"
                 android:inputType="textCapSentences"
                 android:background="@android:color/transparent"/>
 
@@ -135,10 +137,10 @@
                 android:text="@string/groupDesc"
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="7dp"
-                android:textColor="@android:color/black"
+                android:textColor="@color/textViewBasicTextColor"
+                android:textSize="@dimen/largeTextSize"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:textSize="16sp"
                 android:layout_alignParentTop="true"
                 />
             
@@ -155,11 +157,10 @@
                     android:id="@+id/editTextPollQuestion"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/GIBlue"
                     android:hint="@string/groupDescHolder"
                     android:gravity="top|left"
-                    android:textStyle="italic"
-                    android:textSize="14sp"
+                    android:textColor="@color/editTextBasicTextColor"
+                    android:textSize="@dimen/normalTextSize"
                     android:inputType="textCapSentences"
                     android:background="@android:color/transparent"
                     android:padding="2dp"
@@ -176,20 +177,20 @@
             android:layout_marginRight="20dp">
 
             <TextView
-                android:id="@+id/textViewAnswers"
+                android:id="@+id/textViewPaidFor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/groupMembers"
                 android:layout_marginBottom="10dp"
-                android:textColor="@android:color/black"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:textSize="16sp"
+                android:textColor="@color/textViewBasicTextColor"
+                android:textSize="@dimen/largeTextSize"
                 android:layout_alignParentTop="true"
                 />
 
             <ImageButton
-                android:id="@+id/imageButtonAddAnswer"
+                android:id="@+id/imageButtonAddAFriend"
                 android:layout_width="wrap_content"
                 android:padding="3dp"
                 android:layout_height="wrap_content"
@@ -207,7 +208,7 @@
                 android:background="@android:color/transparent"
                 android:layout_margin="0dp"
                 android:padding="0dp"
-                android:layout_below="@+id/textViewAnswers"/>
+                android:layout_below="@+id/textViewPaidFor"/>
 
         </RelativeLayout>
 
@@ -252,6 +253,8 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="@string/cancel"
+                    android:textColor="@color/textViewBasicTextColor"
+                    android:textSize="@dimen/normalTextSize"
                     android:gravity="center"
                     android:background="@android:color/white"
                     />
@@ -266,6 +269,8 @@
                     android:text="@string/ok"
                     android:gravity="center"
                     android:background="@android:color/white"
+                    android:textColor="@color/textViewBasicTextColor"
+                    android:textSize="@dimen/normalTextSize"
                     />
 
 

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:layout_height="100dp"
+                android:background="@color/lightGray"
+                android:elevation="5dp"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <TextView
+        android:id="@+id/textViewBought"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Achat:"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentTop="true"
+        android:textSize="@dimen/largeTextSize"
+        android:textColor="@color/textViewBasicTextColor"
+        />
+
+    <TextView
+        android:id="@+id/textViewObjectBought"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Des bananes"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textViewBought"
+        android:textSize="@dimen/largeTextSize"
+        android:textColor="@color/textViewBasicTextColor"
+        />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pour: "
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/textViewBought"
+        android:layout_alignParentLeft="true"
+        android:textSize="@dimen/normalTextSize"
+        android:textColor="@color/textViewBasicTextColor"
+        />
+
+    <TextView
+        android:id="@+id/textViewNameOwners"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/textViewName"
+        android:layout_below="@+id/textViewBought"
+        android:textSize="@dimen/normalTextSize"
+        android:textColor="@color/textViewBasicTextColor"
+        />
+
+    <TextView
+        android:id="@+id/textViewPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prix:"
+        android:textSize="@dimen/largeTextSize"
+        android:textColor="@color/textViewBasicTextColor"
+        android:layout_toLeftOf="@+id/textViewAmount"
+        android:gravity="right"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp"/>
+
+    <TextView
+        android:id="@+id/textViewAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15€"
+        android:textSize="@dimen/largeTextSize"
+        android:textColor="@color/textViewBasicTextColor"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp"/>
+
+    <TextView
+        android:id="@+id/textViewBoughtBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Par: "
+        android:textSize="@dimen/normalTextSize"
+        android:textColor="@color/textViewBasicTextColor"
+        android:layout_below="@+id/textViewAmount"
+        android:layout_toLeftOf="@+id/textViewBoughtByUid"
+        android:gravity="right"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp"/>
+
+    <TextView
+        android:id="@+id/textViewBoughtByUid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Flo "
+        android:textSize="@dimen/normalTextSize"
+        android:textColor="@color/textViewBasicTextColor"
+        android:layout_below="@+id/textViewAmount"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp"/>
+
+    <ImageButton
+        android:id="@+id/imageButtonConfirm"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/circled_background_green"
+        android:src="@drawable/ic_done"
+        android:elevation="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        />
+    
+</RelativeLayout>

@@ -23,15 +23,17 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp">
 
                 <TextView
                     android:id="@+id/textViewTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="@string/home"
                     android:layout_centerInParent="true"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/textViewToolbarTextColor"
                     android:textSize="18sp"
                     android:fontFamily="monospace"/>
 
@@ -41,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_person_pin"
                     android:background="@android:color/transparent"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="5dp"
                     android:padding="5dp"
                     android:layout_alignParentRight="true"
                     />

@@ -32,6 +32,11 @@ public class GIAdapterRecyclerViewPolls extends RecyclerView.Adapter<GIAdapterRe
         this.volleyHandler = new GIVolleyHandler();
     }
 
+    public void refreshList(ArrayList<GIPoll> pollsList){
+        this.pollsList = pollsList;
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public PollsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 //        View itemView = LayoutInflater.from(parent.getContext())

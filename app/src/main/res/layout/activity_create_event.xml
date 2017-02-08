@@ -32,7 +32,7 @@
             android:layout_alignParentLeft="true"/>
 
         <TextView
-            android:id="@+id/textViewCreateGroup"
+            android:id="@+id/textViewCreateEvent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -115,7 +115,7 @@
                         />
 
                     <EditText
-                        android:id="@+id/editTextEventName"
+                        android:id="@+id/editTextBillPrice"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"

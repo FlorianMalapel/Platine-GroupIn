@@ -33,6 +33,7 @@ import com.groupin.florianmalapel.groupin.model.dbObjects.GIEvent;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIGroup;
 import com.groupin.florianmalapel.groupin.tools.GIDesign;
 import com.groupin.florianmalapel.groupin.views.GIProgressIndicator;
+import com.groupin.florianmalapel.groupin.volley.GIRequestData;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
 import com.groupin.florianmalapel.groupin.volley.GIVolleyRequest;
 import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment;
@@ -65,7 +66,7 @@ public class GIActivityCreateEvent extends AppCompatActivity
     private ImageView imageViewLocationIcon = null;
     private ImageView imageViewEuroIcon = null;
     private TextView textViewValidateCreate = null;
-    private TextView textViewCreateGroup = null;
+    private TextView textViewCreateEvent = null;
     private TextView textViewEventStartDate = null;
     private TextView textViewEventName = null;
     private TextView textViewEventEndDate = null;
@@ -129,13 +130,13 @@ public class GIActivityCreateEvent extends AppCompatActivity
         textViewEventName = (TextView) findViewById(R.id.textViewStartDate);
         textViewEndDate = (TextView) findViewById(R.id.textViewEndDate);
         textViewEventBringBack = (TextView) findViewById(R.id.textViewEventBringBack);
-        textViewCreateGroup = (TextView) findViewById(R.id.textViewCreateGroup);
+        textViewCreateEvent = (TextView) findViewById(R.id.textViewCreateEvent);
         textViewTheme = (TextView) findViewById(R.id.textViewTheme);
         textViewSecondTheme = (TextView) findViewById(R.id.textViewSecondTheme);
         textViewEventPrice = (TextView) findViewById(R.id.textViewEventPrice);
         textViewEventPlace = (TextView) findViewById(R.id.textViewEventPlace);
         relativeLayoutPhotoEvent = (RelativeLayout) findViewById(R.id.relativeLayoutPhotoEvent);
-        editTextEventName = (EditText) findViewById(R.id.editTextEventName);
+        editTextEventName = (EditText) findViewById(R.id.editTextBillPrice);
         editTextEventDesc = (EditText) findViewById(R.id.editTextPollQuestion);
         editTextEventBringBack = (EditText) findViewById(R.id.editTextEventBringBack);
         editTextEventTheme = (EditText) findViewById(R.id.editTextEventTheme);
@@ -195,7 +196,7 @@ public class GIActivityCreateEvent extends AppCompatActivity
     }
 
     private void initializeViews() {
-        textViewCreateGroup.setTypeface(GIDesign.getBoldFont(this));
+        textViewCreateEvent.setTypeface(GIDesign.getBoldFont(this));
         textViewValidateCreate.setTypeface(GIDesign.getBoldFont(this));
         textViewEventStartDate.setTypeface(GIDesign.getRegularFont(this));
         textViewEventEndDate.setTypeface(GIDesign.getRegularFont(this));
@@ -336,12 +337,14 @@ public class GIActivityCreateEvent extends AppCompatActivity
         if(groupParent == null)
             return;
 
+        float price = (editTextEventPrice.getText().toString().isEmpty()) ? 0 : Float.valueOf(editTextEventPrice.getText().toString());
+
         // TODO check if nothing is null
         eventToCreate = new GIEvent(groupParent.id, editTextEventName.getText().toString(),
             editTextEventDesc.getText().toString(), editTextEventTheme.getText().toString(),
             editTextEventPlace.getText().toString(), urlGroupPhoto,
             String.valueOf(eventDateStart), String.valueOf(eventDateEnd),
-            Float.valueOf(editTextEventPrice.getText().toString()), stringItemListChosen);
+            price, stringItemListChosen);
         try {
             volleyHandler.postEvent(this, eventToCreate.getCreateEventJSON(GIApplicationDelegate.getInstance().getDataCache().getUserUid()));
             Log.v("∆∆ ∆∆ || ∆∆", "start post /Event " + eventToCreate.toString());
@@ -433,8 +436,13 @@ public class GIActivityCreateEvent extends AppCompatActivity
     @Override
     public void onRequestFinishWithSuccess(int request_code, JSONObject object) {
         GIApplicationDelegate.getInstance().onRequestFinishWithSuccess(request_code, object);
-        progressIndicator.stopRotate();
-        finish();
+        if(request_code == GIRequestData.POST_EVENT_CODE){
+            volleyHandler.getGroups(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid());
+        }
+        else if(request_code == GIRequestData.GET_GROUPS_CODE){
+            progressIndicator.stopRotate();
+            finish();
+        }
     }
 
     @Override

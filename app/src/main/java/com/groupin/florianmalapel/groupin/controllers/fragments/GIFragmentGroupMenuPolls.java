@@ -47,6 +47,7 @@ public class GIFragmentGroupMenuPolls extends Fragment
     private GIAdapterRecyclerViewPolls adapterRecyclerViewPolls = null;
     private ArrayList<GIPoll> arrayPolls = null;
     private TextView textViewGroupPolls = null;
+    private String groupId = null;
 
     @Nullable
     @Override
@@ -67,6 +68,7 @@ public class GIFragmentGroupMenuPolls extends Fragment
     }
 
     private void initialize(){
+        groupId = getArguments().getString(GIActivityDisplayGroup.GROUP_ID);
         volleyHandler = new GIVolleyHandler();
         swipeRefreshLayout.setOnRefreshListener(this);
         fabAddPoll.setOnClickListener(this);
@@ -75,14 +77,14 @@ public class GIFragmentGroupMenuPolls extends Fragment
 
     private void startRequestGetPolls(){
         GIDesign.startRotatingProgressIndicator(progressIndicator);
-        volleyHandler.getPollsFromGroup(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid(), ((GIActivityDisplayGroup)getContext()).groupId);
+        volleyHandler.getPollsFromGroup(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid(), groupId);
     }
 
     private void onRequestGetPollsComeBack(JSONObject object){
         GIDesign.stopRotatingProgressIndicator(progressIndicator);
         swipeRefreshLayout.setRefreshing(false);
         try {
-            arrayPolls = GIJsonToObjectHelper.getArrayPollsSortedFromJSON(object, ((GIActivityDisplayGroup)getContext()).groupId);
+            arrayPolls = GIJsonToObjectHelper.getArrayPollsSortedFromJSON(object, groupId);
         } catch (JSONException e) {
             arrayPolls = new ArrayList<>();
         } catch (Exception e) {
@@ -102,7 +104,7 @@ public class GIFragmentGroupMenuPolls extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-        volleyHandler.getPollsFromGroup(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid(), ((GIActivityDisplayGroup)getContext()).groupId);
+        volleyHandler.getPollsFromGroup(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid(), groupId);
     }
 
     @Override
@@ -110,7 +112,7 @@ public class GIFragmentGroupMenuPolls extends Fragment
         if(view == fabAddPoll){
             Intent intent = new Intent(getContext(), GIActivityCreatePoll.class);
             Bundle bundle = new Bundle();
-            bundle.putSerializable(GIActivityCreatePoll.GROUP_ID, ((GIActivityDisplayGroup)getContext()).groupId);
+            bundle.putSerializable(GIActivityCreatePoll.GROUP_ID, groupId);
             intent.putExtra(GIActivityCreatePoll.BUNDLE_ID, bundle);
             getContext().startActivity(intent);
         }
@@ -118,7 +120,7 @@ public class GIFragmentGroupMenuPolls extends Fragment
 
     @Override
     public void onRefresh() {
-        volleyHandler.getPollsFromGroup(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid(), ((GIActivityDisplayGroup)getContext()).groupId);
+        volleyHandler.getPollsFromGroup(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid(), groupId);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.groupin.florianmalapel.groupin.helpers;
 
+import com.groupin.florianmalapel.groupin.model.dbObjects.GIBill;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIChatMessage;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIChoice;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIEvent;
@@ -50,7 +51,7 @@ public class GIJsonToObjectHelper {
                 listObjects.add(new ItemReceived(getUsersFromJSON(object), GIRequestData.MY_USER));
                 break;
             case GIRequestData.POST_GROUP_CODE:
-                listObjects.add(new ItemReceived(getUserFromJSON(object), GIRequestData.MY_USER));
+//                listObjects.add(new ItemReceived(getUserFromJSON(object), GIRequestData.MY_USER));
                 listObjects.add(new ItemReceived(getGroupsFromJSON(object), GIRequestData.ALL_GROUPS));
                 break;
             case GIRequestData.GET_GROUPS_CODE:
@@ -67,6 +68,8 @@ public class GIJsonToObjectHelper {
                 listObjects.add(new ItemReceived(getArrayNotificationFriendFromJSON(object), GIRequestData.NOTIFS_FRIENDS));
                 listObjects.add(new ItemReceived(getArrayNotificationGroupFromJSON(object), GIRequestData.NOTIFS_GROUP));
                 break;
+//            case GIRequestData.GET_BILLS_GROUP_CODE:
+//                listObjects.add(new ItemReceived(getBillsArrayFromJSON(object), GIRequestData.BILLS));
 //            case GIRequestData.CHATS:
 //                listObjects.add(new ItemReceived(getUserFromJSON(object), GIRequestData.MY_USER));
 //                listObjects.add(new ItemReceived(getArrayMessagesFromJSON(object), GIRequestData.CHATS));
@@ -86,6 +89,8 @@ public class GIJsonToObjectHelper {
         }
 
         GIUser user = new GIUser();
+        if(object.has("balance"))
+            user.balance = object.getDouble("balance");
         if(object.has("displayName"))
             user.display_name = object.getString("displayName");
         if(object.has("email"))
@@ -268,11 +273,23 @@ public class GIJsonToObjectHelper {
 
         if(object.has("obj")){
             ArrayList<String> objectsBringBack = new ArrayList<>();
-            JSONArray objectsBringBackJSON = object.getJSONArray("obj");
-            for(int i=0; i<objectsBringBackJSON.length(); i++){
-                objectsBringBack.add(objectsBringBackJSON.getString(i));
+            JSONArray arrayObj = object.optJSONArray("obj");
+            if(arrayObj != null){
+                for(int i=0; i<arrayObj.length(); i++){
+                    objectsBringBack.add(arrayObj.getString(i));
+                }
+                event.bring_back_list = objectsBringBack;
             }
-            event.bring_back_list = objectsBringBack;
+            else {
+                JSONObject obj = object.getJSONObject("obj");
+                if (obj.names() != null) {
+                    for (int i = 0; i < obj.names().length(); i++) {
+                        objectsBringBack.add((String) obj.names().get(i));
+                    }
+                    event.bring_back_list = objectsBringBack;
+                }
+            }
+
         }
 
         if(object.has("theme")){
@@ -426,6 +443,11 @@ public class GIJsonToObjectHelper {
             poll.creatorUid = pollJSON.getString("createur");
         }
 
+        if(pollJSON.has("date")){
+            poll.date = pollJSON.getLong("date");
+        }
+
+
         if(pollJSON.has("question")){
             poll.question = pollJSON.getString("question");
         }
@@ -441,6 +463,47 @@ public class GIJsonToObjectHelper {
         poll.groupId = groupId;
 
         return poll;
+    }
+
+    public static ArrayList<GIBill> getBillsArrayFromJSON(JSONObject object) throws JSONException {
+        ArrayList<GIBill> billsArray = new ArrayList<>();
+        JSONArray jsonArrayBills = null;
+        if(object.has("depenses")){
+            jsonArrayBills = object.getJSONArray("depenses");
+        }
+
+        for(int i=0; i<jsonArrayBills.length(); i++){
+            billsArray.add(getBillFromJSON(jsonArrayBills.getJSONObject(i)));
+        }
+
+        return billsArray;
+    }
+
+    public static GIBill getBillFromJSON(JSONObject billJSON) throws JSONException {
+        GIBill bill = new GIBill();
+
+        if(billJSON.has("what"))
+            bill.objectBought = billJSON.getString("what");
+
+        if(billJSON.has("payer_id"))
+            bill.uidBuyer = getUserFromJSON(billJSON.getJSONObject("payer_id")).uid;
+
+        if(billJSON.has("owers")){
+            JSONArray arrayOwners = billJSON.getJSONArray("owers");
+            for(int i=0; i<arrayOwners.length(); i++){
+                bill.paidForList.add(getUserFromJSON(arrayOwners.getJSONObject(i)).uid);
+            }
+        }
+
+        if(billJSON.has("amount")){
+            bill.price = billJSON.getDouble("amount");
+        }
+
+        if(billJSON.has("id")){
+            bill.billId = billJSON.getString("id");
+        }
+
+        return bill;
     }
 
     public static class ItemReceived {

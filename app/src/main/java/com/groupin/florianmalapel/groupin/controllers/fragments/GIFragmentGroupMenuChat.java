@@ -45,6 +45,7 @@ public class GIFragmentGroupMenuChat extends Fragment implements GIVolleyRequest
     private GIVolleyHandler volleyHandler = null;
     private ArrayList<GIChatMessage> chatMessagesList = null;
     private TextView textViewGroupChat = null;
+    private String groupId = null;
 
     @Nullable
     @Override
@@ -64,6 +65,7 @@ public class GIFragmentGroupMenuChat extends Fragment implements GIVolleyRequest
     }
 
     private void initialize(){
+        groupId = getArguments().getString(GIActivityDisplayGroup.GROUP_ID);
         volleyHandler = new GIVolleyHandler();
         chatMessagesList = new ArrayList<>();
         textViewGroupChat.setTypeface(GIDesign.getBoldFont(getContext()));
@@ -71,7 +73,7 @@ public class GIFragmentGroupMenuChat extends Fragment implements GIVolleyRequest
 
     private void requestGetMessages(){
         GIDesign.startRotatingProgressIndicator(progressIndicator);
-        volleyHandler.getMessagesChatFromGroup(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid(), ((GIActivityDisplayGroup)getContext()).groupId);
+        volleyHandler.getMessagesChatFromGroup(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid(), groupId);
     }
     
     private void initialize_chatView(){
@@ -98,7 +100,7 @@ public class GIFragmentGroupMenuChat extends Fragment implements GIVolleyRequest
 
         for(final GIChatMessage message: chatMessagesList){
             GIUser author = GIApplicationDelegate.getInstance().getDataCache().allUsersList.get(message.authorUid);
-            int idAuthor = GIApplicationDelegate.getInstance().getDataCache().userGroupsList.get(((GIActivityDisplayGroup) getContext()).groupId).membersUids.indexOf(author.uid);
+            int idAuthor = GIApplicationDelegate.getInstance().getDataCache().userGroupsList.get(groupId).membersUids.indexOf(author.uid);
 
             Message msg = new Message.Builder()
                     .setUser(new User(idAuthor, (author.display_name == null) ? author.email : author.display_name, null))
@@ -131,7 +133,7 @@ public class GIFragmentGroupMenuChat extends Fragment implements GIVolleyRequest
     }
 
     private void onClickOnButtonSend(){
-        volleyHandler.postChatMessage(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid(), ((GIActivityDisplayGroup)getContext()).groupId, chatView.getInputText());
+        volleyHandler.postChatMessage(this, GIApplicationDelegate.getInstance().getDataCache().getUserUid(), groupId, chatView.getInputText());
         String name = GIApplicationDelegate.getInstance().getDataCache().user.display_name;
         if(name == null || name.isEmpty())
             name = GIApplicationDelegate.getInstance().getDataCache().user.email;

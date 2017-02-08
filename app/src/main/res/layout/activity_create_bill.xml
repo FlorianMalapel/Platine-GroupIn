@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:padding="10dp"
+        android:background="@color/colorPrimaryDark">
+
+        <ImageButton
+            android:id="@+id/imageButtonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back"
+            android:padding="3dp"
+            android:background="@android:color/transparent"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/textViewCreateBill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/createBill"
+            android:textColor="@color/textViewToolbarTextColor"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textStyle="normal|bold"/>
+
+        <TextView
+            android:id="@+id/textViewValidateCreate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/confirm"
+            android:gravity="right"
+            android:paddingRight="5dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/textViewToolbarTextColor"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textStyle="normal|bold"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutEventName"
+        android:layout_below="@+id/relativeLayoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_bottom_light_gray"
+        >
+
+        <TextView
+            android:id="@+id/textViewEventName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nameBill"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/textViewBasicTextColor"
+            android:textSize="@dimen/normalTextSize"
+            />
+
+        <EditText
+            android:id="@+id/editTextBillName"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/GIBlue"
+            android:hint="@string/nameBill"
+            android:gravity="end"
+            android:layout_marginRight="20dp"
+            android:textStyle="italic"
+            android:textSize="@dimen/normalTextSize"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:inputType="textCapSentences"
+            android:background="@android:color/transparent"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutBillPrice"
+        android:layout_below="@+id/relativeLayoutEventName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_bottom_light_gray"
+        >
+
+        <TextView
+            android:id="@+id/textViewBillPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/eventPrice"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/textViewBasicTextColor"
+            android:textSize="@dimen/normalTextSize"
+            />
+
+        <EditText
+            android:id="@+id/editTextBillPrice"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/GIBlue"
+            android:hint="0.00€"
+            android:gravity="end"
+            android:layout_marginRight="20dp"
+            android:textStyle="italic"
+            android:textSize="@dimen/normalTextSize"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:inputType="numberDecimal"
+            android:background="@android:color/transparent"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/relativeLayoutBillPrice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/textViewPaidFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/paidFor"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/textViewBasicTextColor"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:layout_alignParentTop="true"
+            />
+
+        <ImageButton
+            android:id="@+id/imageButtonAddAFriend"
+            android:layout_width="wrap_content"
+            android:padding="3dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_black_24dp"
+            android:background="@drawable/circled_background"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerViewDeletableItems"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            android:layout_below="@+id/textViewPaidFor"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutFriendsPopUp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/colorPrimaryDarkAlpha">
+
+        <RelativeLayout
+            android:layout_width="370dp"
+            android:layout_height="500dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/group_card_style">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewFriends"
+                android:layout_above="@+id/linearLayoutOkOrLeave"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_bottom_light_gray">
+            </android.support.v7.widget.RecyclerView>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutOkOrLeave"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="1px"
+                android:background="#dcdcdc">
+
+                <TextView
+                    android:id="@+id/textViewCancel"
+                    android:layout_width="0dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:layout_marginRight="1px"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancel"
+                    android:gravity="center"
+                    android:background="@android:color/white"
+                    android:textColor="@color/textViewBasicTextColor"
+                    />
+
+                <TextView
+                    android:id="@+id/textViewOk"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="12dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ok"
+                    android:gravity="center"
+                    android:background="@android:color/white"
+                    />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <com.groupin.florianmalapel.groupin.views.GIProgressIndicator
+        android:id="@+id/progressIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:elevation="20dp"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

@@ -36,6 +36,11 @@ public class GIAdapterRecyclerViewEventsList extends RecyclerView.Adapter<GIAdap
         this.context = context;
     }
 
+    public void refreshList(ArrayList<GIEvent> list_events){
+        this.list_events = list_events;
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public EventViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -46,6 +51,10 @@ public class GIAdapterRecyclerViewEventsList extends RecyclerView.Adapter<GIAdap
 
     @Override
     public void onBindViewHolder(EventViewHolder holder, int position) {
+
+        if(list_events.get(position) == null)
+            return;
+
         holder.textView_nameEvent.setText(list_events.get(position).name);
         holder.textView_dateEvent.setText(DateUtils.getRelativeTimeSpanString(Long.valueOf(list_events.get(position).date_start)));
         if(list_events.get(position).participantsUids != null) {

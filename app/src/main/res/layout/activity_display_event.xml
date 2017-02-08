@@ -28,14 +28,13 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Nom de l'événement"
-            android:textColor="@android:color/white"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textStyle="normal|bold"/>
+            android:textColor="@color/textViewToolbarTextColor"
+            />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:background="@color/colorPrimaryDark"
+        android:background="@android:color/black"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         >
@@ -74,19 +73,6 @@
             />
 
         <Button
-            android:id="@+id/buttonParticipateMaybe"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/lightGray"
-            android:textColor="@color/GIBlue"
-            android:drawableLeft="@drawable/ic_not_interested"
-            android:text="@string/maybe"
-            android:textAllCaps="false"
-            android:padding="4dp"
-            />
-
-        <Button
             android:id="@+id/buttonNotParticipating"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -115,8 +101,7 @@
             android:drawablePadding="5dp"
             android:layout_marginTop="10dp"
             android:text="Du 22/01/2017 15:00 au 22/01/2017 22:00"
-            android:textColor="@android:color/black"
-            android:textStyle="italic"
+            android:textColor="@color/textViewBasicTextColor"
             android:gravity="center"
             />
 
@@ -130,8 +115,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="33 rue de douai, 5900 Lille"
-            android:textColor="@android:color/black"
-            android:textStyle="italic"
+            android:textColor="@color/textViewBasicTextColor"
             />
 
         <TextView
@@ -144,8 +128,8 @@
             android:drawablePadding="3dp"
             android:gravity="center"
             android:text="0.00"
-            android:textColor="@android:color/black"
-            android:textStyle="italic"
+            android:textColor="@color/textViewBasicTextColor"
+            android:textSize="@dimen/normalTextSize"
             />
         
         <LinearLayout
@@ -173,7 +157,8 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
             android:text="@string/descriptionHolder"
-            android:textColor="@android:color/black"
+            android:textColor="@color/textViewBasicTextColor"
+            android:textSize="@dimen/normalTextSize"
             />
 
         <LinearLayout
@@ -191,29 +176,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:orientation="vertical"
         >
-
-        <TextView
-            android:text="@string/bringBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/GIBlue"
-            />
 
         <TextView
             android:id="@+id/textViewEventBringBack"
+            android:text="@string/bringBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/normalTextSize"
+            />
+
+        <RelativeLayout
+            android:layout_below="@+id/relativeLayoutAddObjectBringBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left|top"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
-            android:text="De la bonne bière"
-            android:textColor="@android:color/black"
-            />
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewDeletableItems"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:background="@android:color/transparent"
+                android:layout_margin="0dp"
+                android:padding="0dp"
+                />
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -234,12 +231,13 @@
         >
 
         <TextView
+            android:id="@+id/textViewParticipants"
             android:text="@string/participants"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/GIBlue"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/normalTextSize"
             />
 
         <com.groupin.florianmalapel.groupin.views.GIHorizontalBubbleList
@@ -262,23 +260,5 @@
             />
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:orientation="vertical"
-        >
-
-        <TextView
-            android:text="@string/pollsHistory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/GIBlue"
-            />
-
-        </LinearLayout>
 
 </LinearLayout>

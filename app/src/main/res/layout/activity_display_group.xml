@@ -11,7 +11,8 @@
         android:text="Group name"
         android:gravity="center"
         android:padding="10dp"
-        android:textColor="@color/bannerCategoryTextColor"
+        android:textColor="@color/textViewToolbarTextColor"
+        android:textSize="@dimen/largeTextSize"
         android:background="@color/colorPrimaryDark"
         android:layout_alignParentTop="true"
         />

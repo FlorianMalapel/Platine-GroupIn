@@ -70,12 +70,19 @@ public class GIAdapterRecyclerViewDeletableItem extends RecyclerView.Adapter<GIA
             itemView.setOnClickListener(this);
             textViewStringItem = (TextView) itemView.findViewById(R.id.textView_friendName);
             imageViewStringDelete = (ImageView) itemView.findViewById(R.id.imageView_deleteFriend);
-            imageViewStringDelete.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+            if(callback != null) {
+                imageViewStringDelete.getDrawable().mutate().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+            }
+            else {
+                imageViewStringDelete.setVisibility(View.GONE);
+            }
             textViewStringItem.setTypeface(GIDesign.getRegularFont(context));
         }
 
         @Override
         public void onClick(View view) {
+            if(callback == null)
+                return;
             callback.itemDeletedAddPosition(getAdapterPosition());
             notifyItemRemoved(getAdapterPosition());
             notifyDataSetChanged();

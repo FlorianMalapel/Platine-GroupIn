@@ -19,6 +19,7 @@ public class GIPoll implements Serializable {
     public String question = null;
     public boolean hasAlreadyVote = false;
     public boolean isQcm = false;
+    public long date = 0;
     public ArrayList<GIChoice> listChoice = new ArrayList();
 
     public GIPoll() {

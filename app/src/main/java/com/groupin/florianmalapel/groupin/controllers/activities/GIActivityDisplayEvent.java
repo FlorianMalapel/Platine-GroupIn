@@ -4,6 +4,9 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -11,13 +14,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.groupin.florianmalapel.groupin.R;
+import com.groupin.florianmalapel.groupin.controllers.adapters.GIAdapterRecyclerViewDeletableItem;
 import com.groupin.florianmalapel.groupin.model.GIApplicationDelegate;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIEvent;
 import com.groupin.florianmalapel.groupin.model.dbObjects.GIUser;
 import com.groupin.florianmalapel.groupin.tools.GIDesign;
 import com.groupin.florianmalapel.groupin.transformations.CircleTransform;
 import com.groupin.florianmalapel.groupin.views.GIHorizontalBubbleList;
+import com.groupin.florianmalapel.groupin.volley.GIVolleyHandler;
+import com.groupin.florianmalapel.groupin.volley.GIVolleyRequest;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,7 +34,8 @@ import java.util.Date;
  * Created by florianmalapel on 21/01/2017.
  */
 
-public class GIActivityDisplayEvent extends AppCompatActivity implements View.OnClickListener {
+public class GIActivityDisplayEvent extends AppCompatActivity
+        implements View.OnClickListener, GIVolleyRequest.RequestCallback {
 
     public static final String BUNDLE_ID = "bundleEvent";
     public static final String EVENT_ID = "event";
@@ -37,14 +46,18 @@ public class GIActivityDisplayEvent extends AppCompatActivity implements View.On
     private TextView textViewEventName = null;
     private TextView textViewEventDate = null;
     private TextView textViewEventBringBack = null;
+    private TextView textViewParticipants = null;
     private TextView textViewEventLocation = null;
     private TextView textViewEventPrice = null;
     private TextView textViewEventDesc = null;
     private ImageView imageViewEventPhoto = null;
     private Button buttonParticipate = null;
-    private Button buttonParticipateMaybe = null;
     private Button buttonNotParticipating = null;
     private GIHorizontalBubbleList horizontalBubbleListParticipants = null;
+    private GIAdapterRecyclerViewDeletableItem adapterDeleteList = null;
+    private RecyclerView recyclerViewDeletableItems = null;
+    private GIVolleyHandler volleyHandler = null;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,18 +78,20 @@ public class GIActivityDisplayEvent extends AppCompatActivity implements View.On
         textViewEventName = (TextView) findViewById(R.id.textViewEventName);
         textViewEventDate = (TextView) findViewById(R.id.textViewEventDate);
         textViewEventLocation = (TextView) findViewById(R.id.textViewEventLocation);
+        textViewParticipants = (TextView) findViewById(R.id.textViewParticipants);
         textViewEventBringBack = (TextView) findViewById(R.id.textViewEventBringBack);
         textViewEventPrice = (TextView) findViewById(R.id.textViewEventPrice);
         textViewEventDesc = (TextView) findViewById(R.id.textViewEventDesc);
         imageViewEventPhoto = (ImageView) findViewById(R.id.imageViewEventPhoto);
         buttonParticipate = (Button) findViewById(R.id.buttonParticipate);
-        buttonParticipateMaybe = (Button) findViewById(R.id.buttonParticipateMaybe);
         buttonNotParticipating = (Button) findViewById(R.id.buttonNotParticipating);
         horizontalBubbleListParticipants = (GIHorizontalBubbleList) findViewById(R.id.horizontalBubbleList_members);
+        recyclerViewDeletableItems = (RecyclerView) findViewById(R.id.recyclerViewDeletableItems);
     }
 
     private void initializeObjects() {
         tryToGetEventFromBundle();
+        volleyHandler = new GIVolleyHandler();
     }
 
     private void tryToGetEventFromBundle(){
@@ -90,13 +105,26 @@ public class GIActivityDisplayEvent extends AppCompatActivity implements View.On
     private void initializeViews() {
         initTopBubbleFriendList();
         initializeViewsWithEvent();
-        imageButtonBack.getDrawable().mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.GIYellow), PorterDuff.Mode.SRC_ATOP);
+        imageButtonBack.getDrawable().mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.textViewToolbarTextColor), PorterDuff.Mode.SRC_ATOP);
         buttonParticipate.getCompoundDrawables()[0].mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
         buttonNotParticipating.getCompoundDrawables()[0].mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
-        buttonParticipateMaybe.getCompoundDrawables()[0].mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
         textViewEventLocation.getCompoundDrawables()[0].mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
         textViewEventDate.getCompoundDrawables()[0].mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
         textViewEventPrice.getCompoundDrawables()[2].mutate().setColorFilter(GIDesign.getColorFromXml(this, R.color.GIBlue), PorterDuff.Mode.SRC_ATOP);
+
+        textViewEventName.setTypeface(GIDesign.getBoldFont(this));
+        textViewEventDate.setTypeface(GIDesign.getRegularFont(this));
+        textViewEventLocation.setTypeface(GIDesign.getRegularFont(this));
+        textViewEventBringBack.setTypeface(GIDesign.getBoldFont(this));
+        textViewEventPrice.setTypeface(GIDesign.getRegularFont(this));
+        textViewParticipants.setTypeface(GIDesign.getBoldFont(this));
+        textViewEventDesc.setTypeface(GIDesign.getRegularFont(this));
+
+        for(String uid : eventToDisplay.participantsUids){
+            if(uid.equals(GIApplicationDelegate.getInstance().getDataCache().getUserUid())){
+                selectButton(buttonParticipate, true, GIDesign.getColorFromXml(this, R.color.holoGreen));
+            }
+        }
     }
 
     private void initializeViewsWithEvent(){
@@ -106,7 +134,15 @@ public class GIActivityDisplayEvent extends AppCompatActivity implements View.On
         textViewEventPrice.setText(String.valueOf(eventToDisplay.price));
         textViewEventLocation.setText(eventToDisplay.address);
         textViewEventDesc.setText(eventToDisplay.description);
-        textViewEventBringBack.setText(eventToDisplay.bring_back_list.toString());
+        initRecyclerViewDeletableItemList();
+    }
+
+    private void initRecyclerViewDeletableItemList(){
+        adapterDeleteList = new GIAdapterRecyclerViewDeletableItem(eventToDisplay.bring_back_list, null, this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerViewDeletableItems.setLayoutManager(layoutManager);
+        recyclerViewDeletableItems.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewDeletableItems.setAdapter(adapterDeleteList);
     }
 
     private String getTimeFormatted(String start, String end){
@@ -131,7 +167,6 @@ public class GIActivityDisplayEvent extends AppCompatActivity implements View.On
     private void setListeners() {
         imageButtonBack.setOnClickListener(this);
         buttonParticipate.setOnClickListener(this);
-        buttonParticipateMaybe.setOnClickListener(this);
         buttonNotParticipating.setOnClickListener(this);
     }
 
@@ -150,19 +185,28 @@ public class GIActivityDisplayEvent extends AppCompatActivity implements View.On
         else if(view == buttonParticipate){
             selectButton(buttonParticipate, true, GIDesign.getColorFromXml(this, R.color.holoGreen));
             selectButton(buttonNotParticipating, false, 0);
-            selectButton(buttonParticipateMaybe, false, 0);
+            volleyHandler.postParticipateEvent(this, eventToDisplay.id, eventToDisplay.id_group, true);
         }
 
         else if(view == buttonNotParticipating){
             selectButton(buttonParticipate, false, 0);
             selectButton(buttonNotParticipating, true, GIDesign.getColorFromXml(this, R.color.googleRed));
-            selectButton(buttonParticipateMaybe, false, 0);
+            volleyHandler.postParticipateEvent(this, eventToDisplay.id, eventToDisplay.id_group, false);
         }
+    }
 
-        else if(view == buttonParticipateMaybe){
-            selectButton(buttonParticipate, false, 0);
-            selectButton(buttonNotParticipating, false, 0);
-            selectButton(buttonParticipateMaybe, true, GIDesign.getColorFromXml(this, R.color.GIYellow));
-        }
+    @Override
+    public void onRequestStart() {
+
+    }
+
+    @Override
+    public void onRequestFinishWithSuccess(int request_code, JSONObject object) {
+
+    }
+
+    @Override
+    public void onRequestFinishWithFailure() {
+
     }
 }

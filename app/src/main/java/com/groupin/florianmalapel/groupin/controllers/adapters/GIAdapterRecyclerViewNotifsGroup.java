@@ -106,7 +106,7 @@ public class GIAdapterRecyclerViewNotifsGroup  extends RecyclerView.Adapter<GIAd
         }
 
         private void rejectJoinGroup(){
-            volleyHandler.deleteNotifFriend(null,
+            volleyHandler.deleteNotifGroup(null,
                     GIApplicationDelegate.getInstance().getDataCache().user.uid,
                     groupNotifsList.get(getAdapterPosition()).group.id);
             hideNotification();
